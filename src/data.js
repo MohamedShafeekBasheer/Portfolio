@@ -1,0 +1,128 @@
+import SITE from "./content/site.json";
+import WORK from "./content/work.json";
+
+export { SITE, WORK };
+export const URL_BASE = SITE.site_url.replace(/\/$/, "");
+
+export const NAV = [
+  ["/work/", "Work"],
+  ["/services/", "Services"],
+  ["/about/", "About"],
+  ["/contact/", "Contact"],
+];
+
+export const ROUTES = [
+  "/", "/work/", "/services/", "/about/", "/contact/", "/thanks/",
+  ...WORK.map((w) => `/work/${w.slug}/`),
+];
+
+export function normalise(path) {
+  if (!path) return "/";
+  path = path.split(/[?#]/)[0];
+  if (path.endsWith("/index.html")) path = path.slice(0, -10);
+  if (!path.endsWith("/") && !path.includes(".")) path += "/";
+  return path;
+}
+
+export function findCase(path) {
+  const m = /^\/work\/([^/]+)\/$/.exec(path);
+  return m ? WORK.find((w) => w.slug === m[1]) || null : null;
+}
+
+export function isKnown(path) {
+  return ROUTES.includes(normalise(path));
+}
+
+/* ---------- structured data ---------- */
+
+const PERSON = {
+  "@type": "Person",
+  "@id": `${URL_BASE}/#person`,
+  name: SITE.name,
+  jobTitle: SITE.role,
+  url: `${URL_BASE}/`,
+  image: `${URL_BASE}/img/portrait-card-hero.jpg`,
+  email: `mailto:${SITE.email}`,
+  sameAs: [SITE.linkedin],
+  address: { "@type": "PostalAddress", addressLocality: "Abha", addressCountry: "SA" },
+  worksFor: { "@type": "Organization", name: "Al Qahtani Beverages" },
+  alumniOf: { "@type": "CollegeOrUniversity", name: "Anna University" },
+  hasCredential: {
+    "@type": "EducationalOccupationalCredential",
+    name: "PL-900: Microsoft Power Platform Fundamentals",
+    credentialCategory: "certification",
+  },
+  knowsAbout: [
+    "SharePoint Online", "Microsoft 365", "Power Apps", "Power Automate", "SharePoint Framework (SPFx)",
+    "InfoPath modernisation", "Google Workspace to Microsoft 365 migration", "Microsoft Entra ID",
+    "Conditional Access", "Azure OpenAI",
+  ],
+};
+
+const SERVICE = {
+  "@type": "ProfessionalService",
+  "@id": `${URL_BASE}/#service`,
+  name: `${SITE.name} — Microsoft 365 consulting`,
+  url: `${URL_BASE}/services/`,
+  image: `${URL_BASE}/og.png`,
+  founder: { "@id": `${URL_BASE}/#person` },
+  areaServed: "Worldwide",
+  priceRange: "$35+/hour",
+  email: SITE.email,
+  address: { "@type": "PostalAddress", addressLocality: "Abha", addressCountry: "SA" },
+  makesOffer: SITE.offers.map((o) => ({
+    "@type": "Offer",
+    name: o.name,
+    description: o.text,
+    ...(o.price === "$35" ? { price: "35", priceCurrency: "USD" } : {}),
+  })),
+};
+
+const crumbs = (items) => ({
+  "@type": "BreadcrumbList",
+  itemListElement: items.map(([p, n], i) => ({ "@type": "ListItem", position: i + 1, name: n, item: `${URL_BASE}${p}` })),
+});
+
+/* ---------- per-page metadata ---------- */
+
+export function meta(rawPath) {
+  const path = normalise(rawPath);
+  const c = findCase(path);
+  const base = { path, ogType: "website", noindex: false, schema: [] };
+
+  if (path === "/")
+    return { ...base, title: SITE.home_title, description: SITE.home_description,
+      schema: [SERVICE, { "@type": "WebSite", url: `${URL_BASE}/`, name: SITE.name }] };
+  if (path === "/work/")
+    return { ...base, title: `Case studies — ${SITE.name}`,
+      description: "What was failing and how it was fixed: InfoPath to SPFx, a SharePoint data leak, a 5,000-user Google Workspace migration, legacy on-prem rescues and Power Platform apps.",
+      schema: [crumbs([["/", "Home"], ["/work/", "Work"]]), {
+        "@type": "ItemList",
+        itemListElement: WORK.map((w, i) => ({ "@type": "ListItem", position: i + 1, url: `${URL_BASE}/work/${w.slug}/`, name: w.title })),
+      }] };
+  if (c)
+    return { ...base, ogType: "article", title: `${c.title} — ${SITE.name}`, description: c.summary,
+      schema: [crumbs([["/", "Home"], ["/work/", "Work"], [path, c.title]]), {
+        "@type": "Article", headline: c.title, description: c.summary, author: { "@id": `${URL_BASE}/#person` },
+        image: `${URL_BASE}/og.png`, mainEntityOfPage: `${URL_BASE}${path}`, about: c.stack,
+      }] };
+  if (path === "/services/")
+    return { ...base, title: `SharePoint & Microsoft 365 consulting — ${SITE.name}`,
+      description: "Hire a SharePoint and Microsoft 365 consultant: $35/hour review calls, InfoPath and legacy SharePoint rescues, migrations, SPFx and Power Apps projects. Remote, worldwide.",
+      schema: [SERVICE, crumbs([["/", "Home"], ["/services/", "Services"]])] };
+  if (path === "/about/")
+    return { ...base, ogType: "profile", title: `About — ${SITE.name}, Microsoft 365 consultant`,
+      description: `${SITE.name}: five years in SharePoint and Microsoft 365 at Avasoft, Colan InfoTech, EY GDS and Al Qahtani Beverages. Open to consulting and roles abroad.`,
+      schema: [crumbs([["/", "Home"], ["/about/", "About"]]), { "@type": "ProfilePage", mainEntity: { "@id": `${URL_BASE}/#person` } }] };
+  if (path === "/contact/")
+    return { ...base, title: `Contact — ${SITE.name}`,
+      description: "Contact Mohamed Shafeek for SharePoint, Power Apps and Microsoft 365 consulting, projects, or roles abroad.",
+      schema: [crumbs([["/", "Home"], ["/contact/", "Contact"]]), { "@type": "ContactPage", url: `${URL_BASE}/contact/` }] };
+  if (path === "/thanks/")
+    return { ...base, noindex: true, title: `Thanks — ${SITE.name}`, description: "Message sent." };
+  return { ...base, path: "/404.html", noindex: true, title: `Page not found — ${SITE.name}`, description: "Page not found." };
+}
+
+export function jsonLd(m) {
+  return { "@context": "https://schema.org", "@graph": [PERSON, ...m.schema] };
+}

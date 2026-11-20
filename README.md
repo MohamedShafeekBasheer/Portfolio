@@ -1,38 +1,61 @@
-# Mohamed Shafeek — portfolio site
+# Mohamed Shafeek — portfolio
 
-Plain static site, published from `site/`. No framework and no npm. `tools/build.py` writes the
-HTML from two content files.
+React (Vite) site, **prerendered to static HTML** at build time and served from Netlify's global CDN.
 
-## Edit the content
+- Every page is real HTML, so it shows instantly, works with JavaScript turned off, and Google reads it fully.
+- React then takes over for instant page switches, a small loading bar and light animations.
+- A service worker caches the site. Repeat visits load from the device, and pages open even offline or on a
+  bad connection.
+- No third-party requests at all: fonts, images and scripts are all self-hosted.
 
-- `content/site.json`: name, headline, intro, availability, services and prices, about text,
-  timeline, skills.
-- `content/work.json`: one entry per case study. Add an entry and you get a new page at `/work/<slug>/`.
+## Edit content
 
-Then rebuild:
+Everything you'd want to change is in two files:
+
+- `src/content/site.json`: headline, intro, availability, services and prices, about, timeline, skills.
+- `src/content/work.json`: case studies. Each one has `before` (what was failing), `work` (what you
+  did), `outcome` (what changed), `swap` (the short before → after line used on the home page), and `status`.
+  Add an entry and you get a new page at `/work/<slug>/`.
+
+## Run locally
 
 ```bash
-python3 tools/build.py
+npm install
 ```
 
-Commit both `content/` and `site/`.
+```bash
+npm run dev
+```
 
-## Deploy (Netlify)
+Production build into `dist/`:
 
-`netlify.toml` points Netlify at `site/` with no build command. Connect this repo in
-Netlify, choose the branch, and every push goes live.
+```bash
+npm run build
+```
 
-- The contact form uses **Netlify Forms**. Messages show up under *Forms* in the Netlify dashboard.
-  Turn on email notifications there so they reach your inbox.
-- `_redirects` sends old URLs (`/pages/about.html` and others) to the new pages.
-- `sw.js` removes the old site's offline cache for returning visitors. Keep it for a few months.
+Preview the production build:
+
+```bash
+npm run preview
+```
+
+## Deploy
+
+`netlify.toml` already tells Netlify to run `npm ci && npm run build` and publish `dist/`. Connect this
+GitHub repo to your Netlify site once, and every push deploys on its own.
+
+- **Contact form:** Netlify Forms. Messages appear under *Forms* in Netlify. Turn on email notifications
+  there. If a visitor is offline or the send fails, the message is kept on their device and they get a
+  one-tap email fallback.
+- **Old URLs** (`/pages/about.html` and others) redirect to the new pages via `public/_redirects`.
+- **Caching:** hashed files in `/assets/` are cached for a year. HTML and `sw.js` are always re-checked,
+  so new deploys show up straight away.
 
 ## If the domain changes
 
-Update `site_url` in `content/site.json` and rebuild. The canonical links, sitemap, social cards
-and structured data all use it.
+Update `site_url` in `src/content/site.json`. Canonical links, sitemap, social cards and structured data all
+follow it.
 
-## Social share image
+## Share image
 
-`site/assets/og.png` is a screenshot of `tools/og.html`. Edit that file and re-capture it at
-1200×630 if your title changes.
+`public/og.png` is a 1200×630 screenshot of `scripts/og.html`.
