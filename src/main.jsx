@@ -1,10 +1,18 @@
 import { hydrateRoot, createRoot } from "react-dom/client";
 import App from "./App.jsx";
-import { isKnown, normalise } from "./data.js";
+import { BASE, isKnown, normalise, stripBase } from "./data.js";
+import { preloadNote } from "./notes.js";
 import "./styles.css";
 
 const root = document.getElementById("root");
-const path = isKnown(location.pathname) ? normalise(location.pathname) : "/404.html";
+const here = stripBase(location.pathname);
+const path = isKnown(here) ? normalise(here) : "/404.html";
+
+// A prerendered note page carries its own content, so it hydrates without a network request.
+const embedded = document.getElementById("note-data");
+if (embedded) {
+  try { preloadNote(JSON.parse(embedded.textContent)); } catch { /* fetch on demand instead */ }
+}
 const app = <App path={path} />;
 
 // The HTML is already prerendered, so the page is readable before this runs.
@@ -20,6 +28,6 @@ document.documentElement.classList.add("js");
 // and the site still opens on a bad connection.
 if ("serviceWorker" in navigator && import.meta.env.PROD) {
   addEventListener("load", () => {
-    navigator.serviceWorker.register("/sw.js").catch(() => {});
+    navigator.serviceWorker.register(BASE + "sw.js", { scope: BASE }).catch(() => {});
   });
 }

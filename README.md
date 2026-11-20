@@ -1,23 +1,69 @@
 # Mohamed Shafeek — portfolio
 
-React (Vite) site, **prerendered to static HTML** at build time and served from Netlify's global CDN.
+React (Vite) site, prerendered to static HTML and hosted on **GitHub Pages**.
+Everything lives in this repository: code, content, notes and the daily automation.
 
-- Every page is real HTML, so it shows instantly, works with JavaScript turned off, and Google reads it fully.
-- React then takes over for instant page switches, a small loading bar and light animations.
-- A service worker caches the site. Repeat visits load from the device, and pages open even offline or on a
-  bad connection.
-- No third-party requests at all: fonts, images and scripts are all self-hosted.
+Live site: https://mohamedshafeekbasheer.github.io/Portfolio/
 
-## Edit content
+## How it works
 
-Everything you'd want to change is in two files:
+```
+Every morning, 06:17 Riyadh time  (.github/workflows/daily-digest.yml)
+  ├─ collects news from content/sources.json (Microsoft 365 & Power Platform blogs,
+  │   PnP PowerShell / PnPjs releases, new PnP Script Samples, M365 roadmap)
+  ├─ opens an issue: "Daily digest — <date>"
+  └─ drafts ONE note + LinkedIn text with Claude → opens a pull request
 
-- `src/content/site.json`: headline, intro, availability, services and prices, about, timeline, skills.
-- `src/content/work.json`: case studies. Each one has `before` (what was failing), `work` (what you
-  did), `outcome` (what changed), `swap` (the short before → after line used on the home page), and `status`.
-  Add an entry and you get a new page at `/work/<slug>/`.
+You review the pull request
+  ├─ fill in the [ADD: …] placeholders with your own experience
+  ├─ check every claim, test any code
+  └─ Merge  →  .github/workflows/deploy.yml rebuilds and publishes the site (~1 minute)
+               and the LinkedIn text is in the pull request, ready to paste
+```
 
-## Run locally
+Safety nets: nothing publishes without your merge, and the build **refuses to publish a note
+that still contains an `[ADD: …]` placeholder**.
+
+## One-time setup (about 10 minutes)
+
+1. **Turn on GitHub Pages.** Repository → *Settings* → *Pages* → *Source*: **GitHub Actions**.
+2. **Let the digest open pull requests.** *Settings* → *Actions* → *General* → *Workflow permissions*:
+   choose **Read and write permissions** and tick **Allow GitHub Actions to create and approve pull requests**.
+3. **Add your Claude API key** (for drafts). Create a key at console.anthropic.com, then
+   *Settings* → *Secrets and variables* → *Actions* → *New repository secret*:
+   name `ANTHROPIC_API_KEY`. Without it you still get the daily digest, just no draft.
+   Cost: roughly a few cents per draft.
+4. **Contact form (Formspree).** Sign up free at formspree.io, create a form with your email,
+   copy its ID (the part after `/f/`, e.g. `xyzabcde`) into `formspree_id` in
+   `src/content/site.json`. Until then the form opens the visitor's email app instead.
+5. **Merge this branch into `main`.** The first deploy runs automatically.
+6. Optional: run the digest now from *Actions* → *Daily digest* → *Run workflow*.
+
+## Writing and editing
+
+- **Phone:** GitHub app → this repo → *Pull requests* → open the draft → edit the file → merge.
+- **Browser editor:** sign in at https://app.pagescms.org with GitHub and open this repo. You get
+  forms for Notes and LinkedIn texts (configured in `.pages.yml`). Saving commits to the repo.
+- **By hand:** add `content/posts/YYYY-MM-DD-your-slug.md`:
+
+```markdown
+---
+title: "Auditing sharing links with PnP PowerShell"
+date: 2026-11-21
+summary: One sentence that appears in lists and Google results.
+tags: [PnP PowerShell, Governance]
+sources:
+  - https://pnp.github.io/powershell/
+---
+Your note in Markdown…
+```
+
+Set `draft: true` in the front matter to keep a note unpublished.
+
+Other content: `src/content/site.json` (profile, services, recruiter keywords),
+`src/content/work.json` (case studies), `content/sources.json` (what the digest collects).
+
+## Local development
 
 ```bash
 npm install
@@ -27,35 +73,20 @@ npm install
 npm run dev
 ```
 
-Production build into `dist/`:
-
 ```bash
 npm run build
 ```
 
-Preview the production build:
+Try the digest without creating anything:
 
 ```bash
-npm run preview
+DRY_RUN=1 npm run digest
 ```
 
-## Deploy
+## Notes
 
-`netlify.toml` already tells Netlify to run `npm ci && npm run build` and publish `dist/`. Connect this
-GitHub repo to your Netlify site once, and every push deploys on its own.
-
-- **Contact form:** Netlify Forms. Messages appear under *Forms* in Netlify. Turn on email notifications
-  there. If a visitor is offline or the send fails, the message is kept on their device and they get a
-  one-tap email fallback.
-- **Old URLs** (`/pages/about.html` and others) redirect to the new pages via `public/_redirects`.
-- **Caching:** hashed files in `/assets/` are cached for a year. HTML and `sw.js` are always re-checked,
-  so new deploys show up straight away.
-
-## If the domain changes
-
-Update `site_url` in `src/content/site.json`. Canonical links, sitemap, social cards and structured data all
-follow it.
-
-## Share image
-
-`public/og.png` is a 1200×630 screenshot of `scripts/og.html`.
+- The site works at a domain root or under `/Portfolio/`; the deploy workflow sets the base path.
+  If you later add a custom domain or rename the repo to `mohamedshafeekbasheer.github.io`,
+  nothing in the code needs to change.
+- GitHub Pages can't send HTTP security headers, so a Content-Security-Policy is set in each page.
+- A service worker caches the site for fast repeat visits and offline reading.

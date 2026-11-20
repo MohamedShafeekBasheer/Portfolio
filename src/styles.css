@@ -483,3 +483,16 @@ textarea.input { resize: vertical; min-height: 120px; }
 .highlights a:hover { text-decoration: underline; }
 .openTo { margin-top: var(--ms-space-3); font-size: var(--ms-size-small); color: var(--ms-text-on-light-muted); }
 .openTo strong { color: var(--ms-text-on-light); font-weight: var(--ms-weight-semibold); }
+
+/* ---------- note body (rendered Markdown) ---------- */
+.noteBody h2 { font-size: var(--ms-size-h2); margin: var(--ms-space-5) 0 var(--ms-space-2); }
+.noteBody h3 { font-size: var(--ms-size-h3); margin: var(--ms-space-4) 0 var(--ms-space-2); }
+.noteBody p, .noteBody ul, .noteBody ol { margin: 0 0 var(--ms-space-3); }
+.noteBody ul, .noteBody ol { padding-left: var(--ms-space-5); }
+.noteBody li { margin-bottom: var(--ms-space-1); }
+.noteBody a { color: var(--ms-text-on-light); text-decoration-color: var(--ms-text-on-light-muted); text-underline-offset: 3px; }
+.noteBody code { font-family: var(--ms-font-mono); font-size: 0.85em; background: var(--ms-mist-sunken); padding: 1px 4px; border-radius: var(--ms-radius-sm); }
+.noteBody pre { background: var(--ms-surface-shell); color: var(--ms-text-on-dark); padding: var(--ms-space-4); border-radius: var(--ms-radius-md); overflow-x: auto; font-size: var(--ms-size-small); line-height: var(--ms-leading-normal); }
+.noteBody pre code { background: transparent; padding: 0; color: inherit; font-size: inherit; }
+.noteBody blockquote { margin: 0 0 var(--ms-space-3); padding-left: var(--ms-space-4); border-left: 2px solid var(--ms-hairline-light); color: var(--ms-text-on-light-muted); }
+.noteBody img { border-radius: var(--ms-radius-md); }

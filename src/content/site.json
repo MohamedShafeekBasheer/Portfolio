@@ -1,5 +1,5 @@
 {
-  "site_url": "https://mohamedshafeek.netlify.app",
+  "site_url": "https://mohamedshafeekbasheer.github.io",
   "name": "Mohamed Shafeek",
   "role": "Microsoft 365 & SharePoint Architect",
   "email": "basheermohamedshafeek@gmail.com",
@@ -296,5 +296,6 @@
       "Security incident response: external sharing exposure removed across SharePoint and OneDrive."
     ]
   ],
-  "cv_url": "/cv/Mohamed-Shafeek-CV-SharePoint-Microsoft-365.pdf"
+  "cv_url": "/cv/Mohamed-Shafeek-CV-SharePoint-Microsoft-365.pdf",
+  "formspree_id": ""
 }

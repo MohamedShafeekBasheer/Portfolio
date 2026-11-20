@@ -1,6 +1,6 @@
 import { Component, useEffect, useState } from "react";
 import { Link, useRouter } from "./router.jsx";
-import { SITE } from "./data.js";
+import { SITE, withBase } from "./data.js";
 
 /* ---------- icons (16px line icons, no icon font) ---------- */
 const PATHS = {
@@ -70,10 +70,11 @@ export function Nav() {
             <Icon name={icon} /><span className="navText">{label}</span>
           </Link>
         ))}
-        {/* Planned but not built yet: visible so the shape is clear, dimmed so it doesn't pretend. */}
-        <span className="navItem" aria-disabled="true" title="Writing — coming soon">
-          <Icon name="writing" /><span className="navText">Writing</span><span className="navHint">Soon</span>
-        </span>
+        <Link href="/notes/" title="Notes"
+          className={`navItem${isActive(path, "/notes/") ? " navItemActive" : ""}`}
+          aria-current={isActive(path, "/notes/") ? "page" : undefined}>
+          <Icon name="writing" /><span className="navText">Notes</span>
+        </Link>
       </div>
 
       <div className="navGroup">
@@ -142,8 +143,8 @@ export function StatusBar() {
 export function Portrait({ eager = false }) {
   return (
     <picture className="portrait">
-      <source type="image/webp" srcSet="/img/portrait-card-320.webp" />
-      <img src="/img/portrait-card-hero.jpg" width="96" height="96" alt={`Portrait of ${SITE.name}`}
+      <source type="image/webp" srcSet={withBase("/img/portrait-card-320.webp")} />
+      <img src={withBase("/img/portrait-card-hero.jpg")} width="96" height="96" alt={`Portrait of ${SITE.name}`}
         decoding="async" loading={eager ? "eager" : "lazy"} />
     </picture>
   );
@@ -166,8 +167,8 @@ export class ErrorBoundary extends Component {
         <h1 className="emptyTitle">This page hit an error.</h1>
         <p className="emptyBody">Reloading usually fixes it. The rest of the site still works.</p>
         <div className="introActions">
-          <a className="button buttonPrimary" href={typeof location !== "undefined" ? location.pathname : "/"}>Reload</a>
-          <a className="button buttonGhost" href="/">Overview</a>
+          <a className="button buttonPrimary" href={typeof location !== "undefined" ? location.pathname : withBase("/")}>Reload</a>
+          <a className="button buttonGhost" href={withBase("/")}>Overview</a>
         </div>
       </div></div>
     );

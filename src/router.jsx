@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
-import { isKnown, meta, normalise } from "./data.js";
+import { isKnown, meta, normalise, stripBase, withBase } from "./data.js";
 
 /*
  * A tiny router. Every page is also a real prerendered HTML file, so links
@@ -23,7 +23,7 @@ function applyMeta(path) {
   set('meta[name="description"]', "content", m.description);
   set('meta[property="og:title"]', "content", m.title);
   set('meta[property="og:description"]', "content", m.description);
-  set('link[rel="canonical"]', "href", location.origin + m.path);
+  set('link[rel="canonical"]', "href", location.origin + withBase(m.path));
 }
 
 export function RouterProvider({ initialPath, children }) {
@@ -52,19 +52,19 @@ export function RouterProvider({ initialPath, children }) {
   }, []);
 
   const navigate = useCallback((href) => {
-    const url = new URL(href, location.href);
-    const next = normalise(url.pathname);
+    const url = new URL(withBase(href), location.href);
+    const next = normalise(stripBase(url.pathname));
     if (url.origin !== location.origin || !isKnown(next)) {
       location.href = url.href;
       return;
     }
-    if (next + url.search === location.pathname + location.search) return;
-    history.pushState({}, "", next + url.search + url.hash);
+    if (withBase(next) + url.search === location.pathname + location.search) return;
+    history.pushState({}, "", withBase(next) + url.search + url.hash);
     go(next);
   }, [go]);
 
   useEffect(() => {
-    const onPop = () => go(normalise(location.pathname), { push: false });
+    const onPop = () => go(normalise(stripBase(location.pathname)), { push: false });
     addEventListener("popstate", onPop);
     return () => removeEventListener("popstate", onPop);
   }, [go]);
@@ -80,5 +80,5 @@ export function Link({ href, children, ...rest }) {
     e.preventDefault();
     navigate(href);
   };
-  return <a href={href} onClick={onClick} {...rest}>{children}</a>;
+  return <a href={withBase(href)} onClick={onClick} {...rest}>{children}</a>;
 }

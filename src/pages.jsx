@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useRouter } from "./router.jsx";
-import { SITE, WORK, findCase } from "./data.js";
+import { POSTS, SITE, WORK, findCase, findPost, withBase } from "./data.js";
+import { getCachedNote, loadNote } from "./notes.js";
 import { Header, Portrait, StatusPill } from "./components.jsx";
 
 function Page({ title, crumb, primary, children }) {
@@ -116,6 +117,13 @@ function Home() {
         <div className="sectionHead"><h2>Case studies</h2><Link href="/work/">All {WORK.length} →</Link></div>
         <CaseTable items={WORK.slice(0, 5)} />
       </section>
+
+      {POSTS.length > 0 && (
+        <section>
+          <div className="sectionHead"><h2>Latest notes</h2><Link href="/notes/">All notes →</Link></div>
+          <NoteList items={POSTS.slice(0, 3)} />
+        </section>
+      )}
 
       <section>
         <div className="sectionHead"><h2>Ways to work together</h2><Link href="/services/">Details →</Link></div>
@@ -273,6 +281,88 @@ function About() {
   );
 }
 
+/* ---------------------------------------------------------------- notes */
+
+const fmtDate = (d) => {
+  try { return new Date(d + "T00:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }); }
+  catch { return d; }
+};
+
+function NoteList({ items }) {
+  return (
+    <div className="tableWrap">
+      <table className="table">
+        <thead><tr><th scope="col">Date</th><th scope="col">Note</th><th scope="col" className="hideSm">Tags</th></tr></thead>
+        <tbody>
+          {items.map((p) => (
+            <tr key={p.slug}>
+              <td className="cellRef">{fmtDate(p.date)}</td>
+              <td className="wrap"><Link href={`/notes/${p.slug}/`}>{p.title}</Link><br /><span className="cellMuted">{p.summary}</span></td>
+              <td className="cellMuted hideSm">{p.tags.slice(0, 3).join(" · ")}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function Notes() {
+  return (
+    <Page title="Notes">
+      <section>
+        <h1>Notes</h1>
+        <p className="lede">Short, practical notes on SharePoint, SPFx, the Power Platform, PnP PowerShell and Microsoft 365 governance — what changed, and what it means if you run a tenant.</p>
+      </section>
+      {POSTS.length ? <NoteList items={POSTS} /> : (
+        <div className="card empty">
+          <h2 className="emptyTitle">The first notes are on their way.</h2>
+          <p className="emptyBody">In the meantime, the case studies show the work in detail.</p>
+          <div className="introActions"><Link className="button buttonGhost" href="/work/">Read the case studies</Link></div>
+        </div>
+      )}
+    </Page>
+  );
+}
+
+function Note({ meta }) {
+  const [note, setNote] = useState(() => getCachedNote(meta.slug));
+  const [failed, setFailed] = useState(false);
+  useEffect(() => {
+    if (note) return;
+    let live = true;
+    loadNote(meta.slug).then((n) => live && setNote(n)).catch(() => live && setFailed(true));
+    return () => { live = false; };
+  }, [meta.slug, note]);
+
+  return (
+    <Page title={meta.title} crumb={["/notes/", "Notes"]}>
+      <article className="report">
+        <header className="reportHead">
+          <div className="reportMeta">
+            <span className="cellRef">{fmtDate(meta.date)}</span>
+            {meta.tags.map((t) => <span className="eyebrow" key={t}>{t}</span>)}
+          </div>
+          <h1 className="reportTitle">{meta.title}</h1>
+          {meta.summary && <p className="reportLede">{meta.summary}</p>}
+        </header>
+        <section className="reportSection">
+          {note ? <div className="reportBody prose noteBody" dangerouslySetInnerHTML={{ __html: note.html }} />
+            : failed ? <p className="notice" role="alert">This note couldn't load. Check your connection and <a href={withBase(`/notes/${meta.slug}/`)}>reload</a>.</p>
+            : <p className="muted" role="status"><span className="spinner" aria-hidden="true" /> Loading…</p>}
+        </section>
+        {meta.sources.length > 0 && (
+          <section className="reportSection">
+            <h2 className="reportHeading">Sources</h2>
+            <ul className="highlights">{meta.sources.map((s) => <li key={s}><a className="textLink" href={s} rel="noopener" target="_blank">{s}</a></li>)}</ul>
+          </section>
+        )}
+        <footer className="reportFoot">{SITE.name} · {SITE.role}. Questions or a similar problem? <Link href="/contact/">Get in touch</Link>.</footer>
+      </article>
+    </Page>
+  );
+}
+
 /* ---------------------------------------------------------------- recruiters */
 
 function Hire() {
@@ -285,7 +375,7 @@ function Hire() {
           <h1>{SITE.name} — SharePoint Developer &amp; Microsoft 365 Architect</h1>
           <p className="lede">5 years building on SharePoint, Microsoft 365, the Power Platform and Azure, for EY GDS, Avasoft clients in the US, UK and Canada, and a five-company Saudi industrial group. KSA-based, Iqama transferable.</p>
           <div className="introActions">
-            <a className="button buttonPrimary" href={SITE.cv_url} download>Download CV (PDF)</a>
+            <a className="button buttonPrimary" href={withBase(SITE.cv_url)} download>Download CV (PDF)</a>
             <a className="button buttonGhost" href={`mailto:${SITE.email}?subject=${encodeURIComponent("Role opportunity")}`}>Email me</a>
             <a className="button buttonGhost" href={SITE.linkedin} rel="me noopener" target="_blank">LinkedIn</a>
           </div>
@@ -347,16 +437,19 @@ function Contact() {
   const mailto = `mailto:${SITE.email}?subject=${encodeURIComponent(form.topic)}&body=${encodeURIComponent(
     `${form.message}\n\n— ${form.name}${form.company ? `, ${form.company}` : ""}\n${form.email}`)}`;
 
+  const formspree = SITE.formspree_id ? `https://formspree.io/f/${SITE.formspree_id}` : "";
+
   async function onSubmit(e) {
     e.preventDefault();
+    if (!formspree) { location.href = mailto; return; }
     if (!navigator.onLine) { setState("offline"); return; }
     setState("sending");
     try {
       const ctrl = new AbortController();
       const t = setTimeout(() => ctrl.abort(), 12000);
-      const res = await fetch("/", {
-        method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({ "form-name": "contact", ...form }).toString(), signal: ctrl.signal,
+      const res = await fetch(formspree, {
+        method: "POST", headers: { Accept: "application/json" },
+        body: new FormData(e.currentTarget), signal: ctrl.signal,
       });
       clearTimeout(t);
       if (!res.ok) throw new Error(String(res.status));
@@ -374,9 +467,9 @@ function Contact() {
         <p className="lede">Tell me what you're working on. A few lines is plenty; I read every message myself.</p>
       </section>
       <div className="formGrid">
-        <form className="card form" name="contact" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="company_website" onSubmit={onSubmit}>
-          <input type="hidden" name="form-name" value="contact" />
-          <p className="hp"><label>Leave this empty <input name="company_website" tabIndex={-1} autoComplete="off" /></label></p>
+        <form className="card form" name="contact" method="POST" action={formspree || `mailto:${SITE.email}`} onSubmit={onSubmit}>
+          <input type="hidden" name="_subject" value={`Website: ${form.topic}`} />
+          <p className="hp"><label>Leave this empty <input name="_gotcha" tabIndex={-1} autoComplete="off" /></label></p>
           <div className="formRow"><label htmlFor="f-name">Your name</label><input id="f-name" className="input" name="name" autoComplete="name" required value={form.name} onChange={update("name")} /></div>
           <div className="formRow"><label htmlFor="f-email">Email</label><input id="f-email" className="input" name="email" type="email" autoComplete="email" required value={form.email} onChange={update("email")} /></div>
           <div className="formRow"><label htmlFor="f-company">Company <span className="opt">(optional)</span></label><input id="f-company" className="input" name="company" autoComplete="organization" value={form.company} onChange={update("company")} /></div>
@@ -389,7 +482,7 @@ function Contact() {
             <button className="button buttonPrimary" type="submit" disabled={state === "sending"}>
               {state === "sending" ? <><span className="spinner" aria-hidden="true" />Sending</> : "Send message"}
             </button>
-            {state === "idle" && <span className="muted">Goes straight to my inbox.</span>}
+            {state === "idle" && <span className="muted">{formspree ? "Goes straight to my inbox." : "Opens your email app with the message ready."}</span>}
           </div>
           {state === "offline" && <p className="notice" role="status">You're offline. Your message is saved on this device. Send it again when you're back online, or <a href={mailto}>send it by email</a>.</p>}
           {state === "error" && <p className="notice" role="alert">That didn't go through. Your message is saved. Try again, or <a href={mailto}>send it by email</a>.</p>}
@@ -439,9 +532,12 @@ function NotFound() {
 export function Route({ path }) {
   const c = findCase(path);
   if (c) return <Case c={c} />;
+  const post = findPost(path);
+  if (post) return <Note meta={post} key={post.slug} />;
   switch (path) {
     case "/": return <Home />;
     case "/hire/": return <Hire />;
+    case "/notes/": return <Notes />;
     case "/work/": return <Work />;
     case "/services/": return <Services />;
     case "/about/": return <About />;

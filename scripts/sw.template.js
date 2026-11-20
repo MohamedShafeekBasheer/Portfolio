@@ -6,6 +6,7 @@
  * Old caches (including the previous site's) are deleted on activate.
  */
 const VERSION = "__VERSION__";
+const BASE = __BASE__;
 const CACHE = "ms-" + VERSION;
 const PRECACHE = __PRECACHE__;
 
@@ -50,7 +51,7 @@ self.addEventListener("fetch", (event) => {
         if (hit) return hit;
         // …otherwise keep waiting for the network, and only then give up.
         try { return await net; } catch {
-          return (await caches.match("/")) ||
+          return (await caches.match(BASE)) ||
             new Response("<h1>Offline</h1><p>Please check your connection.</p>", { headers: { "Content-Type": "text/html" } });
         }
       })
@@ -58,7 +59,8 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  if (url.pathname.startsWith("/assets/") || url.pathname.startsWith("/img/")) {
+  if (!url.pathname.startsWith(BASE)) return;
+  if (url.pathname.startsWith(BASE + "assets/") || url.pathname.startsWith(BASE + "img/")) {
     event.respondWith(
       caches.match(req).then((hit) =>
         hit || fetch(req).then((res) => {

@@ -1,8 +1,20 @@
 import SITE from "./content/site.json";
 import WORK from "./content/work.json";
+import POSTS from "./content/posts.json";
 
-export { SITE, WORK };
-export const URL_BASE = SITE.site_url.replace(/\/$/, "");
+export { SITE, WORK, POSTS };
+
+/* The site can live at a domain root ("/") or under a sub-path such as
+   "/Portfolio/" on GitHub Pages. BASE comes from Vite's `base` setting. */
+export const BASE = import.meta.env.BASE_URL || "/";
+export const withBase = (p) => (typeof p === "string" && p.startsWith("/") && !p.startsWith("//") ? BASE + p.slice(1) : p);
+export function stripBase(pathname) {
+  if (BASE !== "/" && pathname.startsWith(BASE)) return "/" + pathname.slice(BASE.length);
+  if (BASE !== "/" && pathname === BASE.slice(0, -1)) return "/";
+  return pathname;
+}
+const ORIGIN = (import.meta.env.VITE_SITE_ORIGIN || SITE.site_url).replace(/\/$/, "");
+export const URL_BASE = ORIGIN + BASE.replace(/\/$/, "");
 
 export const NAV = [
   ["/work/", "Work"],
@@ -14,6 +26,8 @@ export const NAV = [
 export const ROUTES = [
   "/", "/hire/", "/work/", "/services/", "/about/", "/contact/", "/thanks/",
   ...WORK.map((w) => `/work/${w.slug}/`),
+  "/notes/",
+  ...POSTS.map((p) => `/notes/${p.slug}/`),
 ];
 
 export function normalise(path) {
@@ -27,6 +41,11 @@ export function normalise(path) {
 export function findCase(path) {
   const m = /^\/work\/([^/]+)\/$/.exec(path);
   return m ? WORK.find((w) => w.slug === m[1]) || null : null;
+}
+
+export function findPost(path) {
+  const m = /^\/notes\/([^/]+)\/$/.exec(path);
+  return m ? POSTS.find((p) => p.slug === m[1]) || null : null;
 }
 
 export function isKnown(path) {
@@ -100,6 +119,17 @@ export function meta(rawPath) {
   if (path === "/")
     return { ...base, title: SITE.home_title, description: SITE.home_description,
       schema: [SERVICE, { "@type": "WebSite", url: `${URL_BASE}/`, name: SITE.name }] };
+  const post = findPost(path);
+  if (path === "/notes/")
+    return { ...base, title: `Notes — ${SITE.name}`,
+      description: "Short, practical notes on SharePoint, SPFx, Power Platform, PnP PowerShell and Microsoft 365 governance from a working Microsoft 365 architect.",
+      schema: [crumbs([["/", "Home"], ["/notes/", "Notes"]])] };
+  if (post)
+    return { ...base, ogType: "article", title: `${post.title} — ${SITE.name}`, description: post.summary,
+      schema: [crumbs([["/", "Home"], ["/notes/", "Notes"], [path, post.title]]), {
+        "@type": "BlogPosting", headline: post.title, description: post.summary, datePublished: post.date,
+        author: { "@id": `${URL_BASE}/#person` }, mainEntityOfPage: `${URL_BASE}${path}`, keywords: post.tags.join(", "),
+      }] };
   if (path === "/hire/")
     return { ...base, ogType: "profile", title: `Hire ${SITE.name} — SharePoint Developer, Microsoft 365 Consultant, Power Platform Developer`,
       description: "For recruiters: SharePoint Developer / Microsoft 365 Architect with 5 years in SPFx, Power Apps, Power Automate, Azure and M365 security. KSA-based, Iqama transferable. Open to Saudi Arabia, UAE, GCC, Singapore, India and remote. CV download.",
