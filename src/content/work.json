@@ -309,5 +309,92 @@
       "The intranet needed to feel useful day to day, not just be a document store."
     ],
     "ref": "CS-07"
+  },
+  {
+    "slug": "post-migration-application-programme",
+    "ref": "CS-08",
+    "title": "Replacing ungoverned spreadsheets with 50+ business apps",
+    "kind": "Application development",
+    "client": "Multiple enterprise clients, via Avasoft",
+    "region": "Global",
+    "duration": "12 months",
+    "status": "Completed",
+    "result": "50+ apps and 200+ flows delivered",
+    "summary": "After each migration wave, clients were left running core processes on complex Google Sheets and manual workflows. I rebuilt them as governed Microsoft applications with proper access control and audit trails.",
+    "before_title": "What was failing",
+    "swap": [
+      "Business processes in spreadsheets",
+      "50+ governed apps"
+    ],
+    "before": [
+      "Core business processes ran on complex Google Sheets after each migration wave.",
+      "Workflows were manual, with no approvals, notifications or audit trail.",
+      "Access to sensitive data was not governed.",
+      "The spreadsheets did not scale as usage grew."
+    ],
+    "situation": [
+      "After each cloud migration wave, clients had dozens of complex Google Sheets, manual workflows and ungoverned spreadsheets. They needed proper Microsoft applications with the same functionality, but better security, scalability and audit trails."
+    ],
+    "work": [
+      "Analysed each Google Sheet for its business logic.",
+      "Rebuilt each one as a governed application: SPFx React web parts, Power Apps canvas and model-driven apps, or Dataverse-backed solutions.",
+      "Added Power Automate workflows, proper access controls, and SharePoint list or Dataverse back ends."
+    ],
+    "outcome": [
+      "50+ business applications delivered across multiple clients.",
+      "Legacy Google Sheets workflows replaced with governed Microsoft solutions.",
+      "200+ Power Automate flows built to support the application portfolio."
+    ],
+    "stack": [
+      "SPFx",
+      "React",
+      "Power Apps",
+      "Power Automate",
+      "SharePoint Online",
+      "Dataverse",
+      "Power BI"
+    ]
+  },
+  {
+    "slug": "internal-audit-app-and-itsm-workspace",
+    "ref": "CS-09",
+    "title": "An internal audit application and an ITSM workspace built from scratch",
+    "kind": "Enterprise operations",
+    "client": "Al Qahtani Beverages",
+    "region": "Saudi Arabia",
+    "duration": "4 months",
+    "status": "Completed",
+    "result": "Audit app live, ITSM workspace operational",
+    "summary": "A SharePoint audit application for capturing and tracking audit data across departments, plus a Freshworks IT service management workspace configured from scratch, with role-based access, automated routing and escalation.",
+    "before_title": "What was missing",
+    "swap": [
+      "No structured audit or IT service desk",
+      "Audit app + ITSM live"
+    ],
+    "before": [
+      "No structured way to capture and track audit data across departments.",
+      "No department-level reporting or approval trail for audit work.",
+      "No configured IT service management workspace: no role-based access, routing or escalation."
+    ],
+    "situation": [
+      "The organisation needed a structured Internal Audit Application, plus a fully configured IT service management workspace in Freshworks with role-based access, automated routing and field manager workflows."
+    ],
+    "work": [
+      "Built the Internal Audit Application on SharePoint with SPFx React: structured data capture, department-level reporting and Power Automate approval workflows.",
+      "Configured the Freshworks ITSM workspace from scratch: role-based access controls, field manager workflows, automated service request routing and escalation rules."
+    ],
+    "outcome": [
+      "Internal Audit Application live with a full audit trail.",
+      "Freshworks ITSM workspace operational, with automated request routing, field manager workflows and structured escalation paths.",
+      "Further areas for Freshworks optimisation identified."
+    ],
+    "stack": [
+      "SPFx",
+      "React",
+      "SharePoint Online",
+      "Power Automate",
+      "Freshworks ITSM",
+      "REST APIs"
+    ]
   }
 ]
