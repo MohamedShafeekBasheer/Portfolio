@@ -94,9 +94,11 @@ function Home() {
           <h1>{SITE.headline}</h1>
           <p className="lede">{SITE.intro[0]}</p>
           <div className="introActions">
+            <Link className="button buttonGhost" href="/hire/">For recruiters &amp; CV</Link>
             <Link className="button buttonGhost" href="/work/">Read the case studies</Link>
-            <Link className="button buttonGhost" href="/services/">Services &amp; rates</Link>
+            <Link className="button buttonGhost" href="/services/">Consulting &amp; rates</Link>
           </div>
+          <p className="openTo"><strong>Open to:</strong> {SITE.target_roles.slice(0, 5).join(" · ")} — in Saudi Arabia, the GCC, Singapore, India or remote. Iqama transferable.</p>
         </div>
       </section>
 
@@ -271,6 +273,58 @@ function About() {
   );
 }
 
+/* ---------------------------------------------------------------- recruiters */
+
+function Hire() {
+  return (
+    <Page title="For recruiters" primary={false}>
+      <section className="intro">
+        <Portrait eager />
+        <div>
+          <p className="eyebrow">For recruiters and hiring managers</p>
+          <h1>{SITE.name} — SharePoint Developer &amp; Microsoft 365 Architect</h1>
+          <p className="lede">5 years building on SharePoint, Microsoft 365, the Power Platform and Azure, for EY GDS, Avasoft clients in the US, UK and Canada, and a five-company Saudi industrial group. KSA-based, Iqama transferable.</p>
+          <div className="introActions">
+            <a className="button buttonPrimary" href={SITE.cv_url} download>Download CV (PDF)</a>
+            <a className="button buttonGhost" href={`mailto:${SITE.email}?subject=${encodeURIComponent("Role opportunity")}`}>Email me</a>
+            <a className="button buttonGhost" href={SITE.linkedin} rel="me noopener" target="_blank">LinkedIn</a>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="sectionHead"><h2>Roles I'm open to</h2></div>
+        <ul className="roleList">{SITE.target_roles.map((r) => <li key={r}>{r}</li>)}</ul>
+        <p className="openTo"><strong>Locations:</strong> {SITE.target_locations}</p>
+      </section>
+
+      <section className="card">
+        <h2>Quick facts</h2>
+        <Defs items={SITE.quick_facts} />
+      </section>
+
+      <section className="card">
+        <h2>Highlights</h2>
+        <ul className="highlights">
+          {SITE.highlights.map(([slug, text]) => (
+            <li key={slug}><Link href={`/work/${slug}/`}>{text}</Link></li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="card">
+        <h2>Skills</h2>
+        <Defs items={SITE.keyword_groups} />
+      </section>
+
+      <section>
+        <div className="sectionHead"><h2>Experience</h2><Link href="/about/">Full profile →</Link></div>
+        <ExperienceTable />
+      </section>
+    </Page>
+  );
+}
+
 /* ---------------------------------------------------------------- contact */
 
 const TOPICS = ["Microsoft 365 review call", "Career guidance call", "Project enquiry", "Ongoing support enquiry", "Job or contract role", "Something else"];
@@ -387,6 +441,7 @@ export function Route({ path }) {
   if (c) return <Case c={c} />;
   switch (path) {
     case "/": return <Home />;
+    case "/hire/": return <Hire />;
     case "/work/": return <Work />;
     case "/services/": return <Services />;
     case "/about/": return <About />;

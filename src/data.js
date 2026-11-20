@@ -12,7 +12,7 @@ export const NAV = [
 ];
 
 export const ROUTES = [
-  "/", "/work/", "/services/", "/about/", "/contact/", "/thanks/",
+  "/", "/hire/", "/work/", "/services/", "/about/", "/contact/", "/thanks/",
   ...WORK.map((w) => `/work/${w.slug}/`),
 ];
 
@@ -47,6 +47,13 @@ const PERSON = {
   address: { "@type": "PostalAddress", addressLocality: "Abha", addressCountry: "SA" },
   worksFor: { "@type": "Organization", name: "Abdul Hadi Abdullah Al-Qahtani & Sons Beverage Company (AQS-PEPSI)" },
   alumniOf: { "@type": "CollegeOrUniversity", name: "Anna University" },
+  knowsLanguage: ["en", "ta"],
+  hasOccupation: SITE.target_roles.map((r) => ({
+    "@type": "Occupation",
+    name: r,
+    occupationLocation: ["Saudi Arabia", "United Arab Emirates", "Qatar", "Singapore", "India"].map((c) => ({ "@type": "Country", name: c })),
+    skills: "SharePoint Online, SPFx, Power Apps, Power Automate, Microsoft 365, Azure Functions, Microsoft Entra ID, Conditional Access",
+  })),
   hasCredential: {
     "@type": "EducationalOccupationalCredential",
     name: "PL-900: Microsoft Power Platform Fundamentals",
@@ -93,6 +100,10 @@ export function meta(rawPath) {
   if (path === "/")
     return { ...base, title: SITE.home_title, description: SITE.home_description,
       schema: [SERVICE, { "@type": "WebSite", url: `${URL_BASE}/`, name: SITE.name }] };
+  if (path === "/hire/")
+    return { ...base, ogType: "profile", title: `Hire ${SITE.name} — SharePoint Developer, Microsoft 365 Consultant, Power Platform Developer`,
+      description: "For recruiters: SharePoint Developer / Microsoft 365 Architect with 5 years in SPFx, Power Apps, Power Automate, Azure and M365 security. KSA-based, Iqama transferable. Open to Saudi Arabia, UAE, GCC, Singapore, India and remote. CV download.",
+      schema: [crumbs([["/", "Home"], ["/hire/", "For recruiters"]]), { "@type": "ProfilePage", mainEntity: { "@id": `${URL_BASE}/#person` } }] };
   if (path === "/work/")
     return { ...base, title: `Case studies — ${SITE.name}`,
       description: "What was failing and how it was fixed: a contract platform on SPFx and Azure, InfoPath retirement, a 45,000-document migration, Dynamics 365 integration, SharePoint security remediation and more.",

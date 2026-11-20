@@ -10,6 +10,7 @@ const PATHS = {
   about: "M8 8a2.75 2.75 0 1 0 0-5.5A2.75 2.75 0 0 0 8 8zM3 13.5c.6-2.4 2.6-3.5 5-3.5s4.4 1.1 5 3.5",
   writing: "M10.5 2.5l3 3-7.5 7.5H3v-3zM9 4l3 3",
   contact: "M2.5 3.5h11v9h-11zM2.5 4l5.5 4.5L13.5 4",
+  hire: "M2.5 4h11v9h-11zM5.5 7a1.25 1.25 0 1 0 0-.01M4 11c.3-1 1-1.5 1.5-1.5S6.7 10 7 11M9 7h3M9 9.5h3",
   linkedin: "M3 6v7M3 3.2v.1M6.5 13V6M6.5 9c0-1.8 1-3 2.6-3S11.5 7.2 11.5 9v4",
   external: "M6 3.5H3.5v9h9V10M9 3h4v4M13 3L7.5 8.5",
 };
@@ -24,6 +25,7 @@ export function Icon({ name, size = 16 }) {
 
 const MAIN_NAV = [
   ["/", "Overview", "overview"],
+  ["/hire/", "For recruiters", "hire"],
   ["/work/", "Case studies", "work"],
   ["/services/", "Services", "services"],
   ["/about/", "About", "about"],
@@ -61,7 +63,7 @@ export function Nav() {
 
       <div className="navGroup">
         <p className="navLabel">Portfolio</p>
-        {MAIN_NAV.slice(0, 4).map(([href, label, icon]) => (
+        {MAIN_NAV.slice(0, 5).map(([href, label, icon]) => (
           <Link key={href} href={href} title={label}
             className={`navItem${isActive(path, href) ? " navItemActive" : ""}`}
             aria-current={isActive(path, href) ? "page" : undefined}>
@@ -102,7 +104,7 @@ export function TabBar() {
       {MAIN_NAV.map(([href, label, icon]) => (
         <Link key={href} href={href} className={isActive(path, href) ? "navItemActive" : undefined}
           aria-current={isActive(path, href) ? "page" : undefined}>
-          <Icon name={icon} size={18} /><span>{label === "Case studies" ? "Work" : label}</span>
+          <Icon name={icon} size={18} /><span>{{ "Case studies": "Work", "For recruiters": "Hire" }[label] || label}</span>
         </Link>
       ))}
     </nav>
