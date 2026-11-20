@@ -1,0 +1,177 @@
+[
+  {
+    "slug": "sharepoint-external-sharing-breach",
+    "title": "Closing an external sharing leak in SharePoint Online",
+    "kind": "Security incident",
+    "client": "Confidential organisation",
+    "region": "Canada",
+    "duration": "2 weeks",
+    "result": "All unauthorised access removed within 48 hours",
+    "summary": "A sharing misconfiguration had exposed internal documents to users at a partner company. I audited the tenant, revoked every unauthorised link and guest, and rebuilt the sharing policy so it couldn't happen again.",
+    "situation": [
+      "An external sharing setting in SharePoint Online had been left too open. Sensitive internal documents were reachable by users at a Canadian partner organisation, and the exposure ran across several site collections.",
+      "Nobody knew exactly how far it went. The first job was to find out — quickly — and stop it."
+    ],
+    "work": [
+      "Audited the whole tenant with PowerShell and the Microsoft 365 admin center.",
+      "Listed every externally shared link, guest account and anonymous access link.",
+      "Revoked access in a controlled order so business-critical sharing wasn't broken by accident.",
+      "Reset sharing policy at both tenant and site-collection level.",
+      "Added monitoring alerts and Conditional Access rules to catch drift early."
+    ],
+    "outcome": [
+      "100% of unauthorised external access removed within 48 hours.",
+      "Sharing policy tightened and enforced with Conditional Access.",
+      "Incident report delivered to stakeholders.",
+      "No recurrence since the fix."
+    ],
+    "stack": ["SharePoint Online", "PowerShell", "Microsoft Entra ID", "M365 admin center", "Conditional Access"]
+  },
+  {
+    "slug": "google-workspace-to-microsoft-365-migration",
+    "title": "Moving 5,000 people from Google Workspace to Microsoft 365",
+    "kind": "Cloud migration",
+    "client": "Enterprise client, via Avasoft",
+    "region": "Global",
+    "duration": "6 months",
+    "result": "5,000+ users migrated, zero data loss",
+    "summary": "Drive, Shared Drives, Sites, Gmail and Groups — the whole Google workplace moved to Microsoft 365 inside six months, with a tracking app so everyone could see where each workload stood.",
+    "situation": [
+      "A large enterprise wanted off Google Workspace entirely: Drive, Shared Drives, Google Sites, Gmail and Groups. The deadline was six months and the business couldn't stop working while it happened."
+    ],
+    "work": [
+      "Google Drive and Shared Drives to SharePoint with ShareGate and Migration Manager.",
+      "Google Sites to SharePoint, classic and modern.",
+      "Gmail to Exchange Online / Outlook.",
+      "Google Groups to Microsoft 365 Groups and Teams.",
+      "Built a migration tracking app so the team could follow every workload in real time instead of chasing spreadsheets."
+    ],
+    "outcome": [
+      "5,000+ users migrated within the six-month window.",
+      "Cutover completed with zero data loss.",
+      "Replaced the client's legacy Google Sheets workflows with a governed SharePoint application after go-live."
+    ],
+    "stack": ["ShareGate", "Migration Manager", "SharePoint Online", "Exchange Online", "Microsoft Teams", "Power Apps"]
+  },
+  {
+    "slug": "ward-sharepoint-on-prem-modernisation",
+    "title": "Stabilising 14 SharePoint on-prem apps for a US logistics company",
+    "kind": "Legacy modernisation",
+    "client": "WARD",
+    "region": "USA",
+    "duration": "8 months",
+    "result": "14+ apps stabilised, duplicate submissions gone",
+    "summary": "Expense, accident-report and approval apps on an ageing SharePoint farm were creating duplicate records every day. I found the race conditions, fixed 50+ broken workflows and rebuilt the Accident Report app from scratch.",
+    "situation": [
+      "WARD ran 14+ business-critical applications — expenses, accident reports, approvals — on an ageing SharePoint on-premises environment.",
+      "Forms were creating duplicate entries, the sequential ID generators kept breaking, and an unstable Node setup made every fix risky. Staff felt it every day."
+    ],
+    "work": [
+      "Traced the duplicates to front-end race conditions when two people submitted at the same time, and fixed them.",
+      "Upgraded the Node versions the apps depended on.",
+      "Rebuilt the Accident Report application end-to-end with a new UI and a reliable back end.",
+      "Fixed 50+ SharePoint Designer workflows across the portfolio."
+    ],
+    "outcome": [
+      "All 14+ applications stable.",
+      "Zero duplicate submissions after the fix.",
+      "New Accident Report application live in production."
+    ],
+    "stack": ["SharePoint on-premises", "SharePoint Designer", "React", "SPFx", "Node.js", "JavaScript"]
+  },
+  {
+    "slug": "infopath-to-spfx-modernisation",
+    "title": "Retiring InfoPath: 30+ forms rebuilt in SPFx",
+    "kind": "Form modernisation",
+    "client": "Al Qahtani Beverages",
+    "region": "Saudi Arabia",
+    "duration": "Ongoing",
+    "result": "30+ forms modernised so far",
+    "summary": "InfoPath forms on SharePoint 2013/2016 — and the SharePoint Designer workflows behind them — being rebuilt as SPFx React forms and Power Automate flows before Microsoft's support deadline.",
+    "situation": [
+      "The company's day-to-day processes ran on InfoPath forms in SharePoint 2013 and 2016, with SharePoint Designer workflows handling approvals and notifications. Microsoft is ending support for both."
+    ],
+    "work": [
+      "Rebuilding each InfoPath form as a responsive SPFx React form.",
+      "Moving every SharePoint Designer workflow to Power Automate, keeping the same approval chains and notification rules.",
+      "Shipping in small batches so departments switch over one at a time."
+    ],
+    "outcome": [
+      "30+ forms modernised to date.",
+      "Legacy workflows on those forms fully replaced by Power Automate.",
+      "Programme still running at a steady pace."
+    ],
+    "stack": ["SPFx", "React", "TypeScript", "Power Automate", "SharePoint Online"]
+  },
+  {
+    "slug": "ey-gds-risk-and-workflow-apps",
+    "title": "Internal risk, leave and resourcing apps at EY GDS",
+    "kind": "Enterprise applications",
+    "client": "Ernst & Young Global Delivery Services",
+    "region": "UK",
+    "duration": "2024 – 2025",
+    "result": "100+ flows and 20+ live apps maintained",
+    "summary": "SPFx React apps on SharePoint for risk workflows, leave tracking, resource allocation and onboarding — all shipped through EY's formal change-request and release process.",
+    "situation": [
+      "EY GDS needed a set of internal applications — risk workflow management, leave tracking, resource allocation and employee onboarding — built to EY's security and change-management standards, with formal release schedules."
+    ],
+    "work": [
+      "Designed and deployed SPFx React applications with SharePoint as the back end.",
+      "Built the internal leave and resource allocation systems.",
+      "Owned 100+ Power Automate workflows.",
+      "Handled all internal releases for the fiscal year and kept 20+ live apps moving through Change Request Management."
+    ],
+    "outcome": [
+      "Full internal workflow suite in production.",
+      "100+ automations maintained.",
+      "Every release went through formal SDLC and change control, with zero compliance breaches."
+    ],
+    "stack": ["SPFx", "React", "SharePoint Online", "Power Automate", "Power Apps", "PowerShell"]
+  },
+  {
+    "slug": "dubai-intranet-spfx-web-parts",
+    "title": "World-clock and weather web parts for a Dubai intranet",
+    "kind": "SPFx web parts",
+    "client": "Food industry company (confidential)",
+    "region": "Dubai, UAE",
+    "duration": "5 months",
+    "result": "Multinational intranet launched",
+    "summary": "Custom SPFx web parts — a multi-timezone world clock and calendar, and a live regional weather panel — for a modern SharePoint intranet serving staff across several countries.",
+    "situation": [
+      "A large food company in Dubai wanted its modern SharePoint intranet to be useful to staff spread across several countries. They needed live, local information that SharePoint doesn't provide out of the box."
+    ],
+    "work": [
+      "Built custom SPFx web parts in React and TypeScript.",
+      "A world clock and calendar web part covering every office time zone.",
+      "A live weather web part with region-specific data pulled from REST APIs."
+    ],
+    "outcome": [
+      "Web parts delivered and live on the intranet.",
+      "Better intranet engagement from international staff across multiple offices."
+    ],
+    "stack": ["SPFx", "React", "TypeScript", "SharePoint Online", "REST APIs"]
+  },
+  {
+    "slug": "genai-internal-assistant",
+    "title": "An internal AI assistant on Azure OpenAI and SharePoint",
+    "kind": "AI & automation",
+    "client": "Al Qahtani Beverages",
+    "region": "Saudi Arabia",
+    "duration": "In progress",
+    "result": "Pilot live in 2 departments",
+    "summary": "A GenAI assistant that searches SharePoint content and handles routine requests for several departments, built with Azure OpenAI, Copilot APIs and an SPFx front end.",
+    "situation": [
+      "Several departments were spending time answering the same questions and processing the same standard requests, and finding documents in SharePoint wasn't easy."
+    ],
+    "work": [
+      "Designing the assistant around Azure OpenAI and Microsoft 365 Copilot APIs, with an SPFx interface inside SharePoint.",
+      "Running alongside it: a standalone Security Guard application and a Freshworks ITSM integration that creates tickets automatically."
+    ],
+    "outcome": [
+      "R&D phase complete.",
+      "Proof of concept live for 2 departments.",
+      "Production rollout under way, with more departments planned."
+    ],
+    "stack": ["Azure OpenAI", "Microsoft Copilot", "SPFx", "React", "Power Automate", "Freshworks"]
+  }
+]

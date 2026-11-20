@@ -1,0 +1,9 @@
+# Old site URLs -> new pages (keeps links and search rankings)
+/pages/about.html            /about/           301
+/pages/services.html         /services/        301
+/pages/consulting.html       /services/        301
+/pages/case-studies.html     /work/            301
+/pages/skills.html           /services/        301
+/pages/contact.html          /contact/         301
+/pages/blog.html             /                 301
+/locales/*                   /                 301

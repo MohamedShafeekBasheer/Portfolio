@@ -1,0 +1,22 @@
+# Mohamed Shafeek
+
+> Microsoft 365 & SharePoint Consultant based in Abha, Saudi Arabia. Remote work in any time zone. Open to on-site contracts and full-time roles outside Saudi Arabia — I'll relocate with my family for the right opportunity.
+
+## Pages
+- [Work](https://mohamedshafeekspconsulting.netlify.app/work/)
+- [Services](https://mohamedshafeekspconsulting.netlify.app/services/)
+- [About](https://mohamedshafeekspconsulting.netlify.app/about/)
+- [Contact](https://mohamedshafeekspconsulting.netlify.app/contact/)
+
+## Case studies
+- [Closing an external sharing leak in SharePoint Online](https://mohamedshafeekspconsulting.netlify.app/work/sharepoint-external-sharing-breach/): A sharing misconfiguration had exposed internal documents to users at a partner company. I audited the tenant, revoked every unauthorised link and guest, and rebuilt the sharing policy so it couldn't happen again.
+- [Moving 5,000 people from Google Workspace to Microsoft 365](https://mohamedshafeekspconsulting.netlify.app/work/google-workspace-to-microsoft-365-migration/): Drive, Shared Drives, Sites, Gmail and Groups — the whole Google workplace moved to Microsoft 365 inside six months, with a tracking app so everyone could see where each workload stood.
+- [Stabilising 14 SharePoint on-prem apps for a US logistics company](https://mohamedshafeekspconsulting.netlify.app/work/ward-sharepoint-on-prem-modernisation/): Expense, accident-report and approval apps on an ageing SharePoint farm were creating duplicate records every day. I found the race conditions, fixed 50+ broken workflows and rebuilt the Accident Report app from scratch.
+- [Retiring InfoPath: 30+ forms rebuilt in SPFx](https://mohamedshafeekspconsulting.netlify.app/work/infopath-to-spfx-modernisation/): InfoPath forms on SharePoint 2013/2016 — and the SharePoint Designer workflows behind them — being rebuilt as SPFx React forms and Power Automate flows before Microsoft's support deadline.
+- [Internal risk, leave and resourcing apps at EY GDS](https://mohamedshafeekspconsulting.netlify.app/work/ey-gds-risk-and-workflow-apps/): SPFx React apps on SharePoint for risk workflows, leave tracking, resource allocation and onboarding — all shipped through EY's formal change-request and release process.
+- [World-clock and weather web parts for a Dubai intranet](https://mohamedshafeekspconsulting.netlify.app/work/dubai-intranet-spfx-web-parts/): Custom SPFx web parts — a multi-timezone world clock and calendar, and a live regional weather panel — for a modern SharePoint intranet serving staff across several countries.
+- [An internal AI assistant on Azure OpenAI and SharePoint](https://mohamedshafeekspconsulting.netlify.app/work/genai-internal-assistant/): A GenAI assistant that searches SharePoint content and handles routine requests for several departments, built with Azure OpenAI, Copilot APIs and an SPFx front end.
+
+## Contact
+- Email: basheermohamedshafeek@gmail.com
+- LinkedIn: https://www.linkedin.com/in/mdshafeek

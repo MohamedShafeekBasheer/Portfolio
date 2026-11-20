@@ -1,0 +1,104 @@
+{
+  "site_url": "https://mohamedshafeekspconsulting.netlify.app",
+  "name": "Mohamed Shafeek",
+  "role": "Microsoft 365 & SharePoint Consultant",
+  "email": "basheermohamedshafeek@gmail.com",
+  "linkedin": "https://www.linkedin.com/in/mdshafeek",
+  "location": "Abha, Saudi Arabia",
+  "timezone": "Asia/Riyadh",
+  "current": "IT Analyst at Al Qahtani Beverages",
+
+  "home_title": "Mohamed Shafeek — SharePoint & Microsoft 365 Consultant",
+  "home_description": "SharePoint, Power Apps and Microsoft 365 consultant. Security clean-ups, Google Workspace to Microsoft 365 migrations, SPFx and InfoPath modernisation. Remote worldwide, open to roles abroad.",
+
+  "headline": "I fix, secure and modernise SharePoint and Microsoft 365 for the companies that run on them.",
+  "intro": [
+    "I'm Mohamed Shafeek. For the last five years I've worked inside Microsoft 365 tenants for clients in the US, the UK, Canada and the Gulf — migrating 5,000 people off Google Workspace, cleaning up a SharePoint data leak, retiring InfoPath, and building 80+ business apps on SharePoint and the Power Platform.",
+    "If something in your Microsoft 365 setup is slow, fragile or exposed, I'm a good person to talk to."
+  ],
+
+  "availability": {
+    "short": "Taking on consulting calls, project work, and roles abroad.",
+    "remote": "Remote work in any time zone.",
+    "relocation": "Open to on-site contracts and full-time roles outside Saudi Arabia — I'll relocate with my family for the right opportunity."
+  },
+
+  "numbers": [
+    ["5,000+", "users moved from Google Workspace to Microsoft 365"],
+    ["80+", "business apps built on SharePoint and Power Platform"],
+    ["200+", "Power Automate flows built and maintained"],
+    ["5 yrs", "hands-on in Microsoft 365, since 2021"]
+  ],
+
+  "help_with": [
+    ["SharePoint security", "External sharing audits, guest clean-up, permission sprawl, Conditional Access."],
+    ["Migrations", "Google Workspace to Microsoft 365, tenant-to-tenant, on-prem to SharePoint Online. ShareGate, Migration Manager, AvePoint, Cloudiway."],
+    ["Legacy retirement", "InfoPath forms and SharePoint Designer workflows rebuilt in SPFx and Power Automate before support runs out."],
+    ["SPFx & intranets", "React and TypeScript web parts and extensions for SharePoint Online."],
+    ["Power Apps & Automate", "Canvas and model-driven apps, Dataverse, approval flows that hold up at volume, Power BI."],
+    ["Copilot & Azure OpenAI", "Internal assistants that search your SharePoint content and take routine requests off people's desks."]
+  ],
+
+  "offers": [
+    {
+      "name": "Microsoft 365 review call",
+      "price": "$35",
+      "unit": "per hour",
+      "text": "We look at your tenant, SharePoint or Power Platform setup as it is today. You leave with a short list of what's risky, what's wasting time, and what to do first.",
+      "cta": "Book a review call",
+      "subject": "Microsoft 365 review call"
+    },
+    {
+      "name": "Career guidance",
+      "price": "$35",
+      "unit": "per hour",
+      "text": "For people building a career in SharePoint, Power Apps or SPFx. Roadmap, interview prep, portfolio feedback — the things I wish someone had told me in 2021.",
+      "cta": "Book a career call",
+      "subject": "Career guidance call"
+    },
+    {
+      "name": "Project work",
+      "price": "Quoted",
+      "unit": "per project",
+      "text": "A defined piece of work: a migration, an SPFx build, an InfoPath retirement, a security remediation. Fixed scope, written plan, handover documentation.",
+      "cta": "Describe your project",
+      "subject": "Project enquiry"
+    },
+    {
+      "name": "Ongoing support",
+      "price": "Monthly",
+      "unit": "retainer",
+      "text": "For teams with a steady backlog of SharePoint and Power Platform work who want the same person picking it up every month.",
+      "cta": "Talk about a retainer",
+      "subject": "Ongoing support enquiry"
+    }
+  ],
+
+  "about": [
+    "I started in December 2021 as a trainee at Avasoft in Chennai, building React and Node apps and helping on SharePoint migrations. Within a few months I was on migration projects full time, and over the next two and a half years I worked on six client programmes — the biggest was a 5,000-user move from Google Workspace.",
+    "After a short stint building SPFx web parts at Colan InfoTech, I joined EY Global Delivery Services, where I spent most of a year on internal risk, leave and resourcing apps. That's where I learned to ship inside a strict change-management process without slowing down.",
+    "Since October 2025 I've been an IT Analyst at Al Qahtani Beverages in Abha, Saudi Arabia. I look after SharePoint and Microsoft 365 for 500+ people, I'm retiring the company's InfoPath forms, and I'm building an internal assistant on Azure OpenAI.",
+    "Outside the day job I take consulting work and mentor people who are starting out on the Microsoft stack. I want to keep working with teams in different countries — and I'm ready to move, with my family, for the right role."
+  ],
+
+  "timeline": [
+    ["2025 – now", "IT Analyst · SharePoint & Microsoft 365", "Al Qahtani Beverages, Abha", "InfoPath modernisation, SPFx, workflow automation and an Azure OpenAI assistant for 500+ users."],
+    ["2024 – 2025", "SharePoint & Power Apps Developer", "Ernst & Young GDS", "SPFx React apps, 100+ Power Automate flows and formal change-request releases for 20+ live internal apps."],
+    ["2024", "SharePoint Developer", "Colan InfoTech", "Custom SPFx web parts and intranet experiences, including a multinational portal for a Dubai client."],
+    ["2021 – 2024", "Power Platform & SharePoint Developer / Admin", "Avasoft, Chennai", "Started as a trainee. Migration programmes, SharePoint modernisation and Power Platform delivery for six client projects."]
+  ],
+
+  "credentials": [
+    ["Certification", "PL-900 · Microsoft Power Platform Fundamentals"],
+    ["Education", "B.Tech, Information Technology · Anna University"]
+  ],
+
+  "skills": [
+    ["SharePoint & Microsoft 365", "SharePoint Online and on-prem, Teams, OneDrive, Exchange Online, Entra ID"],
+    ["Development", "SPFx, React, TypeScript, JavaScript, Node.js, .NET / C#, PnPjs, Microsoft Graph"],
+    ["Power Platform", "Power Apps (canvas and model-driven), Power Automate, Dataverse, Power BI, Power Pages"],
+    ["Security & admin", "PowerShell and PnP PowerShell, Conditional Access, external sharing governance, Compliance Center"],
+    ["Migration", "ShareGate, Migration Manager, AvePoint, Cloudiway, tenant-to-tenant"],
+    ["AI & other", "Azure OpenAI, Microsoft Copilot, Freshworks ITSM, REST APIs"]
+  ]
+}
