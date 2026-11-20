@@ -9,15 +9,9 @@
   "current": "IT Analyst at Al Qahtani Beverages",
   "home_title": "Mohamed Shafeek — SharePoint & Microsoft 365 Consultant",
   "home_description": "SharePoint, Power Apps and Microsoft 365 consultant. Security clean-ups, Google Workspace to Microsoft 365 migrations, SPFx and InfoPath modernisation. Remote worldwide, open to roles abroad.",
-  "headline": [
-    "Legacy SharePoint,",
-    "fixed.",
-    "Microsoft 365,",
-    "secured."
-  ],
+  "headline": "I fix, secure and modernise SharePoint and Microsoft 365 for the companies that run on them.",
   "intro": [
-    "I'm Mohamed Shafeek. For five years I've worked inside Microsoft 365 tenants for clients in the US, the UK, Canada and the Gulf — retiring InfoPath, stopping a SharePoint data leak, moving 5,000 people off Google Workspace, and building 80+ business apps on SharePoint and the Power Platform.",
-    "If something in your Microsoft 365 setup is slow, fragile or exposed, I'm a good person to talk to."
+    "Five years inside Microsoft 365 tenants for clients in the US, UK, Canada and the Gulf: retiring InfoPath, closing a SharePoint data leak, moving 5,000 people off Google Workspace, and building 80+ business apps on SharePoint and the Power Platform."
   ],
   "availability": {
     "short": "Taking on consulting calls, project work, and roles abroad.",
@@ -26,20 +20,24 @@
   },
   "numbers": [
     [
+      "Users migrated",
       "5,000+",
-      "users moved from Google Workspace to Microsoft 365"
+      "Google Workspace to Microsoft 365"
     ],
     [
+      "Apps delivered",
       "80+",
-      "business apps built on SharePoint and Power Platform"
+      "On SharePoint and the Power Platform"
     ],
     [
+      "Automated flows",
       "200+",
-      "Power Automate flows built and maintained"
+      "Power Automate, built and maintained"
     ],
     [
+      "Experience",
       "5 yrs",
-      "hands-on in Microsoft 365, since 2021"
+      "Hands-on in Microsoft 365 since 2021"
     ]
   ],
   "help_with": [

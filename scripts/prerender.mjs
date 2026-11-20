@@ -16,11 +16,6 @@ const { render, meta, jsonLd, ROUTES, WORK, SITE, URL_BASE } = await import(
 const template = fs.readFileSync(path.join(dist, "index.html"), "utf8");
 const assets = fs.readdirSync(path.join(dist, "assets"));
 
-// Preload the two fonts used above the fold so text never flashes.
-const preload = assets
-  .filter((f) => /^(bricolage|instrument)-.*\.woff2$/.test(f))
-  .map((f) => `<link rel="preload" href="/assets/${f}" as="font" type="font/woff2" crossorigin>`)
-  .join("\n");
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 
@@ -40,7 +35,6 @@ function head(m) {
     `<meta property="og:image:width" content="1200">`,
     `<meta property="og:image:height" content="630">`,
     `<meta name="twitter:card" content="summary_large_image">`,
-    preload,
     `<script type="application/ld+json">${JSON.stringify(jsonLd(m)).replace(/</g, "\\u003c")}</script>`,
   ].join("\n");
 }

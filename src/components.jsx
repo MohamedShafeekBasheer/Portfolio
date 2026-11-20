@@ -1,187 +1,158 @@
 import { Component, useEffect, useState } from "react";
 import { Link, useRouter } from "./router.jsx";
-import { NAV, SITE, WORK } from "./data.js";
+import { SITE } from "./data.js";
 
-export function LoadingBar() {
-  const { loading } = useRouter();
-  return <div className={`loadbar${loading ? " is-on" : ""}`} aria-hidden="true" />;
-}
-
-export function Header() {
-  const { path } = useRouter();
+/* ---------- icons (16px line icons, no icon font) ---------- */
+const PATHS = {
+  overview: "M2.5 2.5h4.5v4.5H2.5zM9 2.5h4.5v4.5H9zM2.5 9h4.5v4.5H2.5zM9 9h4.5v4.5H9z",
+  work: "M3 2.5h7l3 3v8H3zM10 2.5v3h3M5.5 8.5h5M5.5 11h5",
+  services: "M2.5 5.5h11v8h-11zM6 5.5V3.5h4v2M2.5 9h11",
+  about: "M8 8a2.75 2.75 0 1 0 0-5.5A2.75 2.75 0 0 0 8 8zM3 13.5c.6-2.4 2.6-3.5 5-3.5s4.4 1.1 5 3.5",
+  writing: "M10.5 2.5l3 3-7.5 7.5H3v-3zM9 4l3 3",
+  contact: "M2.5 3.5h11v9h-11zM2.5 4l5.5 4.5L13.5 4",
+  linkedin: "M3 6v7M3 3.2v.1M6.5 13V6M6.5 9c0-1.8 1-3 2.6-3S11.5 7.2 11.5 9v4",
+  external: "M6 3.5H3.5v9h9V10M9 3h4v4M13 3L7.5 8.5",
+};
+export function Icon({ name, size = 16 }) {
   return (
-    <header className="top">
-      <div className="wrap top-in">
-        <Link className="brand" href="/">
-          <span className="brand-mark" aria-hidden="true">MS</span>
-          <span className="brand-name">{SITE.name}</span>
-        </Link>
-        <nav aria-label="Main">
-          {NAV.map(([href, label]) => (
-            <Link key={href} href={href} aria-current={path === href || (href === "/work/" && path.startsWith("/work/")) ? "page" : undefined}>
-              {label}
-            </Link>
-          ))}
-        </nav>
-      </div>
-    </header>
+    <svg width={size} height={size} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.4"
+      strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+      <path d={PATHS[name]} />
+    </svg>
   );
 }
 
-export function Footer() {
-  return (
-    <footer className="foot">
-      <div className="wrap foot-in">
-        <div>
-          <p className="foot-name">{SITE.name}</p>
-          <p>{SITE.role}<br />{SITE.location} · working worldwide</p>
-        </div>
-        <div className="foot-links">
-          <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
-          <a href={SITE.linkedin} rel="me noopener" target="_blank">LinkedIn</a>
-        </div>
-        <p className="foot-small">© {new Date().getFullYear()} {SITE.name}. No cookies, no trackers.</p>
-      </div>
-    </footer>
-  );
+const MAIN_NAV = [
+  ["/", "Overview", "overview"],
+  ["/work/", "Case studies", "work"],
+  ["/services/", "Services", "services"],
+  ["/about/", "About", "about"],
+  ["/contact/", "Contact", "contact"],
+];
+
+function isActive(path, href) {
+  return href === "/" ? path === "/" : path.startsWith(href);
 }
 
-export function Portrait({ className = "portrait", eager = false }) {
-  return (
-    <picture className={className}>
-      <source type="image/webp" sizes="(max-width: 760px) 70vw, 320px"
-        srcSet="/img/portrait-card-320.webp 320w, /img/portrait-card-560.webp 560w, /img/portrait-card-760.webp 760w" />
-      <img src="/img/portrait-card-hero.jpg" width="760" height="962" alt={`Portrait of ${SITE.name}`}
-        decoding="async" loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : "auto"} />
-    </picture>
-  );
-}
-
-/* Local time — rendered as a placeholder on the server, filled in on the client. */
+/* Local time — placeholder on the server, filled in on the client. */
 export function Clock() {
-  const [t, setT] = useState("—");
+  const [t, setT] = useState("--:--");
   useEffect(() => {
     const f = () => {
       try {
-        setT(new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", weekday: "short", timeZone: SITE.timezone }).format(new Date()));
+        setT(new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: SITE.timezone }).format(new Date()));
       } catch { /* keep placeholder */ }
     };
     f();
     const id = setInterval(f, 30000);
     return () => clearInterval(id);
   }, []);
-  return <span className="clock">{t}</span>;
+  return <span className="mono">{t}</span>;
 }
 
-export function Status() {
+export function Nav() {
+  const { path } = useRouter();
   return (
-    <dl className="status">
-      <div><dt>Now</dt><dd>{SITE.current}</dd></div>
-      <div><dt>Taking on</dt><dd>{SITE.availability.short}</dd></div>
-      <div><dt>Local time</dt><dd><Clock /> in Abha</dd></div>
-    </dl>
-  );
-}
-
-/* Hero ticker: cycles through "before → after" from the case studies. */
-export function Ticker() {
-  const [i, setI] = useState(0);
-  const [paused, setPaused] = useState(false);
-  useEffect(() => {
-    if (paused || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = setInterval(() => setI((n) => (n + 1) % WORK.length), 3600);
-    return () => clearInterval(id);
-  }, [paused]);
-  const w = WORK[i];
-  return (
-    <div className="ticker" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-      <p className="ticker-label"><span>Before</span><span>After</span></p>
-      <Link href={`/work/${w.slug}/`} className="ticker-row" key={w.slug}>
-        <s className="ticker-before">{w.swap[0]}</s>
-        <span className="ticker-arrow" aria-hidden="true">→</span>
-        <strong className="ticker-after">{w.swap[1]}</strong>
+    <nav className="nav" aria-label="Main">
+      <Link className="brand" href="/" aria-label={`${SITE.name} — home`}>
+        <span className="brandMark" aria-hidden="true">MS</span>
+        <span className="brandName"><strong>{SITE.name}</strong><span>Microsoft 365 consultant</span></span>
       </Link>
-      <div className="ticker-dots" role="tablist" aria-label="Case studies">
-        {WORK.map((x, n) => (
-          <button key={x.slug} type="button" role="tab" aria-selected={n === i} aria-label={x.title}
-            className={n === i ? "on" : ""} onClick={() => { setI(n); setPaused(true); }} />
-        ))}
-      </div>
-    </div>
-  );
-}
 
-export function WorkRows({ items }) {
-  return (
-    <ol className="rows">
-      {items.map((w, n) => (
-        <li key={w.slug}>
-          <Link href={`/work/${w.slug}/`} className="row">
-            <span className="row-no">{String(n + 1).padStart(2, "0")}</span>
-            <span className="row-main">
-              <span className="row-title">{w.title}</span>
-              <span className="row-swap"><s>{w.swap[0]}</s> → <b>{w.swap[1]}</b></span>
-            </span>
-            <span className="row-meta">{w.client}<br />{w.region} · {w.status}</span>
-            <span className="row-go" aria-hidden="true">↗</span>
+      <div className="navGroup">
+        <p className="navLabel">Portfolio</p>
+        {MAIN_NAV.slice(0, 4).map(([href, label, icon]) => (
+          <Link key={href} href={href} title={label}
+            className={`navItem${isActive(path, href) ? " navItemActive" : ""}`}
+            aria-current={isActive(path, href) ? "page" : undefined}>
+            <Icon name={icon} /><span className="navText">{label}</span>
           </Link>
-        </li>
-      ))}
-    </ol>
-  );
-}
-
-export function Offers() {
-  return (
-    <div className="offers">
-      {SITE.offers.map((o) => (
-        <article className="offer" key={o.name}>
-          <h3>{o.name}</h3>
-          <p className="price"><strong>{o.price}</strong> {o.unit}</p>
-          <p className="offer-text">{o.text}</p>
-          <Link className="link" href={`/contact/?topic=${encodeURIComponent(o.subject)}`}>{o.cta} →</Link>
-        </article>
-      ))}
-    </div>
-  );
-}
-
-export function Help({ items = SITE.help_with }) {
-  return (
-    <dl className="help">
-      {items.map(([t, d]) => <div key={t}><dt>{t}</dt><dd>{d}</dd></div>)}
-    </dl>
-  );
-}
-
-export function Timeline() {
-  return (
-    <ol className="timeline">
-      {SITE.timeline.map(([when, role, org, text]) => (
-        <li key={when + org}>
-          <span className="tl-when">{when}</span>
-          <div><h3>{role}</h3><p className="tl-org">{org}</p><p>{text}</p></div>
-        </li>
-      ))}
-    </ol>
-  );
-}
-
-export function Cta({ text = "Have a Microsoft 365 system that's failing — or a role abroad you think I'd fit?" }) {
-  return (
-    <section className="cta">
-      <div className="wrap">
-        <p className="cta-text">{text}</p>
-        <p className="cta-actions">
-          <Link className="btn btn-lime" href="/contact/">Get in touch</Link>
-          <a className="cta-mail" href={`mailto:${SITE.email}`}>or email {SITE.email}</a>
-        </p>
+        ))}
+        {/* Planned but not built yet: visible so the shape is clear, dimmed so it doesn't pretend. */}
+        <span className="navItem" aria-disabled="true" title="Writing — coming soon">
+          <Icon name="writing" /><span className="navText">Writing</span><span className="navHint">Soon</span>
+        </span>
       </div>
-    </section>
+
+      <div className="navGroup">
+        <p className="navLabel">Get in touch</p>
+        <Link href="/contact/" title="Contact"
+          className={`navItem${isActive(path, "/contact/") ? " navItemActive" : ""}`}
+          aria-current={isActive(path, "/contact/") ? "page" : undefined}>
+          <Icon name="contact" /><span className="navText">Contact</span>
+        </Link>
+        <a className="navItem" href={SITE.linkedin} rel="me noopener" target="_blank" title="LinkedIn (opens in a new tab)">
+          <Icon name="linkedin" /><span className="navText">LinkedIn</span><span className="navHint"><Icon name="external" size={12} /></span>
+        </a>
+      </div>
+
+      <div className="navSpacer" />
+      <div className="navFoot">
+        <span className="statusPill statusPillDark">Available</span>
+        <p>Consulting, projects and roles abroad. <Clock /> in Abha.</p>
+      </div>
+    </nav>
   );
 }
 
-/* If any page throws, show a working fallback instead of a blank screen. */
+export function TabBar() {
+  const { path } = useRouter();
+  return (
+    <nav className="tabbar" aria-label="Main">
+      {MAIN_NAV.map(([href, label, icon]) => (
+        <Link key={href} href={href} className={isActive(path, href) ? "navItemActive" : undefined}
+          aria-current={isActive(path, href) ? "page" : undefined}>
+          <Icon name={icon} size={18} /><span>{label === "Case studies" ? "Work" : label}</span>
+        </Link>
+      ))}
+    </nav>
+  );
+}
+
+export function Header({ title, crumb, primary = true }) {
+  const { loading } = useRouter();
+  return (
+    <header className="header">
+      <div className="headerTitle">
+        {crumb && <span className="crumb">{crumb[0] ? <Link href={crumb[0]}>{crumb[1]}</Link> : crumb[1]} /</span>}
+        <strong>{title}</strong>
+      </div>
+      <div className="headerActions printHide">
+        <a className="button buttonGhost" href={`mailto:${SITE.email}`}>Email</a>
+        {primary && <Link className="button buttonPrimary" href="/contact/?topic=Microsoft%20365%20review%20call">Book a call</Link>}
+      </div>
+      <div className="progressTrack" aria-hidden="true"><div className={`progressFill${loading ? " isOn" : ""}`} /></div>
+    </header>
+  );
+}
+
+export function StatusBar() {
+  return (
+    <footer className="statusBar">
+      <span>© {new Date().getFullYear()} {SITE.name}</span>
+      <span>{SITE.location} · <Clock /> local time</span>
+      <span><a href={`mailto:${SITE.email}`}>{SITE.email}</a></span>
+      <span>No cookies, no trackers</span>
+    </footer>
+  );
+}
+
+export function Portrait({ eager = false }) {
+  return (
+    <picture className="portrait">
+      <source type="image/webp" srcSet="/img/portrait-card-320.webp" />
+      <img src="/img/portrait-card-hero.jpg" width="96" height="96" alt={`Portrait of ${SITE.name}`}
+        decoding="async" loading={eager ? "eager" : "lazy"} />
+    </picture>
+  );
+}
+
+export function StatusPill({ status }) {
+  const done = /complete/i.test(status);
+  return <span className={`statusPill${done ? "" : " statusPillWarn"}`}>{done ? "Completed" : "In rollout"}</span>;
+}
+
+/* If a page throws, show a working fallback instead of a blank screen. */
 export class ErrorBoundary extends Component {
   constructor(props) { super(props); this.state = { error: null }; }
   static getDerivedStateFromError(error) { return { error }; }
@@ -189,16 +160,14 @@ export class ErrorBoundary extends Component {
   render() {
     if (!this.state.error) return this.props.children;
     return (
-      <section className="wrap page-head narrow">
-        <p className="kicker">Something went wrong</p>
-        <h1>This page hit an error.</h1>
-        <p className="lede">Reloading usually fixes it. Everything else on the site still works.</p>
-        <p className="actions">
-          <a className="btn" href={typeof location !== "undefined" ? location.pathname : "/"}>Reload</a>
-          <a className="link" href="/">Home</a>
-          <a className="link" href={`mailto:${SITE.email}`}>Email me</a>
-        </p>
-      </section>
+      <div className="content"><div className="card empty" role="alert">
+        <h1 className="emptyTitle">This page hit an error.</h1>
+        <p className="emptyBody">Reloading usually fixes it. The rest of the site still works.</p>
+        <div className="introActions">
+          <a className="button buttonPrimary" href={typeof location !== "undefined" ? location.pathname : "/"}>Reload</a>
+          <a className="button buttonGhost" href="/">Overview</a>
+        </div>
+      </div></div>
     );
   }
 }

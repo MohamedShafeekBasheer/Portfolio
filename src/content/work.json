@@ -39,7 +39,8 @@
       "Approvals and notifications depended on SharePoint Designer workflows, which Microsoft is also retiring.",
       "The forms were built for desktop browsers and did not work well on phones.",
       "Every month on the old stack added risk: no fixes, no new features, and a hard end-of-support date."
-    ]
+    ],
+    "ref": "CS-01"
   },
   {
     "slug": "ward-sharepoint-on-prem-modernisation",
@@ -85,7 +86,8 @@
       "Unstable, outdated Node versions made every fix risky.",
       "50+ SharePoint Designer workflows were failing across the app portfolio.",
       "The Accident Report app was too unreliable to patch and had to be rebuilt."
-    ]
+    ],
+    "ref": "CS-02"
   },
   {
     "slug": "sharepoint-external-sharing-breach",
@@ -132,7 +134,8 @@
       "The exposure ran across several site collections, not just one.",
       "Old sharing links, guest accounts and anonymous links had piled up with nobody reviewing them.",
       "No alerting existed to catch over-sharing when it happened."
-    ]
+    ],
+    "ref": "CS-03"
   },
   {
     "slug": "google-workspace-to-microsoft-365-migration",
@@ -177,7 +180,8 @@
       "Day-to-day processes ran on Google Sheets with no governance or audit trail.",
       "A hard six-month deadline, and the business could not stop working during the move.",
       "No single view of migration progress across workloads."
-    ]
+    ],
+    "ref": "CS-04"
   },
   {
     "slug": "genai-internal-assistant",
@@ -218,7 +222,8 @@
       "Several departments spent hours answering the same questions again and again.",
       "Standard requests were processed by hand.",
       "Finding the right document in SharePoint was slow."
-    ]
+    ],
+    "ref": "CS-05"
   },
   {
     "slug": "ey-gds-risk-and-workflow-apps",
@@ -261,7 +266,8 @@
       "Risk workflow management, leave tracking, resource allocation and onboarding all needed proper applications.",
       "Everything had to meet EY’s security standards.",
       "Every change had to go through formal change-request management and scheduled releases."
-    ]
+    ],
+    "ref": "CS-06"
   },
   {
     "slug": "dubai-intranet-spfx-web-parts",
@@ -301,6 +307,7 @@
       "Staff were spread across offices in several countries and time zones.",
       "SharePoint’s out-of-the-box web parts had no world clock, multi-zone calendar or live local weather.",
       "The intranet needed to feel useful day to day, not just be a document store."
-    ]
+    ],
+    "ref": "CS-07"
   }
 ]

@@ -1,82 +1,131 @@
 import { useEffect, useState } from "react";
 import { Link, useRouter } from "./router.jsx";
 import { SITE, WORK, findCase } from "./data.js";
-import { Cta, Help, Offers, Portrait, Status, Ticker, Timeline, WorkRows } from "./components.jsx";
+import { Header, Portrait, StatusPill } from "./components.jsx";
 
-/* ---------------------------------------------------------------- home */
-
-function Home() {
-  const [a, b, c, d] = SITE.headline;
+function Page({ title, crumb, primary, children }) {
   return (
     <>
-      <section className="hero">
-        <div className="wrap hero-grid">
-          <div className="hero-text">
-            <p className="kicker">{SITE.role} · {SITE.location}</p>
-            <h1 className="mega">
-              <span className="line">{a}</span>
-              <span className="line"><mark>{b}</mark></span>
-              <span className="line">{c}</span>
-              <span className="line"><mark>{d}</mark></span>
-            </h1>
+      <Header title={title} crumb={crumb} primary={primary} />
+      <div className="content">{children}</div>
+    </>
+  );
+}
+
+/* ---------------------------------------------------------------- shared blocks */
+
+function CaseTable({ items }) {
+  return (
+    <div className="tableWrap">
+      <table className="table">
+        <thead>
+          <tr><th scope="col">Ref</th><th scope="col">Engagement</th><th scope="col" className="hideMd">Client</th><th scope="col" className="hideSm">Region</th><th scope="col" className="hideMd">Length</th><th scope="col">Status</th></tr>
+        </thead>
+        <tbody>
+          {items.map((w) => (
+            <tr key={w.slug}>
+              <td className="cellRef">{w.ref}</td>
+              <td className="wrap"><Link href={`/work/${w.slug}/`}>{w.title}</Link></td>
+              <td className="cellMuted hideMd">{w.client}</td>
+              <td className="cellMuted hideSm">{w.region}</td>
+              <td className="cellMuted hideMd">{w.duration}</td>
+              <td><StatusPill status={w.status} /></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function ExperienceTable() {
+  return (
+    <div className="tableWrap">
+      <table className="table">
+        <thead><tr><th scope="col">Period</th><th scope="col">Role</th><th scope="col">Organisation</th><th scope="col" className="hideMd">Focus</th></tr></thead>
+        <tbody>
+          {SITE.timeline.map(([when, role, org, text]) => (
+            <tr key={when + org}>
+              <td className="cellRef">{when}</td>
+              <td><strong>{role}</strong></td>
+              <td className="cellMuted">{org}</td>
+              <td className="wrap cellMuted hideMd">{text}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function Offers() {
+  return (
+    <div className="offerGrid">
+      {SITE.offers.map((o) => (
+        <article className="card offer" key={o.name}>
+          <p className="cardLabel">{o.unit}</p>
+          <h3>{o.name}</h3>
+          <p className="price">{o.price}{o.price === "$35" && <span>/ hour</span>}</p>
+          <p className="offerText">{o.text}</p>
+          <Link className="button buttonGhost" href={`/contact/?topic=${encodeURIComponent(o.subject)}`}>{o.cta}</Link>
+        </article>
+      ))}
+    </div>
+  );
+}
+
+function Defs({ items }) {
+  return (
+    <dl className="defs">
+      {items.map(([t, d]) => [<dt key={t + "t"}>{t}</dt>, <dd key={t + "d"}>{d}</dd>])}
+    </dl>
+  );
+}
+
+/* ---------------------------------------------------------------- overview */
+
+function Home() {
+  return (
+    <Page title="Overview">
+      <section className="intro">
+        <Portrait eager />
+        <div>
+          <p className="eyebrow">{SITE.name} · {SITE.role}</p>
+          <h1>{SITE.headline}</h1>
+          <p className="lede">{SITE.intro[0]}</p>
+          <div className="introActions">
+            <Link className="button buttonGhost" href="/work/">Read the case studies</Link>
+            <Link className="button buttonGhost" href="/services/">Services &amp; rates</Link>
           </div>
-          <aside className="hero-side">
-            <Portrait eager />
-            <Status />
-          </aside>
-        </div>
-        <div className="wrap hero-low">
-          <div className="lede">{SITE.intro.map((p) => <p key={p}>{p}</p>)}</div>
-          <Ticker />
-        </div>
-        <div className="wrap actions">
-          <Link className="btn" href="/contact/">Start a conversation</Link>
-          <Link className="link" href="/work/">See what I've fixed →</Link>
         </div>
       </section>
 
-      <section className="band">
-        <ul className="wrap numbers">
-          {SITE.numbers.map(([n, t]) => <li key={t}><strong>{n}</strong><span>{t}</span></li>)}
-        </ul>
+      <section aria-label="Key figures" className="cardGrid">
+        {SITE.numbers.map(([label, n, meta]) => (
+          <div className="card" key={label}>
+            <p className="cardLabel">{label}</p>
+            <p className="cardValue">{n}</p>
+            <p className="cardMeta">{meta}</p>
+          </div>
+        ))}
       </section>
 
-      <section className="wrap section">
-        <div className="section-head">
-          <p className="kicker">Selected work</p>
-          <h2>What was failing, and what it looks like now.</h2>
-        </div>
-        <WorkRows items={WORK.slice(0, 5)} />
-        <p className="more"><Link className="link" href="/work/">All {WORK.length} case studies →</Link></p>
+      <section>
+        <div className="sectionHead"><h2>Case studies</h2><Link href="/work/">All {WORK.length} →</Link></div>
+        <CaseTable items={WORK.slice(0, 5)} />
       </section>
 
-      <section className="wrap section split">
-        <div className="section-head">
-          <p className="kicker">Services</p>
-          <h2>What I help with</h2>
-        </div>
-        <Help />
-      </section>
-
-      <section className="wrap section">
-        <div className="section-head">
-          <p className="kicker">Working together</p>
-          <h2>Start with a one-hour call.</h2>
-        </div>
+      <section>
+        <div className="sectionHead"><h2>Ways to work together</h2><Link href="/services/">Details →</Link></div>
         <Offers />
       </section>
 
-      <section className="wrap section split">
-        <div className="section-head">
-          <p className="kicker">Experience</p>
-          <h2>Where I've been</h2>
-          <p className="muted">{SITE.availability.remote} {SITE.availability.relocation}</p>
-          <p><Link className="link" href="/about/">More about me →</Link></p>
-        </div>
-        <Timeline />
+      <section>
+        <div className="sectionHead"><h2>Experience</h2><Link href="/about/">About me →</Link></div>
+        <ExperienceTable />
+        <p className="muted afterTable">{SITE.availability.remote} {SITE.availability.relocation}</p>
       </section>
-      <Cta />
-    </>
+    </Page>
   );
 }
 
@@ -84,17 +133,13 @@ function Home() {
 
 function Work() {
   return (
-    <>
-      <section className="wrap page-head">
-        <p className="kicker">Work</p>
-        <h1 className="big">What was failing. What I changed.</h1>
-        <p className="lede">Legacy forms, leaking permissions, duplicate records, stalled migrations. Each case study starts with what was broken in the old system, then what I did about it.</p>
+    <Page title="Case studies">
+      <section>
+        <h1>Case studies</h1>
+        <p className="lede">Each one is written up as a short report: what was failing in the old system, what I did, and what changed. Select a row to read it.</p>
       </section>
-      <section className="wrap section-tight">
-        <WorkRows items={WORK} />
-      </section>
-      <Cta text="Got an old system that's starting to fail?" />
-    </>
+      <CaseTable items={WORK} />
+    </Page>
   );
 }
 
@@ -103,49 +148,63 @@ function Case({ c }) {
   const prev = WORK[i - 1];
   const next = WORK[i + 1];
   return (
-    <article>
-      <header className="wrap page-head">
-        <p className="kicker"><Link href="/work/">Work</Link> / {c.kind} · <span className="pill">{c.status}</span></p>
-        <h1 className="big">{c.title}</h1>
-        <p className="lede">{c.summary}</p>
+    <Page title={c.ref} crumb={["/work/", "Case studies"]}>
+      <article className="report">
+        <header className="reportHead">
+          <div className="reportMeta">
+            <span className="cellRef">{c.ref}</span>
+            <span className="eyebrow">{c.kind}</span>
+            <StatusPill status={c.status} />
+          </div>
+          <h1 className="reportTitle">{c.title}</h1>
+          <p className="reportLede">{c.summary}</p>
+        </header>
         <dl className="facts">
           <div><dt>Client</dt><dd>{c.client}</dd></div>
-          <div><dt>Where</dt><dd>{c.region}</dd></div>
+          <div><dt>Region</dt><dd>{c.region}</dd></div>
           <div><dt>Length</dt><dd>{c.duration}</dd></div>
           <div><dt>Result</dt><dd>{c.result}</dd></div>
         </dl>
-      </header>
 
-      <section className="wrap ba">
-        <div className="ba-before">
-          <p className="ba-label">Before</p>
-          <h2>{c.before_title}</h2>
-          <ul className="fails">{c.before.map((t) => <li key={t}>{t}</li>)}</ul>
-          {c.situation.map((p) => <p key={p} className="ba-note">{p}</p>)}
-        </div>
-        <div className="ba-after">
-          <p className="ba-label">After</p>
-          <h2>What changed</h2>
-          <ul className="wins">{c.outcome.map((t) => <li key={t}>{t}</li>)}</ul>
-        </div>
-      </section>
+        <section className="reportSection">
+          <h2 className="reportHeading">{c.before_title} <span className="count">{c.before.length} findings</span></h2>
+          <div>
+            {c.before.map((t, n) => (
+              <div className="finding" key={t}>
+                <span className="findingRef">F-{String(n + 1).padStart(2, "0")}</span>
+                <p className="findingTitle">{t}</p>
+                <span className="statusPill">Resolved</span>
+              </div>
+            ))}
+          </div>
+          {c.situation.length > 0 && <div className="reportBody muted">{c.situation.map((p) => <p key={p}>{p}</p>)}</div>}
+        </section>
 
-      <section className="wrap section-tight case-steps">
-        <div className="section-head"><p className="kicker">How</p><h2>What I did</h2></div>
-        <ol className="steps">{c.work.map((t) => <li key={t}>{t}</li>)}</ol>
-      </section>
+        <section className="reportSection">
+          <h2 className="reportHeading">What I did</h2>
+          <ol className="steps">{c.work.map((t) => <li key={t}>{t}</li>)}</ol>
+        </section>
 
-      <section className="wrap section-tight case-steps">
-        <div className="section-head"><p className="kicker">Stack</p><h2>Tools</h2></div>
-        <ul className="tags">{c.stack.map((t) => <li key={t}>{t}</li>)}</ul>
-      </section>
+        <section className="reportSection">
+          <h2 className="reportHeading">Outcome</h2>
+          <ul className="outcomes">{c.outcome.map((t) => <li key={t}>{t}</li>)}</ul>
+        </section>
 
-      <nav className="wrap pager" aria-label="More case studies">
-        {prev ? <Link href={`/work/${prev.slug}/`}><span>Previous</span>{prev.title}</Link> : <span />}
-        {next ? <Link className="next" href={`/work/${next.slug}/`}><span>Next</span>{next.title}</Link> : <span />}
+        <section className="reportSection">
+          <h2 className="reportHeading">Stack</h2>
+          <ul className="tags">{c.stack.map((t) => <li key={t}>{t}</li>)}</ul>
+        </section>
+
+        <footer className="reportFoot">
+          {c.ref} · {SITE.name} · Figures are from the delivery records of the engagement. Some clients are anonymised.
+        </footer>
+      </article>
+
+      <nav className="pager printHide" aria-label="More case studies">
+        {prev ? <Link className="card" href={`/work/${prev.slug}/`}><span className="cardLabel">Previous · {prev.ref}</span><span>{prev.title}</span></Link> : <span />}
+        {next ? <Link className="card next" href={`/work/${next.slug}/`}><span className="cardLabel">Next · {next.ref}</span><span>{next.title}</span></Link> : <span />}
       </nav>
-      <Cta text="Dealing with something like this?" />
-    </article>
+    </Page>
   );
 }
 
@@ -153,30 +212,28 @@ function Case({ c }) {
 
 function Services() {
   return (
-    <>
-      <section className="wrap page-head">
-        <p className="kicker">Services</p>
-        <h1 className="big">SharePoint, Power Platform and Microsoft 365 consulting.</h1>
-        <p className="lede">I work with companies directly, remotely, in any time zone. Small calls, fixed-scope projects, or ongoing support — whichever fits.</p>
+    <Page title="Services">
+      <section>
+        <h1>Services &amp; rates</h1>
+        <p className="lede">I work with companies directly and remotely, in any time zone. Start with a one-hour call if you're not sure what you need.</p>
       </section>
-      <section className="wrap section-tight"><Offers /></section>
-      <section className="wrap section split">
-        <div className="section-head"><p className="kicker">Scope</p><h2>What I help with</h2></div>
-        <Help />
+      <Offers />
+      <section className="card">
+        <h2>What I help with</h2>
+        <Defs items={SITE.help_with} />
       </section>
-      <section className="wrap section split">
-        <div className="section-head"><p className="kicker">Toolkit</p><h2>What I use week to week</h2></div>
-        <Help items={SITE.skills} />
+      <section className="card">
+        <h2>Toolkit</h2>
+        <Defs items={SITE.skills} />
       </section>
-      <section className="wrap section split">
-        <div className="section-head"><p className="kicker">Process</p><h2>How a first call goes</h2></div>
-        <div className="prose">
-          <p>Send me a few lines about what's going on — what you run on Microsoft 365, what's broken or slow, and any deadline. I'll reply with a time that works across our time zones.</p>
+      <section className="card">
+        <h2>How a first call goes</h2>
+        <div className="reportBody">
+          <p>Send a few lines about what's going on: what you run on Microsoft 365, what's failing or slow, and any deadline. I'll reply with a time that works across our time zones.</p>
           <p>On the call we go through it together. Afterwards you get a short written summary: what I'd fix first, roughly how long it takes, and whether you need me for it or can do it in-house.</p>
         </div>
       </section>
-      <Cta />
-    </>
+    </Page>
   );
 }
 
@@ -184,33 +241,33 @@ function Services() {
 
 function About() {
   return (
-    <>
-      <section className="wrap page-head about-head">
-        <div>
-          <p className="kicker">About</p>
-          <h1 className="big">Hi, I'm Shafeek.</h1>
-          <div className="prose lead-prose">{SITE.about.map((p) => <p key={p}>{p}</p>)}</div>
-        </div>
-        <aside><Portrait eager /><Status /></aside>
+    <Page title="About">
+      <article className="report">
+        <header className="reportHead">
+          <div className="reportMeta"><span className="statusPill">Available</span><span className="eyebrow">{SITE.location}</span></div>
+          <h1 className="reportTitle">Hi, I'm Shafeek.</h1>
+          <p className="reportLede">{SITE.role}. {SITE.current}.</p>
+        </header>
+        <section className="reportSection">
+          <div className="reportBody">{SITE.about.map((p) => <p key={p}>{p}</p>)}</div>
+        </section>
+        <section className="reportSection">
+          <h2 className="reportHeading">Where I'll work</h2>
+          <div className="reportBody">
+            <p>{SITE.availability.remote} {SITE.availability.relocation}</p>
+            <p>I've delivered for teams in the US, UK, Canada, the UAE and Saudi Arabia, so working across borders and time zones is normal for me.</p>
+          </div>
+        </section>
+        <section className="reportSection">
+          <h2 className="reportHeading">Credentials</h2>
+          <Defs items={SITE.credentials} />
+        </section>
+      </article>
+      <section>
+        <div className="sectionHead"><h2>Experience</h2></div>
+        <ExperienceTable />
       </section>
-      <section className="wrap section split">
-        <div className="section-head"><p className="kicker">Experience</p><h2>Timeline</h2></div>
-        <Timeline />
-      </section>
-      <section className="wrap section split">
-        <div className="section-head"><p className="kicker">Credentials</p><h2>Certification & education</h2></div>
-        <Help items={SITE.credentials} />
-      </section>
-      <section className="wrap section split">
-        <div className="section-head"><p className="kicker">Location</p><h2>Where I'll work</h2></div>
-        <div className="prose">
-          <p>{SITE.availability.remote}</p>
-          <p>{SITE.availability.relocation}</p>
-          <p>I've already delivered for teams in the US, UK, Canada, the UAE and Saudi Arabia, so working across borders and time zones is normal for me.</p>
-        </div>
-      </section>
-      <Cta />
-    </>
+    </Page>
   );
 }
 
@@ -218,13 +275,8 @@ function About() {
 
 const TOPICS = ["Microsoft 365 review call", "Career guidance call", "Project enquiry", "Ongoing support enquiry", "Job or contract role", "Something else"];
 const DRAFT_KEY = "contact-draft";
-
-function readDraft() {
-  try { return JSON.parse(localStorage.getItem(DRAFT_KEY) || "null"); } catch { return null; }
-}
-function writeDraft(v) {
-  try { v ? localStorage.setItem(DRAFT_KEY, JSON.stringify(v)) : localStorage.removeItem(DRAFT_KEY); } catch { /* storage blocked */ }
-}
+function readDraft() { try { return JSON.parse(localStorage.getItem(DRAFT_KEY) || "null"); } catch { return null; } }
+function writeDraft(v) { try { v ? localStorage.setItem(DRAFT_KEY, JSON.stringify(v)) : localStorage.removeItem(DRAFT_KEY); } catch { /* storage blocked */ } }
 
 function Contact() {
   const { navigate } = useRouter();
@@ -237,12 +289,7 @@ function Contact() {
     setForm((f) => ({ ...f, ...(draft || {}), ...(topic && TOPICS.includes(topic) ? { topic } : {}) }));
   }, []);
 
-  const update = (k) => (e) => {
-    const next = { ...form, [k]: e.target.value };
-    setForm(next);
-    writeDraft(next);
-  };
-
+  const update = (k) => (e) => { const next = { ...form, [k]: e.target.value }; setForm(next); writeDraft(next); };
   const mailto = `mailto:${SITE.email}?subject=${encodeURIComponent(form.topic)}&body=${encodeURIComponent(
     `${form.message}\n\n— ${form.name}${form.company ? `, ${form.company}` : ""}\n${form.email}`)}`;
 
@@ -250,11 +297,13 @@ function Contact() {
     e.preventDefault();
     if (!navigator.onLine) { setState("offline"); return; }
     setState("sending");
-    const body = new URLSearchParams({ "form-name": "contact", ...form }).toString();
     try {
       const ctrl = new AbortController();
       const t = setTimeout(() => ctrl.abort(), 12000);
-      const res = await fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body, signal: ctrl.signal });
+      const res = await fetch("/", {
+        method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ "form-name": "contact", ...form }).toString(), signal: ctrl.signal,
+      });
       clearTimeout(t);
       if (!res.ok) throw new Error(String(res.status));
       writeDraft(null);
@@ -265,65 +314,75 @@ function Contact() {
   }
 
   return (
-    <section className="wrap page-head contact">
-      <div>
-        <p className="kicker">Contact</p>
-        <h1 className="big">Tell me what you're working on.</h1>
-        <p className="lede">A few lines is plenty. I read every message myself.</p>
-        <dl className="facts facts-col">
-          <div><dt>Email</dt><dd><a href={`mailto:${SITE.email}`}>{SITE.email}</a></dd></div>
-          <div><dt>LinkedIn</dt><dd><a href={SITE.linkedin} rel="me noopener" target="_blank">linkedin.com/in/mdshafeek</a></dd></div>
-          <div><dt>Based in</dt><dd>{SITE.location}</dd></div>
-          <div><dt>Open to</dt><dd>Remote consulting worldwide, contracts, and full-time roles abroad (relocating with family)</dd></div>
-        </dl>
+    <Page title="Contact" primary={false}>
+      <section>
+        <h1>Contact</h1>
+        <p className="lede">Tell me what you're working on. A few lines is plenty; I read every message myself.</p>
+      </section>
+      <div className="formGrid">
+        <form className="card form" name="contact" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="company_website" onSubmit={onSubmit}>
+          <input type="hidden" name="form-name" value="contact" />
+          <p className="hp"><label>Leave this empty <input name="company_website" tabIndex={-1} autoComplete="off" /></label></p>
+          <div className="formRow"><label htmlFor="f-name">Your name</label><input id="f-name" className="input" name="name" autoComplete="name" required value={form.name} onChange={update("name")} /></div>
+          <div className="formRow"><label htmlFor="f-email">Email</label><input id="f-email" className="input" name="email" type="email" autoComplete="email" required value={form.email} onChange={update("email")} /></div>
+          <div className="formRow"><label htmlFor="f-company">Company <span className="opt">(optional)</span></label><input id="f-company" className="input" name="company" autoComplete="organization" value={form.company} onChange={update("company")} /></div>
+          <div className="formRow"><label htmlFor="f-topic">Topic</label>
+            <select id="f-topic" className="input" name="topic" value={form.topic} onChange={update("topic")}>{TOPICS.map((t) => <option key={t}>{t}</option>)}</select></div>
+          <div className="formRow"><label htmlFor="f-message">Message</label>
+            <textarea id="f-message" className="input" name="message" rows={6} required value={form.message} onChange={update("message")}
+              placeholder="What you run on Microsoft 365, what's failing, any deadline." /></div>
+          <div className="formFoot">
+            <button className="button buttonPrimary" type="submit" disabled={state === "sending"}>
+              {state === "sending" ? <><span className="spinner" aria-hidden="true" />Sending</> : "Send message"}
+            </button>
+            {state === "idle" && <span className="muted">Goes straight to my inbox.</span>}
+          </div>
+          {state === "offline" && <p className="notice" role="status">You're offline. Your message is saved on this device. Send it again when you're back online, or <a href={mailto}>send it by email</a>.</p>}
+          {state === "error" && <p className="notice" role="alert">That didn't go through. Your message is saved. Try again, or <a href={mailto}>send it by email</a>.</p>}
+        </form>
+        <aside className="card">
+          <p className="cardLabel">Direct</p>
+          <Defs items={[
+            ["Email", <a className="textLink" href={`mailto:${SITE.email}`}>{SITE.email}</a>],
+            ["LinkedIn", <a className="textLink" href={SITE.linkedin} rel="me noopener" target="_blank">linkedin.com/in/mdshafeek</a>],
+            ["Based in", SITE.location],
+            ["Open to", "Remote consulting worldwide, contracts, and full-time roles abroad (relocating with family)"],
+          ]} />
+        </aside>
       </div>
-      <form className="form" name="contact" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="company_website" onSubmit={onSubmit}>
-        <input type="hidden" name="form-name" value="contact" />
-        <p className="hp"><label>Leave this empty <input name="company_website" tabIndex={-1} autoComplete="off" /></label></p>
-        <label>Your name<input name="name" autoComplete="name" required value={form.name} onChange={update("name")} /></label>
-        <label>Email<input name="email" type="email" autoComplete="email" required value={form.email} onChange={update("email")} /></label>
-        <label><span>Company <span className="opt">(optional)</span></span><input name="company" autoComplete="organization" value={form.company} onChange={update("company")} /></label>
-        <label>What's this about?
-          <select name="topic" value={form.topic} onChange={update("topic")}>{TOPICS.map((t) => <option key={t}>{t}</option>)}</select>
-        </label>
-        <label>Message<textarea name="message" rows={6} required value={form.message} onChange={update("message")}
-          placeholder="What you run on Microsoft 365, what's failing, any deadline." /></label>
-        <button className="btn" type="submit" disabled={state === "sending"}>
-          {state === "sending" ? <><span className="spinner" aria-hidden="true" /> Sending…</> : "Send message"}
-        </button>
-        <div className="form-note" role="status" aria-live="polite">
-          {state === "offline" && <p className="warn">You're offline. Your message is saved on this device — press send again when you're back online, or <a href={mailto}>send it by email</a>.</p>}
-          {state === "error" && <p className="warn">That didn't go through. Your message is saved — try again, or <a href={mailto}>send it by email</a>.</p>}
-          {(state === "idle" || state === "sending") && <p>Goes straight to my inbox. Prefer email? <a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>}
-        </div>
-      </form>
-    </section>
+    </Page>
   );
 }
 
 function Thanks() {
   return (
-    <section className="wrap page-head narrow">
-      <p className="kicker">Message sent</p>
-      <h1 className="big">Thanks — I've got it.</h1>
-      <p className="lede">I'll reply from {SITE.email} as soon as I can. If it's urgent, LinkedIn works too.</p>
-      <p className="actions"><Link className="link" href="/work/">Meanwhile, have a look at the work →</Link></p>
-    </section>
+    <Page title="Message sent">
+      <div className="card empty" role="status">
+        <span className="statusPill">Sent</span>
+        <h1 className="emptyTitle">Thanks, I've got your message.</h1>
+        <p className="emptyBody">I'll reply from {SITE.email} as soon as I can. If it's urgent, LinkedIn works too.</p>
+        <div className="introActions"><Link className="button buttonGhost" href="/work/">Read the case studies</Link></div>
+      </div>
+    </Page>
   );
 }
 
 function NotFound() {
   return (
-    <section className="wrap page-head narrow">
-      <p className="kicker">404</p>
-      <h1 className="big">That page isn't here.</h1>
-      <p className="lede">The site was rebuilt recently, so an old link may have moved.</p>
-      <p className="actions"><Link className="link" href="/">Home</Link> <Link className="link" href="/work/">Work</Link> <Link className="link" href="/contact/">Contact</Link></p>
-    </section>
+    <Page title="Not found">
+      <div className="card empty">
+        <h1 className="emptyTitle">That page isn't here.</h1>
+        <p className="emptyBody">The site was rebuilt recently, so an old link may have moved.</p>
+        <div className="introActions">
+          <Link className="button buttonGhost" href="/">Overview</Link>
+          <Link className="button buttonGhost" href="/work/">Case studies</Link>
+        </div>
+      </div>
+    </Page>
   );
 }
 
-export function Page({ path }) {
+export function Route({ path }) {
   const c = findCase(path);
   if (c) return <Case c={c} />;
   switch (path) {
