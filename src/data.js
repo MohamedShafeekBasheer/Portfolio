@@ -45,7 +45,7 @@ const PERSON = {
   email: `mailto:${SITE.email}`,
   sameAs: [SITE.linkedin],
   address: { "@type": "PostalAddress", addressLocality: "Abha", addressCountry: "SA" },
-  worksFor: { "@type": "Organization", name: "Al Qahtani Beverages" },
+  worksFor: { "@type": "Organization", name: "Abdul Hadi Abdullah Al-Qahtani & Sons Beverage Company (AQS-PEPSI)" },
   alumniOf: { "@type": "CollegeOrUniversity", name: "Anna University" },
   hasCredential: {
     "@type": "EducationalOccupationalCredential",
@@ -55,7 +55,7 @@ const PERSON = {
   knowsAbout: [
     "SharePoint Online", "Microsoft 365", "Power Apps", "Power Automate", "SharePoint Framework (SPFx)",
     "InfoPath modernisation", "Google Workspace to Microsoft 365 migration", "Microsoft Entra ID",
-    "Conditional Access", "Azure OpenAI",
+    "Conditional Access", "Data loss prevention", "Azure Functions", "Dynamics 365 Finance & Operations integration", "Microsoft Copilot",
   ],
 };
 
@@ -95,7 +95,7 @@ export function meta(rawPath) {
       schema: [SERVICE, { "@type": "WebSite", url: `${URL_BASE}/`, name: SITE.name }] };
   if (path === "/work/")
     return { ...base, title: `Case studies — ${SITE.name}`,
-      description: "What was failing and how it was fixed: InfoPath to SPFx, a SharePoint data leak, a 5,000-user Google Workspace migration, legacy on-prem rescues and Power Platform apps.",
+      description: "What was failing and how it was fixed: a contract platform on SPFx and Azure, InfoPath retirement, a 45,000-document migration, Dynamics 365 integration, SharePoint security remediation and more.",
       schema: [crumbs([["/", "Home"], ["/work/", "Work"]]), {
         "@type": "ItemList",
         itemListElement: WORK.map((w, i) => ({ "@type": "ListItem", position: i + 1, url: `${URL_BASE}/work/${w.slug}/`, name: w.title })),
@@ -112,7 +112,7 @@ export function meta(rawPath) {
       schema: [SERVICE, crumbs([["/", "Home"], ["/services/", "Services"]])] };
   if (path === "/about/")
     return { ...base, ogType: "profile", title: `About — ${SITE.name}, Microsoft 365 consultant`,
-      description: `${SITE.name}: five years in SharePoint and Microsoft 365 at Avasoft, Colan InfoTech, EY GDS and Al Qahtani Beverages. Open to consulting and roles abroad.`,
+      description: `${SITE.name}: Microsoft 365 and SharePoint architect at AQS-PEPSI, ex-EY GDS and Avasoft. Open to roles across the GCC, Singapore and India.`,
       schema: [crumbs([["/", "Home"], ["/about/", "About"]]), { "@type": "ProfilePage", mainEntity: { "@id": `${URL_BASE}/#person` } }] };
   if (path === "/contact/")
     return { ...base, title: `Contact — ${SITE.name}`,

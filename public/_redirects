@@ -7,3 +7,5 @@
 /pages/contact.html          /contact/         301
 /pages/blog.html             /                 301
 /locales/*                   /                 301
+/work/post-migration-application-programme/   /work/client-application-suite/             301
+/work/internal-audit-app-and-itsm-workspace/  /work/internal-audit-observation-platform/  301

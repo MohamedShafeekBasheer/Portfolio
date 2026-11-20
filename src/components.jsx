@@ -56,7 +56,7 @@ export function Nav() {
     <nav className="nav" aria-label="Main">
       <Link className="brand" href="/" aria-label={`${SITE.name} — home`}>
         <span className="brandMark" aria-hidden="true">MS</span>
-        <span className="brandName"><strong>{SITE.name}</strong><span>Microsoft 365 consultant</span></span>
+        <span className="brandName"><strong>{SITE.name}</strong><span>M365 &amp; SharePoint Architect</span></span>
       </Link>
 
       <div className="navGroup">

@@ -1,46 +1,408 @@
 [
   {
-    "slug": "infopath-to-spfx-modernisation",
-    "title": "Retiring InfoPath: 30+ forms rebuilt in SPFx",
-    "kind": "Form modernisation",
-    "client": "Al Qahtani Beverages",
+    "slug": "contract-management-platform",
+    "title": "A contract platform that turned days of work into minutes",
+    "kind": "Enterprise application",
+    "client": "AQS-PEPSI (Al-Qahtani & Sons Beverage Co.)",
     "region": "Saudi Arabia",
     "duration": "2025 – 2026",
-    "result": "30+ forms moved off InfoPath",
-    "summary": "Every InfoPath form on the company’s SharePoint 2013/2016 sites — and the SharePoint Designer workflows behind them — rebuilt as SPFx React forms and Power Automate flows, ahead of Microsoft’s support deadline.",
-    "situation": [
-      "The company's day-to-day processes ran on InfoPath forms in SharePoint 2013 and 2016, with SharePoint Designer workflows handling approvals and notifications. Microsoft is ending support for both."
+    "status": "Completed",
+    "result": "Days to minutes, 28 ms response",
+    "summary": "An end-to-end contract management platform: SPFx front end, Azure Functions reading live sales data from the internal data warehouse, Key Vault, Entra ID and DocuSign e-signature — built on systems the company already owned.",
+    "before_title": "What was failing",
+    "before": [
+      "Turning margin contribution into a contract took several days.",
+      "The live sales data the process depended on sat in an internal Azure SQL data warehouse, on premises.",
+      "Contracts needed e-signature without exposing signing credentials, and in line with Saudi PDPL data-residency rules.",
+      "A firewall subnet-allowlisting gap blocked the Azure Function App from reaching the data warehouse at all."
     ],
+    "situation": [],
     "work": [
-      "Rebuilt each InfoPath form as a responsive SPFx React form.",
-      "Moved every SharePoint Designer workflow to Power Automate, keeping the same approval chains and notification rules.",
-      "Shipped in small batches so each department switched over with minimal disruption."
+      "Built the front end in SPFx (React, TypeScript) inside SharePoint.",
+      "Connected it to the internal Azure SQL data warehouse through an Azure Function App, so contracts use live sales data.",
+      "Kept every credential in Azure Key Vault and authenticated users with Entra ID.",
+      "Integrated DocuSign through an Azure Function credential-broker pattern, so signing credentials never leave the server.",
+      "Diagnosed the Azure-to-on-premises networking failure, closed the firewall allowlisting gap and verified secure connectivity."
     ],
     "outcome": [
-      "30+ forms rebuilt and live in SPFx.",
-      "All their SharePoint Designer workflows replaced by Power Automate.",
-      "Programme completed."
+      "Contract processing cut from several days to minutes.",
+      "28 ms end-to-end response.",
+      "Built on systems the company already owned.",
+      "Approved at Chief Officer and Director level."
     ],
     "stack": [
       "SPFx",
       "React",
       "TypeScript",
-      "Power Automate",
+      "Azure Functions",
+      "Azure SQL",
+      "Azure Key Vault",
+      "Entra ID",
+      "DocuSign"
+    ],
+    "ref": "CS-01"
+  },
+  {
+    "slug": "infopath-to-spfx-modernisation",
+    "title": "Retiring InfoPath: 8 forms rebuilt for 500+ users",
+    "kind": "Legacy modernisation",
+    "client": "AQS-PEPSI (Al-Qahtani & Sons Beverage Co.)",
+    "region": "Saudi Arabia",
+    "duration": "2025 – 2026",
+    "status": "Completed",
+    "result": "8 forms live across 15 departments",
+    "summary": "Eight legacy InfoPath forms rebuilt into production SharePoint ahead of Microsoft's retirement deadline, used by 500+ people across 15 departments.",
+    "before_title": "What was failing",
+    "before": [
+      "Day-to-day processes ran on InfoPath forms, a product Microsoft has retired.",
+      "There was a hard end-of-support deadline: no fixes, no new features after it.",
+      "The forms served 500+ users across 15 departments, so a failure would hit the whole company."
+    ],
+    "situation": [],
+    "work": [
+      "Rebuilt each of the 8 InfoPath forms in modern SharePoint.",
+      "Moved the approvals and notifications behind them to Power Automate.",
+      "Switched departments over in stages so work didn't stop."
+    ],
+    "outcome": [
+      "All 8 forms live in production SharePoint before the deadline.",
+      "500+ users across 15 departments moved off InfoPath."
+    ],
+    "stack": [
+      "SharePoint Online",
+      "SPFx",
+      "React",
+      "Power Automate"
+    ],
+    "ref": "CS-02"
+  },
+  {
+    "slug": "internal-audit-observation-platform",
+    "title": "An internal audit platform, from requirements to production",
+    "kind": "Enterprise application",
+    "client": "AQS-PEPSI (Al-Qahtani & Sons Beverage Co.)",
+    "region": "Saudi Arabia",
+    "duration": "2025 – 2026",
+    "status": "Completed",
+    "result": "12/12 UAT cases passed, zero deployment issues",
+    "summary": "A platform for raising, tracking and closing internal audit observations, with tiered reminders, overdue escalation and structured export — delivered from requirements to production and still owned after go-live.",
+    "before_title": "The brief",
+    "before": [
+      "Internal Audit needed one place to raise, track and close observations.",
+      "Owners needed reminders, with escalation when items went overdue.",
+      "Audit needed structured exports for reporting."
+    ],
+    "situation": [],
+    "work": [
+      "Gathered requirements with Internal Audit and designed the solution.",
+      "Built tiered reminders with overdue escalation, and structured export.",
+      "Wrote and ran 12 scripted UAT cases before go-live.",
+      "Kept ownership after go-live."
+    ],
+    "outcome": [
+      "All 12 scripted UAT cases passed.",
+      "Deployed to production with zero deployment issues.",
+      "Still running and supported after go-live."
+    ],
+    "stack": [
+      "SharePoint Online",
+      "SPFx",
+      "React",
+      "Power Automate"
+    ],
+    "ref": "CS-03"
+  },
+  {
+    "slug": "finance-capex-approval-system",
+    "title": "Rebuilding a failed CAPEX approval workflow",
+    "kind": "Workflow modernisation",
+    "client": "AQS-PEPSI (Al-Qahtani & Sons Beverage Co.)",
+    "region": "Saudi Arabia",
+    "duration": "2025 – 2026",
+    "status": "Completed",
+    "result": "Failed workflow replaced, multi-tier approvals live",
+    "summary": "Finance's CAPEX request system rebuilt on modern SharePoint with a multi-tier approval hierarchy, replacing a SharePoint Designer workflow that had failed.",
+    "before_title": "What was failing",
+    "before": [
+      "Capital expenditure requests ran on a SharePoint Designer workflow that had failed.",
+      "SharePoint Designer workflows are a retired technology, so patching it was not an option.",
+      "Requests needed to pass through several levels of approval."
+    ],
+    "situation": [],
+    "work": [
+      "Rebuilt the CAPEX request system on modern SharePoint.",
+      "Designed a multi-tier approval hierarchy to match how Finance signs off spend."
+    ],
+    "outcome": [
+      "Failed SharePoint Designer workflow retired.",
+      "CAPEX requests running on modern SharePoint with multi-tier approvals."
+    ],
+    "stack": [
+      "SharePoint Online",
+      "Power Automate"
+    ],
+    "ref": "CS-04"
+  },
+  {
+    "slug": "group-document-migration",
+    "title": "45,000 documents across four companies, with zero loss",
+    "kind": "Migration",
+    "client": "AQS-PEPSI (Al-Qahtani & Sons Beverage Co.)",
+    "region": "Saudi Arabia",
+    "duration": "2025 – 2026",
+    "status": "Completed",
+    "result": "45,000+ documents, ~60 GB, verified zero loss",
+    "summary": "A group-wide migration of 45,000+ documents (~60 GB) across four legal entities, reorganised and reconciled file by file.",
+    "before_title": "What was failing",
+    "before": [
+      "Documents for four legal entities in the group needed to be moved and reorganised.",
+      "At around 60 GB and 45,000+ files, a silent loss would be easy to miss."
+    ],
+    "situation": [],
+    "work": [
+      "Planned and executed the migration across all four legal entities.",
+      "Reorganised the content into the new structure.",
+      "Reconciled source against destination to verify every document arrived."
+    ],
+    "outcome": [
+      "45,000+ documents (~60 GB) migrated.",
+      "Verified reconciliation with zero loss."
+    ],
+    "stack": [
       "SharePoint Online"
+    ],
+    "ref": "CS-05"
+  },
+  {
+    "slug": "dynamics-365-invoice-integration",
+    "title": "Automating vendor invoice posting into Dynamics 365",
+    "kind": "ERP integration",
+    "client": "AQS-PEPSI (Al-Qahtani & Sons Beverage Co.)",
+    "region": "Saudi Arabia",
+    "duration": "2025 – 2026",
+    "status": "Completed",
+    "result": "Invoice posting automated, duplicates prevented",
+    "summary": "A Power Platform integration that posts vendor invoices into Dynamics 365 Finance & Operations, with duplicate prevention, retry logic and error alerts in Teams.",
+    "before_title": "What was failing",
+    "before": [
+      "Vendor invoices had to be posted into Dynamics 365 Finance & Operations.",
+      "Any automation had to make sure the same invoice could never be posted twice.",
+      "Failed postings needed to be retried and seen by someone, not lost."
+    ],
+    "situation": [],
+    "work": [
+      "Built the Power Platform to Dynamics 365 F&O integration.",
+      "Added duplicate prevention.",
+      "Added retry logic for failed postings.",
+      "Sent errors to Microsoft Teams so the team sees them straight away."
+    ],
+    "outcome": [
+      "Vendor invoice posting automated.",
+      "Duplicate postings prevented.",
+      "Failures retried automatically and alerted in Teams."
+    ],
+    "stack": [
+      "Power Automate",
+      "Dynamics 365 F&O",
+      "Microsoft Teams"
+    ],
+    "ref": "CS-06"
+  },
+  {
+    "slug": "permission-audit-and-security-hardening",
+    "title": "A permission audit framework and tenant hardening for five companies",
+    "kind": "Security & governance",
+    "client": "AQS-PEPSI (Al-Qahtani & Sons Beverage Co.)",
+    "region": "Saudi Arabia",
+    "duration": "2025 – 2026",
+    "status": "Completed",
+    "result": "Repeatable permission audits, CA and DLP baselines",
+    "summary": "A PowerShell/CSOM framework for auditing SharePoint permissions across five group companies, alongside Conditional Access and DLP hardening of the Microsoft 365 tenant.",
+    "before_title": "The brief",
+    "before": [
+      "Five group companies shared one Microsoft 365 environment.",
+      "There was no repeatable way to audit who had access to what.",
+      "The tenant needed Conditional Access and data-loss-prevention baselines."
+    ],
+    "situation": [],
+    "work": [
+      "Built a PowerShell/CSOM permission audit and governance framework.",
+      "Led Microsoft 365 security hardening, including Conditional Access.",
+      "Put DLP policies in place."
+    ],
+    "outcome": [
+      "Permission audits are repeatable instead of manual.",
+      "Conditional Access and DLP baselines in place across the tenant."
+    ],
+    "stack": [
+      "PowerShell",
+      "CSOM",
+      "Entra ID",
+      "Conditional Access",
+      "Microsoft Purview DLP"
+    ],
+    "ref": "CS-07"
+  },
+  {
+    "slug": "sharepoint-external-sharing-breach",
+    "title": "Closing an external sharing leak in SharePoint Online",
+    "kind": "Security incident",
+    "client": "Confidential organisation, via Avasoft",
+    "region": "Canada",
+    "duration": "2 weeks",
+    "result": "All unauthorised access removed within 48 hours",
+    "summary": "After a live security incident, I audited the client's Microsoft 365 tenant, removed every unauthorised external share across SharePoint and OneDrive, and tightened governance so it couldn't happen again.",
+    "situation": [
+      "An external sharing setting in SharePoint Online had been left too open. Sensitive internal documents were reachable by users at a Canadian partner organisation, and the exposure ran across several site collections.",
+      "Nobody knew exactly how far it went. The first job was to find out — quickly — and stop it."
+    ],
+    "work": [
+      "Audited the whole tenant with PowerShell and the Microsoft 365 admin center.",
+      "Listed every externally shared link, guest account and anonymous access link.",
+      "Revoked access in a controlled order so business-critical sharing wasn't broken by accident.",
+      "Reset sharing policy at both tenant and site-collection level.",
+      "Added monitoring alerts and Conditional Access rules to catch drift early."
+    ],
+    "outcome": [
+      "100% of unauthorised external access removed within 48 hours.",
+      "Sharing policy tightened and enforced with Conditional Access.",
+      "Incident report delivered to stakeholders.",
+      "No recurrence since the fix."
+    ],
+    "stack": [
+      "SharePoint Online",
+      "OneDrive",
+      "PowerShell",
+      "Microsoft Entra ID",
+      "M365 admin center",
+      "Conditional Access"
     ],
     "status": "Completed",
     "before_title": "What was failing",
-    "swap": [
-      "InfoPath + SharePoint Designer",
-      "SPFx + Power Automate"
-    ],
     "before": [
-      "Business processes ran on InfoPath forms, a product Microsoft has retired.",
-      "Approvals and notifications depended on SharePoint Designer workflows, which Microsoft is also retiring.",
-      "The forms were built for desktop browsers and did not work well on phones.",
-      "Every month on the old stack added risk: no fixes, no new features, and a hard end-of-support date."
+      "Tenant-level external sharing was set far too open.",
+      "Sensitive internal documents in SharePoint and OneDrive were reachable by users at a partner organisation.",
+      "The exposure ran across several site collections, not just one.",
+      "Old sharing links, guest accounts and anonymous links had piled up with nobody reviewing them.",
+      "No alerting existed to catch over-sharing when it happened."
     ],
-    "ref": "CS-01"
+    "ref": "CS-08"
+  },
+  {
+    "slug": "google-workspace-to-microsoft-365-migration",
+    "title": "Moving 5,000 people from Google Workspace to Microsoft 365",
+    "kind": "Cloud migration",
+    "client": "Enterprise client, via Avasoft",
+    "region": "Global",
+    "duration": "6 months",
+    "result": "5,000+ users migrated, zero data loss",
+    "summary": "Drive, Shared Drives, Sites, Gmail and Groups — the whole Google workplace moved to Microsoft 365 inside six months, with a tracking app so everyone could see where each workload stood.",
+    "situation": [
+      "A large enterprise wanted off Google Workspace entirely: Drive, Shared Drives, Google Sites, Gmail and Groups. The deadline was six months and the business couldn't stop working while it happened."
+    ],
+    "work": [
+      "Ran a pre-migration assessment and mapped every source to its destination.",
+      "Moved Google Drive and Shared Drives to SharePoint, and Google Sites to SharePoint (classic and modern).",
+      "Moved Gmail to Exchange Online, and Google Groups to Microsoft 365 Groups and Teams.",
+      "Used ShareGate, AvePoint, Cloudiway and Microsoft Migration Manager, with delta syncs before cutover.",
+      "Built a tracking app so the team could follow every workload, then validated everything after migration."
+    ],
+    "outcome": [
+      "5,000+ users migrated within the six-month window.",
+      "Cutover completed with zero data loss.",
+      "Replaced the client's legacy Google Sheets workflows with a governed SharePoint application after go-live."
+    ],
+    "stack": [
+      "ShareGate",
+      "AvePoint",
+      "Cloudiway",
+      "Migration Manager",
+      "SharePoint Online",
+      "Exchange Online",
+      "Microsoft Teams"
+    ],
+    "status": "Completed",
+    "before_title": "What was in the way",
+    "before": [
+      "The whole workplace was split across Google Drive, Shared Drives, Sites, Gmail and Groups.",
+      "Day-to-day processes ran on Google Sheets with no governance or audit trail.",
+      "A hard six-month deadline, and the business could not stop working during the move.",
+      "No single view of migration progress across workloads."
+    ],
+    "ref": "CS-09"
+  },
+  {
+    "slug": "tenant-to-tenant-migration-platform",
+    "title": "A C# platform for automated tenant-to-tenant migration",
+    "kind": "Internal tooling",
+    "client": "Avasoft (internal)",
+    "region": "India",
+    "duration": "2022 – 2024",
+    "status": "Completed",
+    "result": "Credential-secure automated transfer at scale",
+    "summary": "An internal C# console platform that automates Microsoft 365 tenant-to-tenant data migration through Google Cloud and Microsoft service-account APIs.",
+    "before_title": "The brief",
+    "before": [
+      "Tenant-to-tenant data moves needed to be automated.",
+      "Transfers had to run at scale without handing out user credentials."
+    ],
+    "situation": [],
+    "work": [
+      "Designed and built a C# console platform.",
+      "Used Google Cloud and Microsoft service-account APIs so transfers run without user credentials.",
+      "Automated the transfer end to end."
+    ],
+    "outcome": [
+      "Credential-secure, automated tenant-to-tenant transfer at scale."
+    ],
+    "stack": [
+      "C#",
+      ".NET",
+      "Microsoft 365 APIs",
+      "Google Cloud APIs"
+    ],
+    "ref": "CS-10"
+  },
+  {
+    "slug": "ey-gds-risk-and-workflow-apps",
+    "title": "A Copilot-assisted risk management module at EY GDS",
+    "kind": "Enterprise applications",
+    "client": "Ernst & Young Global Delivery Services",
+    "region": "UK",
+    "duration": "Sep 2024 – Jul 2025",
+    "result": "10+ apps, 50+ flows, zero compliance breaches",
+    "summary": "I led the Risk Management module, using Microsoft Copilot for AI-assisted release analysis and approval orchestration, alongside 10+ Power Apps and 50+ Power Automate workflows for internal operations.",
+    "situation": [],
+    "work": [
+      "Led the Risk Management module, integrating Microsoft Copilot for AI-assisted release analysis and approval orchestration.",
+      "Used Microsoft Graph and REST APIs to surface organisational context inside the approval workflow.",
+      "Built 10+ Power Apps canvas applications with 50+ Power Automate workflows, with data validation and error handling.",
+      "Hardened Microsoft 365 security across Outlook, SharePoint and Azure AD, and automated admin and reporting with PowerShell.",
+      "Worked in Agile/Scrum with global stakeholders: requirements, documentation, UAT and production support."
+    ],
+    "outcome": [
+      "Risk Management module delivered with AI-assisted analysis.",
+      "10+ apps and 50+ workflows in production.",
+      "Delivered through formal change control with zero compliance breaches."
+    ],
+    "stack": [
+      "SPFx",
+      "React",
+      "Microsoft Copilot",
+      "Microsoft Graph",
+      "Power Apps",
+      "Power Automate",
+      "PowerShell"
+    ],
+    "status": "Completed",
+    "before_title": "The brief",
+    "before": [
+      "Releases needed risk analysis and a controlled approval process.",
+      "Approvers needed organisational context in front of them when deciding.",
+      "Internal processes — leave, resource allocation, onboarding — needed proper applications.",
+      "Everything had to meet EY's security and change-management standards."
+    ],
+    "ref": "CS-11"
   },
   {
     "slug": "ward-sharepoint-on-prem-modernisation",
@@ -76,10 +438,6 @@
     ],
     "status": "Completed",
     "before_title": "What was failing",
-    "swap": [
-      "Duplicate records every day",
-      "Zero duplicates"
-    ],
     "before": [
       "Forms created duplicate records whenever two people submitted at the same time (a front-end race condition).",
       "Sequential ID generators kept breaking, so records lost their reference numbers.",
@@ -87,187 +445,47 @@
       "50+ SharePoint Designer workflows were failing across the app portfolio.",
       "The Accident Report app was too unreliable to patch and had to be rebuilt."
     ],
-    "ref": "CS-02"
+    "ref": "CS-12"
   },
   {
-    "slug": "sharepoint-external-sharing-breach",
-    "title": "Closing an external sharing leak in SharePoint Online",
-    "kind": "Security incident",
-    "client": "Confidential organisation",
-    "region": "Canada",
-    "duration": "2 weeks",
-    "result": "All unauthorised access removed within 48 hours",
-    "summary": "A sharing misconfiguration had exposed internal documents to users at a partner company. I audited the tenant, revoked every unauthorised link and guest, and rebuilt the sharing policy so it couldn't happen again.",
-    "situation": [
-      "An external sharing setting in SharePoint Online had been left too open. Sensitive internal documents were reachable by users at a Canadian partner organisation, and the exposure ran across several site collections.",
-      "Nobody knew exactly how far it went. The first job was to find out — quickly — and stop it."
-    ],
-    "work": [
-      "Audited the whole tenant with PowerShell and the Microsoft 365 admin center.",
-      "Listed every externally shared link, guest account and anonymous access link.",
-      "Revoked access in a controlled order so business-critical sharing wasn't broken by accident.",
-      "Reset sharing policy at both tenant and site-collection level.",
-      "Added monitoring alerts and Conditional Access rules to catch drift early."
-    ],
-    "outcome": [
-      "100% of unauthorised external access removed within 48 hours.",
-      "Sharing policy tightened and enforced with Conditional Access.",
-      "Incident report delivered to stakeholders.",
-      "No recurrence since the fix."
-    ],
-    "stack": [
-      "SharePoint Online",
-      "PowerShell",
-      "Microsoft Entra ID",
-      "M365 admin center",
-      "Conditional Access"
-    ],
+    "slug": "client-application-suite",
+    "title": "20+ applications across six client engagements",
+    "kind": "Application development",
+    "client": "Multiple clients, via Avasoft",
+    "region": "USA, UK, Canada",
+    "duration": "2022 – 2024",
     "status": "Completed",
-    "before_title": "What was failing",
-    "swap": [
-      "Internal files open to outsiders",
-      "Locked down in 48 hours"
-    ],
+    "result": "20+ apps across 6+ engagements",
+    "summary": "Incident reporting, expense, leave and credit trackers, real-time web parts and a training management system — 20+ applications for clients in the US, UK and Canada, running six engagements at once.",
+    "before_title": "The brief",
     "before": [
-      "Tenant-level external sharing was set far too open.",
-      "Sensitive internal documents were reachable by users at a partner organisation.",
-      "The exposure ran across several site collections, not just one.",
-      "Old sharing links, guest accounts and anonymous links had piled up with nobody reviewing them.",
-      "No alerting existed to catch over-sharing when it happened."
+      "Clients needed incident reporting and tracking, and expense, leave and credit requests with multi-stage approvals.",
+      "Intranets needed live data from external systems.",
+      "Some clients were still on legacy platforms and needed to move to SharePoint Online without disrupting the business."
     ],
-    "ref": "CS-03"
-  },
-  {
-    "slug": "google-workspace-to-microsoft-365-migration",
-    "title": "Moving 5,000 people from Google Workspace to Microsoft 365",
-    "kind": "Cloud migration",
-    "client": "Enterprise client, via Avasoft",
-    "region": "Global",
-    "duration": "6 months",
-    "result": "5,000+ users migrated, zero data loss",
-    "summary": "Drive, Shared Drives, Sites, Gmail and Groups — the whole Google workplace moved to Microsoft 365 inside six months, with a tracking app so everyone could see where each workload stood.",
-    "situation": [
-      "A large enterprise wanted off Google Workspace entirely: Drive, Shared Drives, Google Sites, Gmail and Groups. The deadline was six months and the business couldn't stop working while it happened."
-    ],
+    "situation": [],
     "work": [
-      "Google Drive and Shared Drives to SharePoint with ShareGate and Migration Manager.",
-      "Google Sites to SharePoint, classic and modern.",
-      "Gmail to Exchange Online / Outlook.",
-      "Google Groups to Microsoft 365 Groups and Teams.",
-      "Built a migration tracking app so the team could follow every workload in real time instead of chasing spreadsheets."
+      "Built SPFx incident reporting and tracking systems.",
+      "Built integrated expense, leave and credit tracker suites with multi-stage approval routing.",
+      "Built real-time web parts consuming external REST APIs, and a React/Node.js training management system integrated with SharePoint.",
+      "Led legacy-to-SharePoint Online migrations and built branded intranet portals.",
+      "Supported pre-sales with effort estimates, solution proposals and technical documentation."
     ],
     "outcome": [
-      "5,000+ users migrated within the six-month window.",
-      "Cutover completed with zero data loss.",
-      "Replaced the client's legacy Google Sheets workflows with a governed SharePoint application after go-live."
-    ],
-    "stack": [
-      "ShareGate",
-      "Migration Manager",
-      "SharePoint Online",
-      "Exchange Online",
-      "Microsoft Teams",
-      "Power Apps"
-    ],
-    "status": "Completed",
-    "before_title": "What was in the way",
-    "swap": [
-      "5,000 people on Google Workspace",
-      "All on Microsoft 365"
-    ],
-    "before": [
-      "The whole workplace was split across Google Drive, Shared Drives, Sites, Gmail and Groups.",
-      "Day-to-day processes ran on Google Sheets with no governance or audit trail.",
-      "A hard six-month deadline, and the business could not stop working during the move.",
-      "No single view of migration progress across workloads."
-    ],
-    "ref": "CS-04"
-  },
-  {
-    "slug": "genai-internal-assistant",
-    "title": "An internal AI assistant on Azure OpenAI and SharePoint",
-    "kind": "AI & automation",
-    "client": "Al Qahtani Beverages",
-    "region": "Saudi Arabia",
-    "duration": "In progress",
-    "result": "Pilot live in 2 departments",
-    "summary": "A GenAI assistant that searches SharePoint content and handles routine requests for several departments, built with Azure OpenAI, Copilot APIs and an SPFx front end.",
-    "situation": [
-      "Several departments were spending time answering the same questions and processing the same standard requests, and finding documents in SharePoint wasn't easy."
-    ],
-    "work": [
-      "Designing the assistant around Azure OpenAI and Microsoft 365 Copilot APIs, with an SPFx interface inside SharePoint.",
-      "Running alongside it: a standalone Security Guard application and a Freshworks ITSM integration that creates tickets automatically."
-    ],
-    "outcome": [
-      "R&D phase complete.",
-      "Proof of concept live for 2 departments.",
-      "Production rollout under way, with more departments planned."
-    ],
-    "stack": [
-      "Azure OpenAI",
-      "Microsoft Copilot",
-      "SPFx",
-      "React",
-      "Power Automate",
-      "Freshworks"
-    ],
-    "status": "In production rollout",
-    "before_title": "What was failing",
-    "swap": [
-      "Same questions, every day",
-      "Answered by an assistant"
-    ],
-    "before": [
-      "Several departments spent hours answering the same questions again and again.",
-      "Standard requests were processed by hand.",
-      "Finding the right document in SharePoint was slow."
-    ],
-    "ref": "CS-05"
-  },
-  {
-    "slug": "ey-gds-risk-and-workflow-apps",
-    "title": "Internal risk, leave and resourcing apps at EY GDS",
-    "kind": "Enterprise applications",
-    "client": "Ernst & Young Global Delivery Services",
-    "region": "UK",
-    "duration": "2024 – 2025",
-    "result": "100+ flows and 20+ live apps maintained",
-    "summary": "SPFx React apps on SharePoint for risk workflows, leave tracking, resource allocation and onboarding — all shipped through EY's formal change-request and release process.",
-    "situation": [
-      "EY GDS needed a set of internal applications — risk workflow management, leave tracking, resource allocation and employee onboarding — built to EY's security and change-management standards, with formal release schedules."
-    ],
-    "work": [
-      "Designed and deployed SPFx React applications with SharePoint as the back end.",
-      "Built the internal leave and resource allocation systems.",
-      "Owned 100+ Power Automate workflows.",
-      "Handled all internal releases for the fiscal year and kept 20+ live apps moving through Change Request Management."
-    ],
-    "outcome": [
-      "Full internal workflow suite in production.",
-      "100+ automations maintained.",
-      "Every release went through formal SDLC and change control, with zero compliance breaches."
+      "20+ applications delivered across 6+ concurrent engagements.",
+      "Clients in the US, UK and Canada."
     ],
     "stack": [
       "SPFx",
       "React",
-      "SharePoint Online",
-      "Power Automate",
+      "TypeScript",
       "Power Apps",
+      "Power Automate",
+      "Node.js",
+      "C#",
       "PowerShell"
     ],
-    "status": "Completed",
-    "before_title": "The brief",
-    "swap": [
-      "A new app suite, under strict change control",
-      "20+ apps live, zero compliance breaches"
-    ],
-    "before": [
-      "Risk workflow management, leave tracking, resource allocation and onboarding all needed proper applications.",
-      "Everything had to meet EY’s security standards.",
-      "Every change had to go through formal change-request management and scheduled releases."
-    ],
-    "ref": "CS-06"
+    "ref": "CS-13"
   },
   {
     "slug": "dubai-intranet-spfx-web-parts",
@@ -299,102 +517,49 @@
     ],
     "status": "Completed",
     "before_title": "The gap",
-    "swap": [
-      "Generic intranet",
-      "Live global web parts"
-    ],
     "before": [
       "Staff were spread across offices in several countries and time zones.",
       "SharePoint’s out-of-the-box web parts had no world clock, multi-zone calendar or live local weather.",
       "The intranet needed to feel useful day to day, not just be a document store."
     ],
-    "ref": "CS-07"
+    "ref": "CS-14"
   },
   {
-    "slug": "post-migration-application-programme",
-    "ref": "CS-08",
-    "title": "Replacing ungoverned spreadsheets with 50+ business apps",
-    "kind": "Application development",
-    "client": "Multiple enterprise clients, via Avasoft",
-    "region": "Global",
-    "duration": "12 months",
-    "status": "Completed",
-    "result": "50+ apps and 200+ flows delivered",
-    "summary": "After each migration wave, clients were left running core processes on complex Google Sheets and manual workflows. I rebuilt them as governed Microsoft applications with proper access control and audit trails.",
-    "before_title": "What was failing",
-    "swap": [
-      "Business processes in spreadsheets",
-      "50+ governed apps"
-    ],
-    "before": [
-      "Core business processes ran on complex Google Sheets after each migration wave.",
-      "Workflows were manual, with no approvals, notifications or audit trail.",
-      "Access to sensitive data was not governed.",
-      "The spreadsheets did not scale as usage grew."
-    ],
-    "situation": [
-      "After each cloud migration wave, clients had dozens of complex Google Sheets, manual workflows and ungoverned spreadsheets. They needed proper Microsoft applications with the same functionality, but better security, scalability and audit trails."
-    ],
-    "work": [
-      "Analysed each Google Sheet for its business logic.",
-      "Rebuilt each one as a governed application: SPFx React web parts, Power Apps canvas and model-driven apps, or Dataverse-backed solutions.",
-      "Added Power Automate workflows, proper access controls, and SharePoint list or Dataverse back ends."
-    ],
-    "outcome": [
-      "50+ business applications delivered across multiple clients.",
-      "Legacy Google Sheets workflows replaced with governed Microsoft solutions.",
-      "200+ Power Automate flows built to support the application portfolio."
-    ],
-    "stack": [
-      "SPFx",
-      "React",
-      "Power Apps",
-      "Power Automate",
-      "SharePoint Online",
-      "Dataverse",
-      "Power BI"
-    ]
-  },
-  {
-    "slug": "internal-audit-app-and-itsm-workspace",
-    "ref": "CS-09",
-    "title": "An internal audit application and an ITSM workspace built from scratch",
-    "kind": "Enterprise operations",
-    "client": "Al Qahtani Beverages",
+    "slug": "genai-internal-assistant",
+    "title": "An internal AI assistant on Azure OpenAI and SharePoint",
+    "kind": "AI & automation",
+    "client": "AQS-PEPSI (Al-Qahtani & Sons Beverage Co.)",
     "region": "Saudi Arabia",
-    "duration": "4 months",
-    "status": "Completed",
-    "result": "Audit app live, ITSM workspace operational",
-    "summary": "A SharePoint audit application for capturing and tracking audit data across departments, plus a Freshworks IT service management workspace configured from scratch, with role-based access, automated routing and escalation.",
-    "before_title": "What was missing",
-    "swap": [
-      "No structured audit or IT service desk",
-      "Audit app + ITSM live"
-    ],
-    "before": [
-      "No structured way to capture and track audit data across departments.",
-      "No department-level reporting or approval trail for audit work.",
-      "No configured IT service management workspace: no role-based access, routing or escalation."
-    ],
+    "duration": "In progress",
+    "result": "Pilot live in 2 departments",
+    "summary": "A GenAI assistant that searches SharePoint content and handles routine requests for several departments, built with Azure OpenAI, Copilot APIs and an SPFx front end.",
     "situation": [
-      "The organisation needed a structured Internal Audit Application, plus a fully configured IT service management workspace in Freshworks with role-based access, automated routing and field manager workflows."
+      "Several departments were spending time answering the same questions and processing the same standard requests, and finding documents in SharePoint wasn't easy."
     ],
     "work": [
-      "Built the Internal Audit Application on SharePoint with SPFx React: structured data capture, department-level reporting and Power Automate approval workflows.",
-      "Configured the Freshworks ITSM workspace from scratch: role-based access controls, field manager workflows, automated service request routing and escalation rules."
+      "Designing the assistant around Azure OpenAI and Microsoft 365 Copilot APIs, with an SPFx interface inside SharePoint.",
+      "Running alongside it: a standalone Security Guard application and a Freshworks ITSM integration that creates tickets automatically."
     ],
     "outcome": [
-      "Internal Audit Application live with a full audit trail.",
-      "Freshworks ITSM workspace operational, with automated request routing, field manager workflows and structured escalation paths.",
-      "Further areas for Freshworks optimisation identified."
+      "R&D phase complete.",
+      "Proof of concept live for 2 departments.",
+      "Production rollout under way, with more departments planned."
     ],
     "stack": [
+      "Azure OpenAI",
+      "Microsoft Copilot",
       "SPFx",
       "React",
-      "SharePoint Online",
       "Power Automate",
-      "Freshworks ITSM",
-      "REST APIs"
-    ]
+      "Freshworks"
+    ],
+    "status": "In production rollout",
+    "before_title": "What was failing",
+    "before": [
+      "Several departments spent hours answering the same questions again and again.",
+      "Standard requests were processed by hand.",
+      "Finding the right document in SharePoint was slow."
+    ],
+    "ref": "CS-15"
   }
 ]
