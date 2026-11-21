@@ -351,12 +351,6 @@ function Note({ meta }) {
             : failed ? <p className="notice" role="alert">This note couldn't load. Check your connection and <a href={withBase(`/notes/${meta.slug}/`)}>reload</a>.</p>
             : <p className="muted" role="status"><span className="spinner" aria-hidden="true" /> Loading…</p>}
         </section>
-        {meta.sources.length > 0 && (
-          <section className="reportSection">
-            <h2 className="reportHeading">Sources</h2>
-            <ul className="highlights">{meta.sources.map((s) => <li key={s}><a className="textLink" href={s} rel="noopener" target="_blank">{s}</a></li>)}</ul>
-          </section>
-        )}
         <footer className="reportFoot">{SITE.name} · {SITE.role}. Questions or a similar problem? <Link href="/contact/">Get in touch</Link>.</footer>
       </article>
     </Page>
