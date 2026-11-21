@@ -325,6 +325,42 @@ function Notes() {
   );
 }
 
+function NoteSidebar({ current }) {
+  const others = POSTS.filter((p) => p.slug !== current).slice(0, 5);
+  return (
+    <aside className="noteSide" aria-label="About the author and more notes">
+      <section className="card noteAuthor">
+        <div className="noteAuthorHead">
+          <Portrait />
+          <div>
+            <p className="noteAuthorName">{SITE.name}</p>
+            <p className="cardMeta">{SITE.role}</p>
+          </div>
+        </div>
+        <p className="noteAuthorText">I own SharePoint, Microsoft 365 and Power Platform end to end for a five-company group in Saudi Arabia. Ex-EY GDS.</p>
+        <div className="introActions">
+          <Link className="button buttonGhost" href="/hire/">For recruiters</Link>
+          <Link className="button buttonGhost" href="/contact/">Contact</Link>
+        </div>
+      </section>
+      {others.length > 0 && (
+        <section className="card">
+          <p className="cardLabel">More notes</p>
+          <ul className="highlights noteMore">
+            {others.map((p) => <li key={p.slug}><Link href={`/notes/${p.slug}/`}>{p.title}</Link></li>)}
+          </ul>
+        </section>
+      )}
+      <section className="card">
+        <p className="cardLabel">Case studies</p>
+        <ul className="highlights noteMore">
+          {WORK.slice(0, 3).map((w) => <li key={w.slug}><Link href={`/work/${w.slug}/`}>{w.title}</Link></li>)}
+        </ul>
+      </section>
+    </aside>
+  );
+}
+
 function Note({ meta }) {
   const [note, setNote] = useState(() => getCachedNote(meta.slug));
   const [failed, setFailed] = useState(false);
@@ -337,6 +373,7 @@ function Note({ meta }) {
 
   return (
     <Page title={meta.title} crumb={["/notes/", "Notes"]}>
+      <div className="noteLayout">
       <article className="report reportNote">
         <header className="reportHead">
           <div className="reportMeta">
@@ -353,6 +390,8 @@ function Note({ meta }) {
         </section>
         <footer className="reportFoot">{SITE.name} · {SITE.role}. Questions or a similar problem? <Link href="/contact/">Get in touch</Link>.</footer>
       </article>
+        <NoteSidebar current={meta.slug} />
+      </div>
     </Page>
   );
 }
