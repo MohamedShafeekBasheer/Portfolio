@@ -20,7 +20,8 @@ const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").repl
 
 // GitHub Pages can't send security headers, so the policy goes in a meta tag.
 const CSP = [
-  "default-src 'self'", "script-src 'self'", "style-src 'self'", "img-src 'self' data:", "font-src 'self'",
+  "default-src 'self'", "script-src 'self'", "style-src 'self'",
+  `img-src 'self' data:${SITE.goatcounter_code ? ` https://${SITE.goatcounter_code}.goatcounter.com` : ""}`, "font-src 'self'",
   "connect-src 'self' https://formspree.io", "form-action 'self' https://formspree.io mailto:",
   "base-uri 'self'", "object-src 'none'", "manifest-src 'self'", "worker-src 'self'",
 ].join("; ");

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useRouter } from "./router.jsx";
 import { POSTS, SITE, WORK, findCase, findPost, withBase } from "./data.js";
 import { getCachedNote, loadNote } from "./notes.js";
+import { trackEvent } from "./analytics.js";
 import { Header, Portrait, StatusPill } from "./components.jsx";
 
 function Page({ title, crumb, primary, children }) {
@@ -408,7 +409,7 @@ function Hire() {
           <h1>{SITE.name} — SharePoint Developer &amp; Microsoft 365 Architect</h1>
           <p className="lede">5 years building on SharePoint, Microsoft 365, the Power Platform and Azure, for EY GDS, Avasoft clients in the US, UK and Canada, and a five-company Saudi industrial group. KSA-based, Iqama transferable.</p>
           <div className="introActions">
-            <a className="button buttonPrimary" href={withBase(SITE.cv_url)} download>Download CV (PDF)</a>
+            <a className="button buttonPrimary" href={withBase(SITE.cv_url)} download onClick={() => trackEvent("cv-download")}>Download CV (PDF)</a>
             <a className="button buttonGhost" href={`mailto:${SITE.email}?subject=${encodeURIComponent("Role opportunity")}`}>Email me</a>
             <a className="button buttonGhost" href={SITE.linkedin} rel="me noopener" target="_blank">LinkedIn</a>
           </div>
@@ -487,6 +488,7 @@ function Contact() {
       clearTimeout(t);
       if (!res.ok) throw new Error(String(res.status));
       writeDraft(null);
+      trackEvent(`contact-form:${form.topic}`);
       navigate("/thanks/");
     } catch {
       setState(navigator.onLine ? "error" : "offline");

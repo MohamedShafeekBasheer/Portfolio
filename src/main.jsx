@@ -2,6 +2,7 @@ import { hydrateRoot, createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import { BASE, isKnown, normalise, stripBase } from "./data.js";
 import { preloadNote } from "./notes.js";
+import { trackPage } from "./analytics.js";
 import "./styles.css";
 
 const root = document.getElementById("root");
@@ -23,6 +24,7 @@ if (root.hasChildNodes()) {
   createRoot(root).render(app);
 }
 document.documentElement.classList.add("js");
+trackPage();
 
 // Offline support: cache pages and assets so repeat visits load instantly
 // and the site still opens on a bad connection.
