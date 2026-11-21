@@ -103,7 +103,26 @@ async function fromRoadmap(src) {
     .filter((r) => kw.length === 0 || kw.some((k) => (r.title + " " + r.summary).toLowerCase().includes(k)));
 }
 
-const READERS = { rss: fromRss, "github-releases": fromReleases, "github-commits": fromCommits, "m365-roadmap": fromRoadmap };
+// One script per day from PnP Script Samples, chosen by date so every day differs.
+// Read-only "get/export/list" scripts are the safest for beginners to run.
+async function fromScriptOfDay(src) {
+  const entries = await get(`https://api.github.com/repos/${src.repo}/contents/scripts`, { json: true, github: true });
+  const names = entries.filter((e) => e.type === "dir" && src.prefixes.some((p) => e.name.startsWith(p))).map((e) => e.name).sort();
+  if (!names.length) return [];
+  const day = Math.floor(Date.now() / 86400000);
+  const name = names[day % names.length];
+  const readme = await get(`https://raw.githubusercontent.com/${src.repo}/main/scripts/${name}/README.md`);
+  const title = (/^#\s+(.+)$/m.exec(readme) || [, name])[1].trim();
+  const summary = (/## Summary\s+([\s\S]*?)(\n#|$)/.exec(readme) || [, ""])[1];
+  return [{
+    title: `${title} (${name})`,
+    url: `https://pnp.github.io/script-samples/${name}/README.html`,
+    date: Date.now(),
+    summary: clip(decode(summary), 400) + ` Source: https://github.com/${src.repo}/tree/main/scripts/${name}`,
+  }];
+}
+
+const READERS = { rss: fromRss, "github-releases": fromReleases, "github-commits": fromCommits, "m365-roadmap": fromRoadmap, "pnp-script-of-the-day": fromScriptOfDay };
 
 async function collect() {
   const groups = [];
@@ -177,6 +196,7 @@ How to write:
 - Only include code (PowerShell, PnP PowerShell, CSOM, SPFx) if you are confident it is correct for current versions. Mark every code block with a first-line comment: # Draft — test before publishing
 - Note body: 300–600 words of Markdown. Use "##" subheadings. Do not repeat the title as a heading.
 - LinkedIn post: under 1,200 characters, plain text, no Markdown, blank lines between short paragraphs, at most 3 hashtags at the end, and end with the line "Full note: {{URL}}" (keep {{URL}} literally).
+- A "Beginner script of the day" from PnP Script Samples is included most days. Picking it is a good choice: explain what it does, who it helps, and what a beginner needs to know before running it. Credit the original author and link the sample (the library is MIT-licensed). Prefer a short simplified version over pasting the whole script.
 - If nothing in today's list is genuinely useful to his audience, set skip to true and explain why in skip_reason.`;
 
 const SCHEMA = {

@@ -1,0 +1,19 @@
+New to PnP PowerShell? This is the script I'd start with.
+
+It answers a question every SharePoint team gets eventually: how many sites do we have, who can share them externally, and how much space are they using?
+
+One connection, one command, one CSV:
+
+Connect-PnPOnline -Url https://contoso-admin.sharepoint.com -ClientId <your-app-id> -Interactive
+Get-PnPTenantSite | Select-Object Url, Template, SharingCapability, StorageUsageCurrent | Export-Csv .\sites.csv -NoTypeInformation
+
+Two things that catch beginners out:
+
+1. Older samples sign in with -UseWebLogin, or -Interactive without a ClientId. That no longer works. You need your own Entra ID app registration first.
+2. Use PowerShell 7. Current PnP PowerShell won't run in Windows PowerShell 5.1.
+
+Based on Kasper Larsen's sample in the PnP Script Samples library, which has 400+ community scripts worth exploring.
+
+Full walkthrough, plus a one-line filter for externally shared sites: https://mohamedshafeekbasheer.github.io/Portfolio/notes/first-sharepoint-admin-report-pnp-powershell/
+
+#SharePoint #PnPPowerShell #Microsoft365

@@ -1,0 +1,13 @@
+Three Microsoft 365 roadmap items worth a SharePoint admin's attention this week:
+
+1. Purview default library labels will start applying to files already in the library, not just new ones. Check which libraries have a default label before it reaches your tenant. A label that covered a few new files is about to cover everything.
+
+2. SharePoint News can be cross-posted to Viva Engage communities. Tell your intranet owners and comms team now, so where news goes is planned rather than ad hoc.
+
+3. Copilot Studio workflows get a Python Code node. Useful for transforms and parsing, but add it to your Power Platform governance and DLP review. Code is harder to review than connectors.
+
+Roadmap dates move, so check Message center before you plan around them.
+
+More detail and the roadmap links: https://mohamedshafeekbasheer.github.io/Portfolio/notes/microsoft-365-roadmap-what-admins-should-notice/
+
+#SharePoint #Microsoft365 #MicrosoftPurview
