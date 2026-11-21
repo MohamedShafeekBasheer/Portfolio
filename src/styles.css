@@ -330,7 +330,7 @@ h3 { font-size: var(--ms-size-h3); }
 .reportSection:last-of-type { border-bottom: 0; }
 .reportHeading { font-size: var(--ms-size-h2); margin-bottom: var(--ms-space-3); display: flex; align-items: baseline; gap: var(--ms-space-3); }
 .reportHeading .count { font: var(--ms-weight-regular) var(--ms-size-small) var(--ms-font-ui); color: var(--ms-text-on-light-muted); }
-.reportBody { max-width: var(--ms-max-reading-width); font-size: 0.9375rem; line-height: var(--ms-leading-read); }
+.reportBody { font-size: 0.9375rem; line-height: var(--ms-leading-read); }
 .reportFoot { padding: var(--ms-space-3) var(--ms-space-6); background: var(--ms-mist-sunken); color: var(--ms-text-on-light-muted); font-size: var(--ms-size-micro); }
 
 .finding { display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; gap: var(--ms-space-3); align-items: baseline; padding: var(--ms-space-3) 0; border-top: 1px solid var(--ms-hairline-light); }
