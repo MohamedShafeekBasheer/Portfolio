@@ -320,7 +320,7 @@ h3 { font-size: var(--ms-size-h3); }
 .reportHead { padding: var(--ms-space-5) var(--ms-space-6); border-bottom: 1px solid var(--ms-hairline-light); }
 .reportMeta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ms-space-2) var(--ms-space-3); margin-bottom: var(--ms-space-3); }
 .reportTitle { font-size: var(--ms-size-h1); max-width: 40ch; }
-.reportLede { font-size: var(--ms-size-lede); line-height: var(--ms-leading-read); max-width: var(--ms-max-reading-width); margin: var(--ms-space-3) 0 0; }
+.reportLede { font-size: var(--ms-size-lede); line-height: var(--ms-leading-read); margin: var(--ms-space-3) 0 0; }
 .facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; background: var(--ms-mist); border-bottom: 1px solid var(--ms-hairline-light); }
 .facts div { padding: var(--ms-space-3) var(--ms-space-6); border-left: 1px solid var(--ms-hairline-light); }
 .facts div:first-child { border-left: 0; }
