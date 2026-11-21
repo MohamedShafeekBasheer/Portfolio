@@ -1,0 +1,15 @@
+New to SharePoint? The first question you get when you create a site is the one most people guess at: team site or communication site?
+
+One question settles it: will most people work in this site, or read it?
+
+Work together → team site. It comes with a Microsoft 365 group (so Teams, a shared calendar, Planner), and members can edit.
+
+A few people publish for everyone else → communication site. No group, mostly read-only, built for pages and news. Think intranet home, IT help, HR policies.
+
+A good pattern is to use both: HR drafts in a team site and publishes the finished policies on a communication site.
+
+And choose the site address carefully. It's hard to change once people bookmark it.
+
+Full note with a quick decision table: https://mohamedshafeekbasheer.github.io/Portfolio/notes/team-site-or-communication-site/
+
+#SharePoint #Microsoft365 #SharePointTips

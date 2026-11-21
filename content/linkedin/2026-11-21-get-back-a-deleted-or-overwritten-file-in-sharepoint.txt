@@ -1,0 +1,13 @@
+"I've lost my file" is one of the most common SharePoint questions, and most of the time you can fix it yourself in under a minute.
+
+Deleted it? Go to the site's Recycle bin, tick the file, Restore. It goes back to the same folder with its history. Items are kept for 93 days in total, so don't wait too long.
+
+Saved over it, or someone else changed it? Select the file, then ⋯ → Version history, find the version from before the change, and Restore. Newer versions aren't lost, so you can always go back again.
+
+Two habits that prevent the problem:
+• Keep the file in the library, not as an email attachment.
+• Edit in place instead of downloading and re-uploading, so every change is saved as a version.
+
+Step-by-step note: https://mohamedshafeekbasheer.github.io/Portfolio/notes/get-back-a-deleted-or-overwritten-file-in-sharepoint/
+
+#SharePoint #Microsoft365 #SharePointTips
