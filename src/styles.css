@@ -496,3 +496,9 @@ textarea.input { resize: vertical; min-height: 120px; }
 .noteBody pre code { background: transparent; padding: 0; color: inherit; font-size: inherit; }
 .noteBody blockquote { margin: 0 0 var(--ms-space-3); padding-left: var(--ms-space-4); border-left: 2px solid var(--ms-hairline-light); color: var(--ms-text-on-light-muted); }
 .noteBody img { border-radius: var(--ms-radius-md); }
+
+/* Notes are read top to bottom: size the card to the reading column so there's no empty band on the right. */
+.reportNote { max-width: calc(var(--ms-max-reading-width) + 2 * var(--ms-space-6)); }
+.reportNote .reportTitle, .reportNote .reportLede, .reportNote .reportBody { max-width: none; }
+.noteBody hr { border: 0; border-top: 1px solid var(--ms-hairline-light); margin: var(--ms-space-5) 0 var(--ms-space-4); }
+.noteBody > :last-child { margin-bottom: 0; }
