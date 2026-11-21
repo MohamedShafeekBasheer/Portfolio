@@ -1,0 +1,301 @@
+{
+  "site_url": "https://mohamedshafeekbasheer.github.io",
+  "name": "Mohamed Shafeek",
+  "role": "Microsoft 365 & SharePoint Architect",
+  "email": "basheermohamedshafeek@gmail.com",
+  "linkedin": "https://www.linkedin.com/in/mdshafeek",
+  "location": "Abha, Saudi Arabia",
+  "timezone": "Asia/Riyadh",
+  "current": "Sole owner of SharePoint, Microsoft 365 and Power Platform at AQS-PEPSI",
+  "home_title": "Mohamed Shafeek — SharePoint Developer & Microsoft 365 Architect (SPFx, Power Platform, Azure) · Saudi Arabia",
+  "home_description": "SharePoint Developer and Microsoft 365 Architect with 5 years in SPFx, Power Apps, Power Automate, Azure and M365 security. Ex-EY GDS. KSA-based, Iqama transferable — open to roles in Saudi Arabia, UAE, the GCC, Singapore and India.",
+  "headline": "I own Microsoft 365 platforms end to end — architecture, development, security and governance — for companies that need more than a working form.",
+  "intro": [
+    "SharePoint Developer and Microsoft 365 Architect. I'm the sole owner of SharePoint, Microsoft 365 and the Power Platform across a five-company Saudi industrial group, where I delivered seven production systems across six business functions in twelve months. Before that: EY Global Delivery Services and Avasoft, delivering for clients in the US, UK, Canada and the GCC."
+  ],
+  "availability": {
+    "short": "Open to roles and consulting.",
+    "remote": "Remote consulting in any time zone, especially SharePoint governance and remediation.",
+    "relocation": "Open to Senior SharePoint Developer, Microsoft 365 Consultant, Power Platform Developer and M365 Architect roles across the GCC, Singapore and India. KSA-based, Iqama transferable — and ready to relocate with my family."
+  },
+  "numbers": [
+    [
+      "Production systems",
+      "7",
+      "Delivered in 12 months across six business functions"
+    ],
+    [
+      "Documents migrated",
+      "45,000+",
+      "~60 GB across four legal entities, verified zero loss"
+    ],
+    [
+      "Users migrated",
+      "5,000+",
+      "Google Workspace to Microsoft 365"
+    ],
+    [
+      "Contract platform",
+      "28 ms",
+      "End-to-end response — a multi-day process now takes minutes"
+    ]
+  ],
+  "help_with": [
+    [
+      "SharePoint governance & security",
+      "Permission audits (PowerShell/CSOM), external sharing remediation, Conditional Access and DLP baselines."
+    ],
+    [
+      "Enterprise applications",
+      "SPFx (React, TypeScript) front ends with Azure Functions, Azure SQL, Key Vault and Entra ID behind them."
+    ],
+    [
+      "Migrations",
+      "Google Workspace to Microsoft 365, tenant-to-tenant, legacy to SharePoint Online — with verified reconciliation."
+    ],
+    [
+      "Legacy retirement",
+      "InfoPath forms and failed SharePoint Designer workflows rebuilt on modern SharePoint."
+    ],
+    [
+      "Power Platform & ERP",
+      "Power Apps, Power Automate and Dataverse, including Dynamics 365 F&O integration."
+    ],
+    [
+      "Copilot & AI",
+      "Microsoft Copilot and Copilot Studio inside real approval workflows."
+    ]
+  ],
+  "offers": [
+    {
+      "name": "Microsoft 365 review call",
+      "price": "$35",
+      "unit": "per hour",
+      "text": "We look at your tenant, SharePoint or Power Platform setup as it is today. You leave with a short list of what's risky, what's wasting time, and what to do first.",
+      "cta": "Book a review call",
+      "subject": "Microsoft 365 review call"
+    },
+    {
+      "name": "Career guidance",
+      "price": "$35",
+      "unit": "per hour",
+      "text": "For people building a career in SharePoint, Power Apps or SPFx. Roadmap, interview prep, portfolio feedback — the things I wish someone had told me in 2021.",
+      "cta": "Book a career call",
+      "subject": "Career guidance call"
+    },
+    {
+      "name": "Project work",
+      "price": "Quoted",
+      "unit": "per project",
+      "text": "A defined piece of work: a migration, an SPFx build, an InfoPath retirement, a security remediation. Fixed scope, written plan, handover documentation.",
+      "cta": "Describe your project",
+      "subject": "Project enquiry"
+    },
+    {
+      "name": "Ongoing support",
+      "price": "Monthly",
+      "unit": "retainer",
+      "text": "For teams with a steady backlog of SharePoint and Power Platform work who want the same person picking it up every month.",
+      "cta": "Talk about a retainer",
+      "subject": "Ongoing support enquiry"
+    }
+  ],
+  "about": [
+    "I own Microsoft 365 platforms end to end: architecture, development, security and governance. As AI writes more code, the scarce skill isn't producing solutions — it's auditing permissions, hardening tenants and catching what generated code gets wrong. That's where I spend most of my attention.",
+    "I started at Avasoft in Chennai in December 2021 as a trainee, then spent two years as a software engineer delivering 20+ applications across six concurrent client engagements in the US, UK and Canada. I led an organisation-wide Google Workspace to Microsoft 365 migration, built a C# tenant-to-tenant migration platform, and led a security audit for a Canadian client after a live incident.",
+    "After a short stint at Colan Infotech, I joined EY Global Delivery Services, where I led a Risk Management module that used Microsoft Copilot for AI-assisted release analysis and approvals, and built 10+ Power Apps with 50+ workflows.",
+    "Since October 2025 I've been the sole owner of SharePoint, Microsoft 365 and the Power Platform across five companies at AQS-PEPSI in Abha. In twelve months I delivered seven production systems across six business functions, approved at Chief Officer and Director level — including a contract platform that turned days of work into minutes.",
+    "I also build bilingual Arabic/English enterprise applications with right-to-left document generation."
+  ],
+  "timeline": [
+    [
+      "Oct 2025 – now",
+      "Information Technology Analyst",
+      "AQS-PEPSI, Abha",
+      "Sole owner of SharePoint, M365 and Power Platform across five group companies. 7 production systems in 12 months: contract platform, internal audit, CAPEX, InfoPath retirement, 45,000-document migration, D365 F&O integration, permission audit framework."
+    ],
+    [
+      "Sep 2024 – Jul 2025",
+      "O365 Developer, Software Engineer",
+      "EY Global Delivery Services",
+      "Led the Risk Management module with Microsoft Copilot; 10+ Power Apps and 50+ Power Automate workflows; M365 security hardening."
+    ],
+    [
+      "Jul 2024 – Sep 2024",
+      "SharePoint Developer",
+      "Colan Infotech",
+      "SPFx web parts, Power Apps and Power Automate, REST and Microsoft Graph integration."
+    ],
+    [
+      "Jun 2022 – Jun 2024",
+      "Software Engineer",
+      "Avasoft, Chennai",
+      "20+ apps across 6+ client engagements; Google Workspace to M365 migration; C# tenant-to-tenant platform; Canada security audit; pre-sales."
+    ],
+    [
+      "Dec 2021 – May 2022",
+      "Trainee Software Engineer",
+      "Avasoft, Chennai",
+      "React and Node.js web apps; SharePoint migrations with Cloudiway and AvePoint."
+    ]
+  ],
+  "credentials": [
+    [
+      "Certification",
+      "Microsoft Certified: Power Platform Fundamentals (PL-900)"
+    ],
+    [
+      "In progress",
+      "PL-400 (Power Platform Developer) and PL-600 (Power Platform Solution Architect)"
+    ],
+    [
+      "Education",
+      "B.Tech, Information Technology · Anna University, 2018 – 2022"
+    ],
+    [
+      "Languages",
+      "English and Tamil"
+    ]
+  ],
+  "skills": [
+    [
+      "SharePoint & M365",
+      "SharePoint Online, Teams, OneDrive, Exchange Online, Entra ID, Microsoft Graph"
+    ],
+    [
+      "Development",
+      "SPFx, React, TypeScript, C#, Node.js, PowerShell, CSOM"
+    ],
+    [
+      "Azure",
+      "Azure Functions, Azure SQL, Key Vault"
+    ],
+    [
+      "Power Platform",
+      "Power Apps, Power Automate, Power BI, Dataverse, Copilot Studio"
+    ],
+    [
+      "Security",
+      "Conditional Access, DLP, permission audits, external sharing governance"
+    ],
+    [
+      "Migration",
+      "ShareGate, AvePoint, Cloudiway, Migration Manager"
+    ],
+    [
+      "Integration",
+      "Dynamics 365 F&O, DocuSign, REST APIs"
+    ]
+  ],
+  "target_roles": [
+    "Senior SharePoint Developer",
+    "SharePoint Online / SPFx Developer",
+    "Microsoft 365 Consultant",
+    "Microsoft 365 Architect / Solution Architect",
+    "Power Platform Developer / Power Apps Developer",
+    "Power Platform Consultant",
+    "SharePoint & Microsoft 365 Administrator",
+    "Modern Workplace / Collaboration Consultant"
+  ],
+  "target_locations": "Saudi Arabia (Riyadh, Jeddah, Dammam, Abha), UAE (Dubai, Abu Dhabi), Qatar, Bahrain, Kuwait, Oman, Singapore and India (Chennai, Bengaluru, Hyderabad) — or remote.",
+  "quick_facts": [
+    [
+      "Current role",
+      "Information Technology Analyst (SharePoint, Microsoft 365 & Power Platform), AQS-PEPSI"
+    ],
+    [
+      "Experience",
+      "5 years in SharePoint, Microsoft 365 and Power Platform (since Dec 2021), including EY GDS"
+    ],
+    [
+      "Based in",
+      "Abha, Saudi Arabia"
+    ],
+    [
+      "Work authorisation",
+      "KSA-based, Iqama transferable"
+    ],
+    [
+      "Open to",
+      "Full-time, contract and remote roles; relocating with family"
+    ],
+    [
+      "Locations",
+      "Saudi Arabia, UAE and the wider GCC, Singapore, India, remote"
+    ],
+    [
+      "Languages",
+      "English, Tamil"
+    ],
+    [
+      "Certification",
+      "Microsoft Certified: Power Platform Fundamentals (PL-900); PL-400 and PL-600 in progress"
+    ]
+  ],
+  "keyword_groups": [
+    [
+      "SharePoint",
+      "SharePoint Online, SharePoint Framework (SPFx), SharePoint on-premises, SharePoint administration, site architecture, intranet portals, permissions, PnPjs, CSOM, InfoPath migration, SharePoint Designer workflow migration"
+    ],
+    [
+      "Microsoft 365",
+      "Microsoft 365 administration, Microsoft Teams, OneDrive, Exchange Online, Microsoft Graph API, tenant governance, Microsoft 365 migration, tenant-to-tenant migration"
+    ],
+    [
+      "Power Platform",
+      "Power Apps (canvas and model-driven), Power Automate, Power BI, Dataverse, Copilot Studio, Power Platform governance, Dynamics 365 Finance & Operations integration"
+    ],
+    [
+      "Azure",
+      "Azure Functions, Azure SQL, Azure Key Vault, Microsoft Entra ID (Azure AD), Azure-to-on-premises connectivity, REST APIs"
+    ],
+    [
+      "Security & compliance",
+      "Conditional Access, data loss prevention (DLP), permission audits, external sharing governance, Microsoft Purview, Saudi PDPL data residency"
+    ],
+    [
+      "Development",
+      "React, TypeScript, JavaScript, C#, .NET, Node.js, PowerShell, PnP PowerShell, Git"
+    ],
+    [
+      "Migration tools",
+      "ShareGate, AvePoint, Cloudiway, Microsoft Migration Manager, Google Workspace to Microsoft 365"
+    ],
+    [
+      "AI",
+      "Microsoft Copilot, Copilot Studio, AI-assisted workflows"
+    ],
+    [
+      "Delivery",
+      "Requirements gathering, solution architecture, UAT, Agile/Scrum, change management, pre-sales estimation, technical documentation, stakeholder management"
+    ]
+  ],
+  "highlights": [
+    [
+      "contract-management-platform",
+      "Contract platform on SPFx + Azure Functions + Azure SQL: a multi-day process now takes minutes (28 ms response)."
+    ],
+    [
+      "group-document-migration",
+      "45,000+ documents (~60 GB) migrated across four legal entities with verified zero loss."
+    ],
+    [
+      "dynamics-365-invoice-integration",
+      "Power Platform to Dynamics 365 F&O vendor invoice integration with duplicate prevention and retries."
+    ],
+    [
+      "google-workspace-to-microsoft-365-migration",
+      "Google Workspace to Microsoft 365 migration for 5,000+ users."
+    ],
+    [
+      "ey-gds-risk-and-workflow-apps",
+      "EY GDS: led a Copilot-assisted Risk Management module; 10+ Power Apps, 50+ flows."
+    ],
+    [
+      "sharepoint-external-sharing-breach",
+      "Security incident response: external sharing exposure removed across SharePoint and OneDrive."
+    ]
+  ],
+  "cv_url": "/cv/Mohamed-Shafeek-CV-SharePoint-Microsoft-365.pdf",
+  "formspree_id": ""
+}

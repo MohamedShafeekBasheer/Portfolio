@@ -1,0 +1,56 @@
+# Configuration for Pages CMS (https://pagescms.org) — a free editor for this repository.
+# Sign in at https://app.pagescms.org with GitHub, open this repo, and you get forms for
+# notes and LinkedIn texts. Saving commits straight to the repository.
+media:
+  input: public/img/notes
+  output: /img/notes
+
+content:
+  - name: notes
+    label: Notes
+    type: collection
+    path: content/posts
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, date]
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: date
+        label: Date
+        type: date
+        required: true
+      - name: summary
+        label: One-line summary
+        type: string
+      - name: tags
+        label: Tags
+        type: string
+        list: true
+      - name: sources
+        label: Source links
+        type: string
+        list: true
+      - name: draft
+        label: Keep as draft (not published)
+        type: boolean
+      - name: body
+        label: Note
+        type: rich-text
+
+  - name: linkedin
+    label: LinkedIn texts
+    type: collection
+    path: content/linkedin
+    format: raw
+    filename: "{year}-{month}-{day}-{primary}.txt"
+    fields:
+      - name: body
+        label: LinkedIn post
+        type: text

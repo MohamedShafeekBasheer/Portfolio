@@ -1,0 +1,27 @@
+{
+  "name": "mohamed-shafeek-portfolio",
+  "private": true,
+  "version": "2.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/build-content.mjs && vite",
+    "build": "node scripts/build-content.mjs && vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs",
+    "preview": "vite preview --port 4173",
+    "content": "node scripts/build-content.mjs",
+    "digest": "node scripts/digest.mjs"
+  },
+  "dependencies": {
+    "react": "19.2.9",
+    "react-dom": "19.2.9"
+  },
+  "devDependencies": {
+    "@anthropic-ai/sdk": "^1.6.0",
+    "@vitejs/plugin-react": "5.2.0",
+    "marked": "^18.1.3",
+    "vite": "7.3.7",
+    "yaml": "^2.9.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
