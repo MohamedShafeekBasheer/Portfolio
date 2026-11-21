@@ -135,7 +135,7 @@ export function StatusBar() {
       <span>© {new Date().getFullYear()} {SITE.name}</span>
       <span>{SITE.location} · <Clock /> local time</span>
       <span><a href={`mailto:${SITE.email}`}>{SITE.email}</a></span>
-      <span>No cookies, no trackers</span>
+      <span>No cookies · anonymous visit counts only</span>
     </footer>
   );
 }

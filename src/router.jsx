@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 import { isKnown, meta, normalise, stripBase, withBase } from "./data.js";
+import { trackPage } from "./analytics.js";
 
 /*
  * A tiny router. Every page is also a real prerendered HTML file, so links
@@ -36,6 +37,7 @@ export function RouterProvider({ initialPath, children }) {
       setPath(next);
       if (push) window.scrollTo(0, 0);
       applyMeta(next);
+      trackPage();
       requestAnimationFrame(() => {
         const h1 = document.querySelector("main h1");
         if (h1) { h1.setAttribute("tabindex", "-1"); h1.focus({ preventScroll: true }); }
