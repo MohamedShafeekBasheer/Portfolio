@@ -337,7 +337,7 @@ function Note({ meta }) {
 
   return (
     <Page title={meta.title} crumb={["/notes/", "Notes"]}>
-      <article className="report">
+      <article className="report reportNote">
         <header className="reportHead">
           <div className="reportMeta">
             <span className="cellRef">{fmtDate(meta.date)}</span>
