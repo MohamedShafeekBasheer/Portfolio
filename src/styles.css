@@ -213,7 +213,7 @@ h3 { font-size: var(--ms-size-h3); }
 @keyframes progress { 0% { transform: scaleX(0); opacity: 1; } 75% { transform: scaleX(0.9); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .progressFill.isOn { animation: none; } }
 
-.content { flex: 1; width: 100%; max-width: calc(var(--ms-content-width) + 2 * var(--ms-space-6)); padding: var(--ms-space-6); }
+.content { flex: 1; width: 100%; margin-inline: auto; max-width: calc(var(--ms-content-width) + 2 * var(--ms-space-6)); padding: var(--ms-space-6); }
 .content > * + * { margin-top: var(--ms-space-6); }
 
 .statusBar {
@@ -498,7 +498,19 @@ textarea.input { resize: vertical; min-height: 120px; }
 .noteBody img { border-radius: var(--ms-radius-md); }
 
 /* Notes are read top to bottom: size the card to the reading column so there's no empty band on the right. */
-.reportNote { max-width: calc(var(--ms-max-reading-width) + 2 * var(--ms-space-6)); }
+/* Note page: the article at reading width, with author and related links beside it on wide screens. */
+.noteLayout { display: grid; grid-template-columns: minmax(0, calc(var(--ms-max-reading-width) + 2 * var(--ms-space-6))) minmax(260px, 320px); gap: var(--ms-space-5); align-items: start; }
+.noteSide { position: sticky; top: calc(var(--ms-header-height) + var(--ms-space-4)); display: grid; gap: var(--ms-space-3); }
+.noteAuthorHead { display: flex; gap: var(--ms-space-3); align-items: center; }
+.noteAuthorHead .portrait img { width: 56px; height: 56px; object-fit: cover; object-position: 50% 18%; border-radius: var(--ms-radius-md); background: var(--ms-white); }
+.noteAuthorName { margin: 0; font-weight: var(--ms-weight-semibold); }
+.noteAuthorText { margin: var(--ms-space-3) 0 0; color: var(--ms-text-on-light-muted); font-size: var(--ms-size-small); }
+.noteAuthor .introActions { margin-top: var(--ms-space-3); }
+.noteMore { margin-top: var(--ms-space-2); font-size: var(--ms-size-small); }
+@media (max-width: 1100px) {
+  .noteLayout { grid-template-columns: minmax(0, 1fr); }
+  .noteSide { position: static; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+}
 .reportNote .reportTitle, .reportNote .reportLede, .reportNote .reportBody { max-width: none; }
 .noteBody hr { border: 0; border-top: 1px solid var(--ms-hairline-light); margin: var(--ms-space-5) 0 var(--ms-space-4); }
 .noteBody > :last-child { margin-bottom: 0; }
