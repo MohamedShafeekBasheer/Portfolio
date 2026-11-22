@@ -206,9 +206,9 @@ const SCHEMA = {
   properties: {
     skip: { type: "boolean" },
     skip_reason: { type: "string" },
-    title: { type: "string", description: "Specific, under 80 characters, no clickbait." },
+    title: { type: "string", description: "Specific, under 55 characters (search engines cut titles at about 70), no clickbait." },
     slug: { type: "string", description: "lowercase-words-with-hyphens, under 60 characters." },
-    summary: { type: "string", description: "One sentence, under 200 characters." },
+    summary: { type: "string", description: "One sentence, under 155 characters. Used as the search-result description." },
     tags: { type: "array", items: { type: "string" }, description: "2-4 tags such as SharePoint Online, PnP PowerShell, SPFx, Power Automate, Governance." },
     sources: { type: "array", items: { type: "string" }, description: "URLs from the list that the note is based on." },
     body_markdown: { type: "string" },

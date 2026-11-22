@@ -2,6 +2,7 @@
 title: "Your first SharePoint admin report with PnP PowerShell"
 date: 2026-11-21
 summary: A beginner-friendly script that lists every SharePoint site with its template, sharing setting and storage — and the two things that trip people up when they first run it.
+description: "A beginner PnP PowerShell script that lists every SharePoint site with its template, sharing setting and storage, plus two common pitfalls."
 tags: [PnP PowerShell, SharePoint Online, Governance, Beginners]
 sources:
   - https://pnp.github.io/script-samples/spo-export-basic-sitecollection-info/README.html

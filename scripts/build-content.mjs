@@ -36,6 +36,7 @@ for (const file of files) {
     slug, date,
     title: String(fm.title),
     summary: String(fm.summary || ""),
+    ...(fm.description ? { description: String(fm.description) } : {}),
     tags: Array.isArray(fm.tags) ? fm.tags.map(String) : [],
     sources: Array.isArray(fm.sources) ? fm.sources.map(String) : [],
   };

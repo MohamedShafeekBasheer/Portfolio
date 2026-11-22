@@ -67,6 +67,13 @@ function write(route, file) {
 }
 
 for (const r of ROUTES) write(r, path.join(r, "index.html"));
+
+// Bing Site Scan flags titles over 70 characters and descriptions outside 25-160.
+for (const r of [...ROUTES, "/404.html"]) {
+  const { title, description } = meta(r);
+  if (title.length > 70) console.warn(`SEO: title is ${title.length} chars on ${r}`);
+  if (description.length < 25 || description.length > 160) console.warn(`SEO: description is ${description.length} chars on ${r}`);
+}
 write("/404.html", "404.html");
 
 // sitemap + robots

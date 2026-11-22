@@ -2,6 +2,7 @@
 title: "Three Microsoft 365 roadmap items SharePoint admins should notice"
 date: 2026-11-21
 summary: Default library labels for files already in SharePoint, SharePoint News cross-posted to Engage, and Python steps in Copilot Studio — what each means if you run a tenant.
+description: "Default library labels, SharePoint News cross-posted to Engage, and Python in Copilot Studio: what each means for SharePoint admins."
 tags: [SharePoint Online, Microsoft Purview, Copilot Studio, Governance]
 sources:
   - https://www.microsoft.com/microsoft-365/roadmap?featureid=575283
