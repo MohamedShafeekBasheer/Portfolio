@@ -100,16 +100,23 @@ ${rssItems}
 </channel></rss>
 `);
 
-// llms.txt
+// llms.txt — a plain-text profile that AI assistants and answer engines read.
+const pairs = (rows) => rows.map(([a, b]) => `- ${a}: ${b}`);
 fs.writeFileSync(
   path.join(dist, "llms.txt"),
   [
     `# ${SITE.name}`, "",
-    `> ${SITE.role} based in ${SITE.location}. ${SITE.availability.remote} ${SITE.availability.relocation}`, "",
-    "## Pages", ...["hire", "work", "notes", "services", "about", "contact"].map((p) => `- [${p}](${URL_BASE}/${p}/)`), "",
+    `> ${SITE.role} based in ${SITE.location}. ${SITE.home_description}`, "",
+    `Also known as: ${SITE.alternate_names.join(", ")}.`, "",
+    "## Summary", ...SITE.about, "",
+    "## Quick facts", ...pairs(SITE.quick_facts), "",
+    "## Roles open to", ...SITE.target_roles.map((r) => `- ${r}`), `Locations: ${SITE.target_locations}`, "",
+    "## Skills", ...pairs(SITE.keyword_groups), "",
+    "## Experience", ...SITE.timeline.map(([when, role, org, text]) => `- ${when}: ${role}, ${org}. ${text}`), "",
+    "## Pages", ...["hire", "work", "notes", "services", "about", "contact"].map((p) => `- [${p}](${URL_BASE}/${p}/)`), `- [CV (PDF)](${URL_BASE}${SITE.cv_url})`, "",
     "## Case studies", ...WORK.map((w) => `- [${w.title}](${URL_BASE}/work/${w.slug}/): ${w.summary}`), "",
     ...(POSTS.length ? ["## Notes", ...POSTS.slice(0, 20).map((p) => `- [${p.title}](${URL_BASE}/notes/${p.slug}/): ${p.summary}`), ""] : []),
-    "## Contact", `- Email: ${SITE.email}`, `- LinkedIn: ${SITE.linkedin}`, "",
+    "## Contact", `- Email: ${SITE.email}`, `- LinkedIn: ${SITE.linkedin}`, `- GitHub: ${SITE.github}`, `- Website: ${URL_BASE}/`, "",
   ].join("\n"),
 );
 
