@@ -113,7 +113,24 @@ const crumbs = (items) => ({
 
 /* ---------- per-page metadata ---------- */
 
+/* Search engines cut titles at about 70 characters and descriptions at about
+   160. Add the name only when the title still fits, and trim a description
+   at a word boundary as a safety net (pages normally set a short one). */
+const TITLE_MAX = 70, DESC_MAX = 160;
+const titled = (t) => (`${t} — ${SITE.name}`.length <= TITLE_MAX ? `${t} — ${SITE.name}` : t);
+export function clipDesc(s) {
+  s = String(s).trim();
+  if (s.length <= DESC_MAX) return s;
+  const cut = s.slice(0, DESC_MAX - 1);
+  return cut.slice(0, cut.lastIndexOf(" ")).replace(/[\s,;:—–-]+$/, "") + "…";
+}
+
 export function meta(rawPath) {
+  const m = pageMeta(rawPath);
+  return { ...m, description: clipDesc(m.description) };
+}
+
+function pageMeta(rawPath) {
   const path = normalise(rawPath);
   const c = findCase(path);
   const base = { path, ogType: "website", noindex: false, schema: [] };
@@ -123,47 +140,47 @@ export function meta(rawPath) {
       schema: [SERVICE, { "@type": "WebSite", url: `${URL_BASE}/`, name: SITE.name }] };
   const post = findPost(path);
   if (path === "/notes/")
-    return { ...base, title: `Notes — ${SITE.name}`,
+    return { ...base, title: `SharePoint & Microsoft 365 notes — ${SITE.name}`,
       description: "Short, practical notes on SharePoint, SPFx, Power Platform, PnP PowerShell and Microsoft 365 governance from a working Microsoft 365 architect.",
       schema: [crumbs([["/", "Home"], ["/notes/", "Notes"]])] };
   if (post)
-    return { ...base, ogType: "article", title: `${post.title} — ${SITE.name}`, description: post.summary,
+    return { ...base, ogType: "article", title: titled(post.title), description: post.description || post.summary,
       schema: [crumbs([["/", "Home"], ["/notes/", "Notes"], [path, post.title]]), {
         "@type": "BlogPosting", headline: post.title, description: post.summary, datePublished: post.date,
         author: { "@id": `${URL_BASE}/#person` }, mainEntityOfPage: `${URL_BASE}${path}`, keywords: post.tags.join(", "),
       }] };
   if (path === "/hire/")
-    return { ...base, ogType: "profile", title: `Hire ${SITE.name} — SharePoint Developer, Microsoft 365 Consultant, Power Platform Developer`,
-      description: "For recruiters: SharePoint Developer / Microsoft 365 Architect with 5 years in SPFx, Power Apps, Power Automate, Azure and M365 security. KSA-based, Iqama transferable. Open to Saudi Arabia, UAE, GCC, Singapore, India and remote. CV download.",
+    return { ...base, ogType: "profile", title: `Hire ${SITE.name} — SharePoint, Microsoft 365, Power Platform`,
+      description: "SharePoint Developer and Microsoft 365 Architect, 5 years in SPFx, Power Platform and Azure. KSA-based, Iqama transferable. Open to GCC, Asia. CV download.",
       schema: [crumbs([["/", "Home"], ["/hire/", "For recruiters"]]), { "@type": "ProfilePage", mainEntity: { "@id": `${URL_BASE}/#person` } }] };
   if (path === "/work/")
-    return { ...base, title: `Case studies — ${SITE.name}`,
-      description: "What was failing and how it was fixed: a contract platform on SPFx and Azure, InfoPath retirement, a 45,000-document migration, Dynamics 365 integration, SharePoint security remediation and more.",
+    return { ...base, title: `SharePoint & Microsoft 365 case studies — ${SITE.name}`,
+      description: "What was failing and how it was fixed: a contract platform on SPFx and Azure, InfoPath retirement, a 45,000-document migration and SharePoint security.",
       schema: [crumbs([["/", "Home"], ["/work/", "Work"]]), {
         "@type": "ItemList",
         itemListElement: WORK.map((w, i) => ({ "@type": "ListItem", position: i + 1, url: `${URL_BASE}/work/${w.slug}/`, name: w.title })),
       }] };
   if (c)
-    return { ...base, ogType: "article", title: `${c.title} — ${SITE.name}`, description: c.summary,
+    return { ...base, ogType: "article", title: titled(c.title), description: c.meta_description || c.summary,
       schema: [crumbs([["/", "Home"], ["/work/", "Work"], [path, c.title]]), {
         "@type": "Article", headline: c.title, description: c.summary, author: { "@id": `${URL_BASE}/#person` },
         image: `${URL_BASE}/og.png`, mainEntityOfPage: `${URL_BASE}${path}`, about: c.stack,
       }] };
   if (path === "/services/")
     return { ...base, title: `SharePoint & Microsoft 365 consulting — ${SITE.name}`,
-      description: "Hire a SharePoint and Microsoft 365 consultant: $35/hour review calls, InfoPath and legacy SharePoint rescues, migrations, SPFx and Power Apps projects. Remote, worldwide.",
+      description: "SharePoint and Microsoft 365 consulting: $35/hour review calls, InfoPath and legacy SharePoint rescues, migrations, SPFx and Power Apps. Remote, worldwide.",
       schema: [SERVICE, crumbs([["/", "Home"], ["/services/", "Services"]])] };
   if (path === "/about/")
     return { ...base, ogType: "profile", title: `About — ${SITE.name}, Microsoft 365 consultant`,
       description: `${SITE.name}: Microsoft 365 and SharePoint architect at AQS-PEPSI, ex-EY GDS and Avasoft. Open to roles across the GCC, Singapore and India.`,
       schema: [crumbs([["/", "Home"], ["/about/", "About"]]), { "@type": "ProfilePage", mainEntity: { "@id": `${URL_BASE}/#person` } }] };
   if (path === "/contact/")
-    return { ...base, title: `Contact — ${SITE.name}`,
+    return { ...base, title: `Contact ${SITE.name} — SharePoint consultant`,
       description: "Contact Mohamed Shafeek for SharePoint, Power Apps and Microsoft 365 consulting, projects, or roles abroad.",
       schema: [crumbs([["/", "Home"], ["/contact/", "Contact"]]), { "@type": "ContactPage", url: `${URL_BASE}/contact/` }] };
   if (path === "/thanks/")
-    return { ...base, noindex: true, title: `Thanks — ${SITE.name}`, description: "Message sent." };
-  return { ...base, path: "/404.html", noindex: true, title: `Page not found — ${SITE.name}`, description: "Page not found." };
+    return { ...base, noindex: true, title: `Thanks — ${SITE.name}`, description: "Thanks. Your message to Mohamed Shafeek has been sent." };
+  return { ...base, path: "/404.html", noindex: true, title: `Page not found — ${SITE.name}`, description: "This page doesn't exist. Go to the home page, case studies or notes." };
 }
 
 export function jsonLd(m) {

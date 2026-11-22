@@ -40,7 +40,8 @@
       "Entra ID",
       "DocuSign"
     ],
-    "ref": "CS-01"
+    "ref": "CS-01",
+    "meta_description": "A contract management platform on SPFx, Azure Functions, Key Vault, Entra ID and DocuSign, built on systems the company already owned."
   },
   {
     "slug": "infopath-to-spfx-modernisation",
@@ -110,7 +111,8 @@
       "React",
       "Power Automate"
     ],
-    "ref": "CS-03"
+    "ref": "CS-03",
+    "meta_description": "A SharePoint platform for raising, tracking and closing internal audit observations, with reminders, escalation and export."
   },
   {
     "slug": "finance-capex-approval-system",
@@ -206,7 +208,8 @@
       "Dynamics 365 F&O",
       "Microsoft Teams"
     ],
-    "ref": "CS-06"
+    "ref": "CS-06",
+    "meta_description": "Power Platform integration posting vendor invoices into Dynamics 365 F&O, with duplicate prevention, retries and Teams alerts."
   },
   {
     "slug": "permission-audit-and-security-hardening",
@@ -241,7 +244,8 @@
       "Conditional Access",
       "Microsoft Purview DLP"
     ],
-    "ref": "CS-07"
+    "ref": "CS-07",
+    "meta_description": "A PowerShell and CSOM framework auditing SharePoint permissions across five companies, plus Conditional Access and DLP hardening."
   },
   {
     "slug": "sharepoint-external-sharing-breach",
@@ -286,7 +290,8 @@
       "Old sharing links, guest accounts and anonymous links had piled up with nobody reviewing them.",
       "No alerting existed to catch over-sharing when it happened."
     ],
-    "ref": "CS-08"
+    "ref": "CS-08",
+    "meta_description": "After a security incident: a Microsoft 365 tenant audit, every unauthorised external share removed, and governance tightened."
   },
   {
     "slug": "google-workspace-to-microsoft-365-migration",
@@ -329,7 +334,8 @@
       "A hard six-month deadline, and the business could not stop working during the move.",
       "No single view of migration progress across workloads."
     ],
-    "ref": "CS-09"
+    "ref": "CS-09",
+    "meta_description": "Drive, Shared Drives, Sites, Gmail and Groups moved from Google Workspace to Microsoft 365 for 5,000 people in six months."
   },
   {
     "slug": "tenant-to-tenant-migration-platform",
@@ -402,7 +408,8 @@
       "Internal processes — leave, resource allocation, onboarding — needed proper applications.",
       "Everything had to meet EY's security and change-management standards."
     ],
-    "ref": "CS-11"
+    "ref": "CS-11",
+    "meta_description": "Led a Copilot-assisted risk management module at EY GDS, plus 10+ Power Apps and 50+ Power Automate workflows."
   },
   {
     "slug": "ward-sharepoint-on-prem-modernisation",
@@ -445,7 +452,8 @@
       "50+ SharePoint Designer workflows were failing across the app portfolio.",
       "The Accident Report app was too unreliable to patch and had to be rebuilt."
     ],
-    "ref": "CS-12"
+    "ref": "CS-12",
+    "meta_description": "Fixed race conditions and 50+ broken workflows across 14 SharePoint on-prem apps, and rebuilt the Accident Report app."
   },
   {
     "slug": "client-application-suite",
@@ -485,7 +493,8 @@
       "C#",
       "PowerShell"
     ],
-    "ref": "CS-13"
+    "ref": "CS-13",
+    "meta_description": "20+ SharePoint and Power Platform apps (incidents, expenses, leave, training) for clients in the US, UK and Canada."
   },
   {
     "slug": "dubai-intranet-spfx-web-parts",
@@ -522,7 +531,8 @@
       "SharePoint’s out-of-the-box web parts had no world clock, multi-zone calendar or live local weather.",
       "The intranet needed to feel useful day to day, not just be a document store."
     ],
-    "ref": "CS-14"
+    "ref": "CS-14",
+    "meta_description": "Custom SPFx web parts for a Dubai intranet: a multi-timezone world clock and calendar, and a live regional weather panel."
   },
   {
     "slug": "genai-internal-assistant",
@@ -560,6 +570,7 @@
       "Standard requests were processed by hand.",
       "Finding the right document in SharePoint was slow."
     ],
-    "ref": "CS-15"
+    "ref": "CS-15",
+    "meta_description": "A GenAI assistant that searches SharePoint content and handles routine requests, built on Azure OpenAI and SPFx."
   }
 ]
