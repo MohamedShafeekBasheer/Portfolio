@@ -4,6 +4,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
+import { execSync } from "node:child_process";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -77,9 +78,15 @@ for (const r of [...ROUTES, "/404.html"]) {
 write("/404.html", "404.html");
 
 // sitemap + robots
+// lastmod: a note's own date; pages that list notes change when a note is
+// published; other pages change when the site's content was last committed.
 const today = new Date().toISOString().slice(0, 10);
+let contentDate = today;
+try { contentDate = execSync("git log -1 --format=%cs -- src content public", { cwd: root }).toString().trim() || today; } catch {}
+const newestPost = POSTS[0]?.date || contentDate;
+const later = (a, b) => (a > b ? a : b);
 const indexable = ROUTES.filter((r) => !meta(r).noindex);
-const lastmod = (r) => findPost(r)?.date || today;
+const lastmod = (r) => findPost(r)?.date || (r === "/" || r === "/notes/" ? later(newestPost, contentDate) : contentDate);
 fs.writeFileSync(
   path.join(dist, "sitemap.xml"),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +

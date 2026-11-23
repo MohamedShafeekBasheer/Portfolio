@@ -1,7 +1,9 @@
 // Turns content/posts/*.md (YAML front matter + Markdown) into:
 //   src/content/posts.json        — list of published notes (metadata only, bundled into the app)
 //   public/notes-data/<slug>.json — full note with rendered HTML (fetched or embedded per page)
-// Runs before every build. A post with `draft: true` is skipped.
+// Runs before every build. A post with `draft: true` is skipped, and so is a
+// post dated in the future (Riyadh time): the daily scheduled deploy publishes
+// it on its date. Set SHOW_FUTURE_NOTES=1 to preview them locally.
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -16,6 +18,10 @@ fs.mkdirSync(outDir, { recursive: true });
 
 const files = fs.existsSync(srcDir) ? fs.readdirSync(srcDir).filter((f) => f.endsWith(".md")) : [];
 const posts = [];
+// "Today" in Riyadh (UTC+3, no daylight saving), so a note goes live on its date there.
+const today = new Date(Date.now() + 3 * 3600e3).toISOString().slice(0, 10);
+const showFuture = process.env.SHOW_FUTURE_NOTES === "1";
+let scheduled = 0;
 
 for (const file of files) {
   const raw = fs.readFileSync(path.join(srcDir, file), "utf8");
@@ -27,6 +33,7 @@ for (const file of files) {
   const slug = (fm.slug || base.replace(/^\d{4}-\d{2}-\d{2}-/, "")).toString().toLowerCase().replace(/[^a-z0-9-]+/g, "-");
   const date = fm.date instanceof Date ? fm.date.toISOString().slice(0, 10) : String(fm.date || base.slice(0, 10));
   if (!fm.title) { console.warn(`skip ${file}: no title`); continue; }
+  if (date > today && !showFuture) { scheduled++; continue; }
   // Safety net for AI drafts: never publish a note that still has an "[ADD: ...]" placeholder.
   if (/\[ADD:/.test(m[2])) { console.warn(`skip ${file}: still has an [ADD: ...] placeholder`); continue; }
   // Root-relative links/images ("/img/notes/x.png") need the site's base path on GitHub Pages.
@@ -46,4 +53,4 @@ for (const file of files) {
 
 posts.sort((a, b) => (a.date < b.date ? 1 : -1));
 fs.writeFileSync(path.join(root, "src/content/posts.json"), JSON.stringify(posts, null, 1));
-console.log(`content: ${posts.length} published note(s)`);
+console.log(`content: ${posts.length} published note(s), ${scheduled} scheduled for later`);

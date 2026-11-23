@@ -514,3 +514,7 @@ textarea.input { resize: vertical; min-height: 120px; }
 .reportNote .reportTitle, .reportNote .reportLede, .reportNote .reportBody { max-width: none; }
 .noteBody hr { border: 0; border-top: 1px solid var(--ms-hairline-light); margin: var(--ms-space-5) 0 var(--ms-space-4); }
 .noteBody > :last-child { margin-bottom: 0; }
+/* Summary card image at the end of a note: portrait, so keep it narrow. */
+.noteBody .noteCard { margin: var(--ms-space-5) 0 0; max-width: 360px; }
+.noteBody .noteCard img { width: 100%; height: auto; border: 1px solid var(--ms-hairline-light); }
+.noteBody .noteCard figcaption { margin-top: var(--ms-space-2); font-size: var(--ms-size-small); color: var(--ms-text-on-light-muted); }
