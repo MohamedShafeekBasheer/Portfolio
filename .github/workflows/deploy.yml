@@ -1,10 +1,13 @@
 # Builds the site and publishes it to GitHub Pages on every push to main
-# (including when you merge a draft-note pull request).
+# (including when you merge a draft-note pull request), and every morning so
+# that notes dated today go live on their date.
 name: Deploy site
 
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: "13 5 * * *"   # 08:13 Riyadh, before the 9:00 LinkedIn post
   workflow_dispatch:
 
 permissions:
@@ -21,6 +24,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # full history, so the sitemap's lastmod dates are real
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -64,7 +69,14 @@ jobs:
           base = "https://mohamedshafeekbasheer.github.io/Portfolio"
           time.sleep(30)  # give GitHub Pages a moment to serve the new deploy
           sitemap = urllib.request.urlopen(f"{base}/sitemap.xml", timeout=30).read().decode()
-          urls = re.findall(r"<loc>([^<]+)</loc>", sitemap)
+          entries = re.findall(r"<loc>([^<]+)</loc><lastmod>([^<]+)</lastmod>", sitemap)
+          urls = [u for u, _ in entries]
+          if "${{ github.event_name }}" == "schedule":
+              # Daily run: only send what changed today (a new note and the pages that list it).
+              today = time.strftime("%Y-%m-%d", time.gmtime(time.time() + 3 * 3600))
+              urls = [u for u, d in entries if d == today]
+              if not urls:
+                  print("IndexNow: nothing new today"); raise SystemExit
           body = json.dumps({"host": "mohamedshafeekbasheer.github.io", "key": key,
                              "keyLocation": f"{base}/{key}.txt", "urlList": urls}).encode()
           req = urllib.request.Request("https://api.indexnow.org/indexnow", data=body,
