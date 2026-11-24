@@ -92,8 +92,9 @@ function Home() {
       <section className="intro">
         <Portrait eager />
         <div>
-          <p className="eyebrow">{SITE.name} · {SITE.role}</p>
-          <h1>{SITE.headline}</h1>
+          {/* The name is the page's main heading (for search), styled as the small label above the headline. */}
+          <h1 className="eyebrow introName">{SITE.name} · {SITE.role}</h1>
+          <p className="introHeadline">{SITE.headline}</p>
           <p className="lede">{SITE.intro[0]}</p>
           <div className="introActions">
             <Link className="button buttonGhost" href="/hire/">For recruiters &amp; CV</Link>
@@ -256,7 +257,7 @@ function About() {
       <article className="report">
         <header className="reportHead">
           <div className="reportMeta"><span className="statusPill">Available</span><span className="eyebrow">{SITE.location}</span></div>
-          <h1 className="reportTitle">Hi, I'm Shafeek.</h1>
+          <h1 className="reportTitle">Hi, I'm Mohamed Shafeek.</h1>
           <p className="reportLede">{SITE.role}. {SITE.current}.</p>
         </header>
         <section className="reportSection">
