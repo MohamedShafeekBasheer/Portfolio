@@ -178,7 +178,7 @@ const PROFILE = [
   `${SITE.name} — ${SITE.role}. ${SITE.location}.`,
   ...SITE.about,
   "Case studies (the only projects you may refer to as his):",
-  ...WORK.map((w) => `- ${w.title} (${w.client}, ${w.region}): ${w.summary}`),
+  ...WORK.map((w) => `- ${w.title} (${w.kind}): ${w.summary}`),
   "Skills: " + SITE.skills.map(([a, b]) => `${a}: ${b}`).join("; "),
 ].join("\n");
 

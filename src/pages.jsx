@@ -21,16 +21,15 @@ function CaseTable({ items }) {
     <div className="tableWrap">
       <table className="table">
         <thead>
-          <tr><th scope="col">Ref</th><th scope="col">Engagement</th><th scope="col" className="hideMd">Client</th><th scope="col" className="hideSm">Region</th><th scope="col" className="hideMd">Length</th><th scope="col">Status</th></tr>
+          <tr><th scope="col">Ref</th><th scope="col">Engagement</th><th scope="col" className="hideMd">Area</th><th scope="col" className="hideSm">Platform</th><th scope="col">Status</th></tr>
         </thead>
         <tbody>
           {items.map((w) => (
             <tr key={w.slug}>
               <td className="cellRef">{w.ref}</td>
               <td className="wrap"><Link href={`/work/${w.slug}/`}>{w.title}</Link></td>
-              <td className="cellMuted hideMd">{w.client}</td>
-              <td className="cellMuted hideSm">{w.region}</td>
-              <td className="cellMuted hideMd">{w.duration}</td>
+              <td className="cellMuted hideMd">{w.kind}</td>
+              <td className="cellMuted hideSm">{w.stack.slice(0, 3).join(", ")}</td>
               <td><StatusPill status={w.status} /></td>
             </tr>
           ))}
@@ -172,9 +171,8 @@ function Case({ c }) {
           <p className="reportLede">{c.summary}</p>
         </header>
         <dl className="facts">
-          <div><dt>Client</dt><dd>{c.client}</dd></div>
-          <div><dt>Region</dt><dd>{c.region}</dd></div>
-          <div><dt>Length</dt><dd>{c.duration}</dd></div>
+          <div><dt>Area</dt><dd>{c.kind}</dd></div>
+          <div><dt>Platform</dt><dd>{c.stack.slice(0, 4).join(", ")}</dd></div>
           <div><dt>Result</dt><dd>{c.result}</dd></div>
         </dl>
 
@@ -208,7 +206,7 @@ function Case({ c }) {
         </section>
 
         <footer className="reportFoot">
-          {c.ref} · {SITE.name} · Figures are from the delivery records of the engagement. Some clients are anonymised.
+          {c.ref} · {SITE.name} · Figures are from the delivery records of the engagement. Client details are kept confidential.
         </footer>
       </article>
 
