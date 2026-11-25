@@ -6,7 +6,7 @@ summary: Posting vendor invoices into Dynamics 365 Finance & Operations with Pow
 description: "Lessons from automating vendor invoice posting into Dynamics 365 F&O: duplicate prevention, retries and Teams alerts for automation that touches money."
 tags: [Power Automate, Dynamics 365, Power Platform, Case study]
 ---
-For a multi-company group, I built a Power Platform integration that posts **vendor invoices into Dynamics 365 Finance & Operations**.
+I built a Power Platform integration that posts **vendor invoices into Dynamics 365 Finance & Operations**.
 
 Getting an invoice from one system into the other was the simple part. **Making it safe** took most of the work, because when automation touches money, the failure cases matter more than the happy path.
 

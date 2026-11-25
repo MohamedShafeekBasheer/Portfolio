@@ -6,7 +6,7 @@ summary: Copying 45,000 documents is the easy part of a migration. Proving that 
 description: "How to prove nothing was lost in a SharePoint migration: counts and sizes per library before and after, and a reconciliation you can show people."
 tags: [Migration, SharePoint Online, Case study]
 ---
-For a multi-company group, I moved more than **45,000 documents (about 60 GB)** across **four legal entities** into a new structure. The migration finished with **verified zero loss**.
+I recently moved more than **45,000 documents (about 60 GB)** across **several legal entities** into a new structure. The migration finished with **verified zero loss**.
 
 The copying itself was the easy part. Tools do that. The part that matters, and the part people skip, is **proving** nothing was lost.
 
@@ -45,7 +45,7 @@ This is your evidence. Store it with the project records.
 
 ## The result
 
-45,000+ documents, four legal entities, reorganised into a new structure, with a reconciliation showing **zero loss**. When questions came later, the answer was in the document.
+45,000+ documents, several legal entities, reorganised into a new structure, with a reconciliation showing **zero loss**. When questions came later, the answer was in the document.
 
 The [case study](/work/group-document-migration/) has a short summary.
 

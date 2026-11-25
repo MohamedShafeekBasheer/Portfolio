@@ -3,10 +3,10 @@ title: "What formal change control taught me about speed"
 slug: change-control-lessons
 date: 2026-12-16
 summary: Formal change requests, scheduled releases and documentation felt slow at first. They are also why we delivered 10+ apps and 50+ workflows with zero compliance breaches. Good process is what lets you keep going fast.
-description: "Lessons from formal change control at a Big Four firm: how change requests, scheduled releases and documentation helped ship 10+ Power Apps safely."
+description: "Lessons from formal change control in a large enterprise: how change requests, scheduled releases and documentation helped ship 10+ Power Apps safely."
 tags: [Power Platform, Career, Governance]
 ---
-At a Big Four global delivery centre I led a **Risk Management module** that used **Microsoft Copilot** for AI-assisted release analysis and approvals, and built **10+ Power Apps** with **50+ Power Automate workflows**.
+On a large enterprise programme I led a **Risk Management module** that used **Microsoft Copilot** for AI-assisted release analysis and approvals, and built **10+ Power Apps** with **50+ Power Automate workflows**.
 
 The technical work was interesting. What changed how I work was the **process** around it.
 
@@ -34,7 +34,7 @@ Moving fast without process feels quick for a few months. Then something breaks,
 
 ## What I carry into smaller teams
 
-You don't need a Big Four firm's full process in a team of one or five. But a lightweight version pays off everywhere:
+You don't need a large enterprise's full process in a team of one or five. But a lightweight version pays off everywhere:
 
 1. **A short change note** for anything that touches production: what, why, and how to undo it.
 2. **A test environment** for Power Platform (a separate environment, with solutions moved between them) instead of building in production.

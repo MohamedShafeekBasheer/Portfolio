@@ -6,7 +6,7 @@ summary: How a contract process that took several days became a few minutes, usi
 description: "How SPFx, Azure Functions, Key Vault and DocuSign took a contract process from several days to minutes, and the firewall gap that held it up."
 tags: [SPFx, Azure Functions, SharePoint Online, Case study]
 ---
-At a multi-company industrial group where I work, turning margin contribution figures into a signed contract used to take several days of manual work.
+In one recent project, turning margin contribution figures into a signed contract used to take several days of manual work.
 
 The data needed already existed, in an internal Azure SQL data warehouse. It just wasn't connected to the process.
 

@@ -6,7 +6,7 @@ summary: A partner company could reach a client's internal files in SharePoint a
 description: "How a SharePoint and OneDrive oversharing incident was audited, every unauthorised share removed within 48 hours, and governance tightened."
 tags: [Security, SharePoint Online, Governance, Case study]
 ---
-I led a Microsoft 365 security audit for a Canadian client after a live incident. An external sharing setting in SharePoint Online had been left too open, and **internal documents were reachable by users at a partner organisation**. The exposure ran across several site collections.
+I led a Microsoft 365 security audit for a client after a live incident. An external sharing setting in SharePoint Online had been left too open, and **internal documents were reachable by users at a partner organisation**. The exposure ran across several site collections.
 
 Nobody knew exactly how far it went. The first job was to find out, quickly, and stop it.
 
