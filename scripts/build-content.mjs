@@ -2,7 +2,7 @@
 //   src/content/posts.json        — list of published notes (metadata only, bundled into the app)
 //   public/notes-data/<slug>.json — full note with rendered HTML (fetched or embedded per page)
 // Runs before every build. A post with `draft: true` is skipped, and so is a
-// post dated in the future (Riyadh time): the daily scheduled deploy publishes
+// post dated in the future (UTC+3): the daily scheduled deploy publishes
 // it on its date. Set SHOW_FUTURE_NOTES=1 to preview them locally.
 import fs from "node:fs";
 import path from "node:path";
@@ -18,7 +18,7 @@ fs.mkdirSync(outDir, { recursive: true });
 
 const files = fs.existsSync(srcDir) ? fs.readdirSync(srcDir).filter((f) => f.endsWith(".md")) : [];
 const posts = [];
-// "Today" in Riyadh (UTC+3, no daylight saving), so a note goes live on its date there.
+// "Today" in UTC+3 (GCC time, no daylight saving), so a note goes live on its date there.
 const today = new Date(Date.now() + 3 * 3600e3).toISOString().slice(0, 10);
 const showFuture = process.env.SHOW_FUTURE_NOTES === "1";
 let scheduled = 0;

@@ -92,7 +92,7 @@ export function Nav() {
       <div className="navSpacer" />
       <div className="navFoot">
         <span className="statusPill statusPillDark">Available</span>
-        <p>Consulting, projects and roles abroad. <Clock /> in Abha.</p>
+        <p>Consulting, projects and roles abroad. <Clock /> GCC time.</p>
       </div>
     </nav>
   );

@@ -120,7 +120,7 @@ fs.writeFileSync(
   path.join(dist, "llms.txt"),
   [
     `# ${SITE.name}`, "",
-    `> ${SITE.role} based in ${SITE.location}. ${SITE.home_description}`, "",
+    `> ${SITE.role} · ${SITE.location}. ${SITE.home_description}`, "",
     `Also known as: ${SITE.alternate_names.join(", ")}.`, "",
     "## Summary", ...SITE.about, "",
     "## Quick facts", ...pairs(SITE.quick_facts), "",

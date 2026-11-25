@@ -101,7 +101,7 @@ function Home() {
             <Link className="button buttonGhost" href="/work/">Read the case studies</Link>
             <Link className="button buttonGhost" href="/services/">Consulting &amp; rates</Link>
           </div>
-          <p className="openTo"><strong>Open to:</strong> {SITE.target_roles.slice(0, 5).join(" · ")} — in Saudi Arabia, the GCC, Singapore, India or remote. Iqama transferable.</p>
+          <p className="openTo"><strong>Open to:</strong> {SITE.target_roles.slice(0, 5).join(" · ")} — in the GCC and Middle East, Singapore, India or remote. Transferable residence visa.</p>
         </div>
       </section>
 
@@ -267,7 +267,7 @@ function About() {
           <h2 className="reportHeading">Where I'll work</h2>
           <div className="reportBody">
             <p>{SITE.availability.remote} {SITE.availability.relocation}</p>
-            <p>I've delivered for teams in the US, UK, Canada, the UAE and Saudi Arabia, so working across borders and time zones is normal for me.</p>
+            <p>I've delivered for teams in the US, UK, Canada and across the GCC, so working across borders and time zones is normal for me.</p>
           </div>
         </section>
         <section className="reportSection">
@@ -339,7 +339,7 @@ function NoteSidebar({ current }) {
             <p className="cardMeta">{SITE.role}</p>
           </div>
         </div>
-        <p className="noteAuthorText">I own SharePoint, Microsoft 365 and Power Platform end to end for a five-company group in Saudi Arabia. Ex-EY GDS.</p>
+        <p className="noteAuthorText">I own SharePoint, Microsoft 365 and Power Platform end to end for a five-company group in the GCC. Big Four experience.</p>
         <div className="introActions">
           <Link className="button buttonGhost" href="/hire/">For recruiters</Link>
           <Link className="button buttonGhost" href="/contact/">Contact</Link>
@@ -408,7 +408,7 @@ function Hire() {
         <div>
           <p className="eyebrow">For recruiters and hiring managers</p>
           <h1>{SITE.name} — SharePoint Developer &amp; Microsoft 365 Architect</h1>
-          <p className="lede">5 years building on SharePoint, Microsoft 365, the Power Platform and Azure, for EY GDS, Avasoft clients in the US, UK and Canada, and a five-company Saudi industrial group. KSA-based, Iqama transferable.</p>
+          <p className="lede">5 years building on SharePoint, Microsoft 365, the Power Platform and Azure, for a Big Four firm, clients in the US, UK and Canada, and a five-company industrial group in the GCC. GCC-based, transferable residence visa.</p>
           <div className="introActions">
             <a className="button buttonPrimary" href={withBase(SITE.cv_url)} download onClick={() => trackEvent("cv-download")}>Download CV (PDF)</a>
             <a className="button buttonGhost" href={`mailto:${SITE.email}?subject=${encodeURIComponent("Role opportunity")}`}>Email me</a>

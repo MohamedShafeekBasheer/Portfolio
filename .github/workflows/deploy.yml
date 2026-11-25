@@ -7,7 +7,7 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: "13 5 * * *"   # 08:13 Riyadh, before the 9:00 LinkedIn post
+    - cron: "13 5 * * *"   # 08:13 UTC+3, before the 9:00 LinkedIn post
   workflow_dispatch:
 
 permissions:

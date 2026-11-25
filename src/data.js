@@ -65,14 +65,13 @@ const PERSON = {
   image: `${URL_BASE}/img/portrait-card-hero.jpg`,
   email: `mailto:${SITE.email}`,
   sameAs: [SITE.linkedin, SITE.github],
-  address: { "@type": "PostalAddress", addressLocality: "Abha", addressCountry: "SA" },
-  worksFor: { "@type": "Organization", name: "Abdul Hadi Abdullah Al-Qahtani & Sons Beverage Company (AQS-PEPSI)" },
+  homeLocation: { "@type": "Place", name: "GCC, Middle East" },
   alumniOf: { "@type": "CollegeOrUniversity", name: "Anna University" },
   knowsLanguage: ["en", "ta"],
   hasOccupation: SITE.target_roles.map((r) => ({
     "@type": "Occupation",
     name: r,
-    occupationLocation: ["Saudi Arabia", "United Arab Emirates", "Qatar", "Singapore", "India"].map((c) => ({ "@type": "Country", name: c })),
+    occupationLocation: [{ "@type": "Place", name: "GCC and Middle East" }, ...["United Arab Emirates", "Qatar", "Singapore", "India"].map((c) => ({ "@type": "Country", name: c }))],
     skills: "SharePoint Online, SPFx, Power Apps, Power Automate, Microsoft 365, Azure Functions, Microsoft Entra ID, Conditional Access",
   })),
   hasCredential: {
@@ -97,7 +96,6 @@ const SERVICE = {
   areaServed: "Worldwide",
   priceRange: "$35+/hour",
   email: SITE.email,
-  address: { "@type": "PostalAddress", addressLocality: "Abha", addressCountry: "SA" },
   makesOffer: SITE.offers.map((o) => ({
     "@type": "Offer",
     name: o.name,
@@ -151,7 +149,7 @@ function pageMeta(rawPath) {
       }] };
   if (path === "/hire/")
     return { ...base, ogType: "profile", title: `Hire ${SITE.name} — SharePoint, Microsoft 365, Power Platform`,
-      description: "SharePoint Developer and Microsoft 365 Architect, 5 years in SPFx, Power Platform and Azure. KSA-based, Iqama transferable. Open to GCC, Asia. CV download.",
+      description: "SharePoint Developer and Microsoft 365 Architect, 5 years in SPFx, Power Platform and Azure. GCC-based, transferable visa. Open to the Middle East and Asia. CV download.",
       schema: [crumbs([["/", "Home"], ["/hire/", "For recruiters"]]), { "@type": "ProfilePage", mainEntity: { "@id": `${URL_BASE}/#person` } }] };
   if (path === "/work/")
     return { ...base, title: `SharePoint & Microsoft 365 case studies — ${SITE.name}`,
@@ -172,7 +170,7 @@ function pageMeta(rawPath) {
       schema: [SERVICE, crumbs([["/", "Home"], ["/services/", "Services"]])] };
   if (path === "/about/")
     return { ...base, ogType: "profile", title: `About — ${SITE.name}, Microsoft 365 consultant`,
-      description: `${SITE.name}: Microsoft 365 and SharePoint architect at AQS-PEPSI, ex-EY GDS and Avasoft. Open to roles across the GCC, Singapore and India.`,
+      description: `${SITE.name}: Microsoft 365 and SharePoint architect for a multi-company group in the GCC, with Big Four experience. Open to roles across the Middle East and Asia.`,
       schema: [crumbs([["/", "Home"], ["/about/", "About"]]), { "@type": "ProfilePage", mainEntity: { "@id": `${URL_BASE}/#person` } }] };
   if (path === "/contact/")
     return { ...base, title: `Contact ${SITE.name} — SharePoint consultant`,
