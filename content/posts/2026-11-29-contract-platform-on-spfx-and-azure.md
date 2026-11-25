@@ -6,7 +6,7 @@ summary: How a contract process that took several days became a few minutes, usi
 description: "How SPFx, Azure Functions, Key Vault and DocuSign took a contract process from several days to minutes, and the firewall gap that held it up."
 tags: [SPFx, Azure Functions, SharePoint Online, Case study]
 ---
-At AQS-PEPSI, turning margin contribution figures into a signed contract used to take several days of manual work.
+At a multi-company industrial group where I work, turning margin contribution figures into a signed contract used to take several days of manual work.
 
 The data needed already existed, in an internal Azure SQL data warehouse. It just wasn't connected to the process.
 
@@ -15,7 +15,7 @@ The data needed already existed, in an internal Azure SQL data warehouse. It jus
 - **An SPFx front end (React and TypeScript) inside SharePoint.** People start and track contracts where they already work, with no new app to learn.
 - **Azure Functions** that read live sales data from the warehouse, so a contract is built from current numbers, not a copy from last week.
 - **Azure Key Vault** for every credential and **Microsoft Entra ID** for sign-in. No passwords in code or configuration files.
-- **DocuSign for e-signature**, reached through a small credential-broker Function. The browser never sees a signing credential, which also keeps the design aligned with Saudi Arabia's Personal Data Protection Law (PDPL).
+- **DocuSign for e-signature**, reached through a small credential-broker Function. The browser never sees a signing credential, which also keeps the design aligned with local data-protection and data-residency rules.
 
 ## The part nobody plans for
 

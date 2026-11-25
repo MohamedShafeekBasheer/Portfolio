@@ -6,16 +6,16 @@ summary: Five years from trainee software engineer to the only person running Sh
 description: "Five years from trainee to running SharePoint, Microsoft 365 and Power Platform for a five-company group: what helped and advice for starting out."
 tags: [Career, SharePoint Online, Microsoft 365]
 ---
-In December 2021 I started as a trainee software engineer at Avasoft, building React and Node.js apps. Five years later I'm the only person running SharePoint, Microsoft 365 and the Power Platform for a five-company industrial group in Saudi Arabia.
+In December 2021 I started as a trainee software engineer at an IT services firm, building React and Node.js apps. Five years later I'm the only person running SharePoint, Microsoft 365 and the Power Platform for a five-company industrial group in the GCC.
 
 Here is the path, and what helped.
 
 ## The path
 
-- **Avasoft (2021–2024).** From trainee to SharePoint and Power Platform developer. More than 20 applications for clients in the US, UK and Canada: incident reporting, expenses, leave, training management, SPFx web parts. Also migrations and a security incident response.
-- **Colan Infotech (2024).** A short spell as a SharePoint developer.
-- **EY Global Delivery Services (2024–2025).** Led a Risk Management module that used Microsoft Copilot for AI-assisted release analysis, plus 10+ Power Apps and 50+ Power Automate workflows, all through formal change control.
-- **AQS-PEPSI (2025–now).** The sole owner of SharePoint, Microsoft 365 and the Power Platform for five companies. Seven production systems in twelve months, including a contract platform, an InfoPath retirement and a 45,000-document migration.
+- **IT services firm (2021–2024).** From trainee to SharePoint and Power Platform developer. More than 20 applications for clients in the US, UK and Canada: incident reporting, expenses, leave, training management, SPFx web parts. Also migrations and a security incident response.
+- **A second IT services company (2024).** A short spell as a SharePoint developer.
+- **A Big Four global delivery centre (2024–2025).** Led a Risk Management module that used Microsoft Copilot for AI-assisted release analysis, plus 10+ Power Apps and 50+ Power Automate workflows, all through formal change control.
+- **A multi-company industrial group in the GCC (2025–now).** The sole owner of SharePoint, Microsoft 365 and the Power Platform for five companies. Seven production systems in twelve months, including a contract platform, an InfoPath retirement and a 45,000-document migration.
 
 ## What helped most
 
@@ -25,7 +25,7 @@ Here is the path, and what helped.
 
 **Writing things down.** Every fix, script and design decision. It turns one solved problem into something you can reuse, and it's how others learn to trust your work.
 
-**Working in a big organisation for a while.** EY taught me that how you ship matters as much as what you ship.
+**Working in a big organisation for a while.** The Big Four firm taught me that how you ship matters as much as what you ship.
 
 ## If you're starting out in SharePoint and Microsoft 365
 

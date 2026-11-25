@@ -45,7 +45,7 @@ For the last 30 days I've posted one SharePoint, Microsoft 365 or Power Platform
 - [Proving zero loss in a SharePoint migration](/notes/proving-zero-loss-in-a-sharepoint-migration/)
 - [Lessons from a SharePoint oversharing incident](/notes/lessons-from-a-sharepoint-oversharing-incident/)
 - [Automating invoices safely into Dynamics 365](/notes/safe-invoice-automation-dynamics-365/)
-- [What change control at EY taught me about speed](/notes/change-control-lessons-from-ey/)
+- [What formal change control taught me about speed](/notes/change-control-lessons/)
 
 ## Career
 

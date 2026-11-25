@@ -1,4 +1,4 @@
-# Every morning (06:17 Riyadh time): collect Microsoft 365 / PnP news into a "Daily digest" issue,
+# Every morning (06:17 UTC+3): collect Microsoft 365 / PnP news into a "Daily digest" issue,
 # and — if the ANTHROPIC_API_KEY secret is set — open a pull request with one drafted note
 # plus LinkedIn text. Nothing is published until you merge the pull request.
 name: Daily digest

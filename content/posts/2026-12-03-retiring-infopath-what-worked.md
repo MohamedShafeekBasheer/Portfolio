@@ -8,7 +8,7 @@ tags: [InfoPath, SharePoint Online, Power Automate, Case study]
 ---
 InfoPath has been retired for years, yet many companies still run real business processes on it: requests, approvals, checklists. While it works, nobody touches it. When something breaks after support ends, there is nobody to fix it.
 
-At AQS-PEPSI there were **8 InfoPath forms** used by **more than 500 people across 15 departments**. All 8 were live in modern SharePoint before the deadline. Here is what worked.
+At a multi-company industrial group where I work, there were **8 InfoPath forms** used by **more than 500 people across 15 departments**. All 8 were live in modern SharePoint before the deadline. Here is what worked.
 
 ## 1. Make the list first
 

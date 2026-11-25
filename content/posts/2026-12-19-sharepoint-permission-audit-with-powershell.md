@@ -6,7 +6,7 @@ summary: For five companies on one Microsoft 365 tenant, "who has access to what
 description: "How a PowerShell and CSOM permission audit made 'who has access to what?' answerable across five companies, plus a PnP PowerShell starter script."
 tags: [PnP PowerShell, SharePoint Online, Governance, Case study]
 ---
-At AQS-PEPSI, five group companies share one Microsoft 365 tenant. "Who has access to what?" was a question nobody could answer quickly. Every audit request meant clicking through sites by hand.
+In a multi-company group where I work, five companies share one Microsoft 365 tenant. "Who has access to what?" was a question nobody could answer quickly. Every audit request meant clicking through sites by hand.
 
 So I built a **PowerShell and CSOM permission audit framework**, and alongside it, **Conditional Access** and **DLP** baselines for the tenant.
 

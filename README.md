@@ -8,7 +8,7 @@ Live site: https://mohamedshafeekbasheer.github.io/Portfolio/
 ## How it works
 
 ```
-Every morning, 06:17 Riyadh time  (.github/workflows/daily-digest.yml)
+Every morning, 06:17 UTC+3  (.github/workflows/daily-digest.yml)
   ├─ collects news from content/sources.json (Microsoft 365 & Power Platform blogs,
   │   PnP PowerShell / PnPjs releases, new PnP Script Samples, M365 roadmap)
   ├─ opens an issue: "Daily digest — <date>"
